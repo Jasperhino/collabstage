@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import './App.css';
-import { io } from 'socket.io-client';
 import socketService from './services/socketService';
-import { JoinRoom } from './components/joinRoom';
+import JoinStage from './components/stage/JoinStage';
+import CreateStage from './components/stage/CreateStage';
 import GameContext, { IGameContextProps } from './gameContext';
-import { Game } from './components/game';
+import { Play } from './components/play';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/home/Home';
+import NoMatch from './components/NoMatch';
 
 function App() {
   const [isInRoom, setInRoom] = useState(false);
@@ -15,7 +17,7 @@ function App() {
 
   const connectSocket = async () => {
     const socket = await socketService.connect('http://localhost:9000').catch((err) => {
-      console.log('Error: ', err);
+      console.error('Error: ', err);
     });
   };
 
@@ -36,8 +38,13 @@ function App() {
 
   return (
     <GameContext.Provider value={gameContextValue}>
-      {!isInRoom && <JoinRoom />}
-      {isInRoom && <Game />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="stage/join" element={<JoinStage />} />
+        <Route path="stage/create" element={<CreateStage />} />
+        <Route path="play" element={<Play />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
     </GameContext.Provider>
   );
 }

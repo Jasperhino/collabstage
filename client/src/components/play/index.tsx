@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import gameContext from '../../gameContext';
-import gameService from '../../services/gameService';
+import gameService from '../../services/stageService';
 import socketService from '../../services/socketService';
 
 export type IPlayMatrix = Array<Array<string | null>>;
@@ -9,7 +9,7 @@ export interface IStartGame {
   symbol: 'x' | 'o';
 }
 
-export function Game() {
+export function Play() {
   const [matrix, setMatrix] = useState<IPlayMatrix>([
     [null, null, null],
     [null, null, null],
@@ -75,7 +75,7 @@ export function Game() {
     }
 
     if (socketService.socket) {
-      gameService.updateGame(socketService.socket, newMatrix);
+      gameService.updateStage(socketService.socket, newMatrix);
       const [currentPlayerWon, otherPlayerWon] = checkGameState(newMatrix);
       if (currentPlayerWon && otherPlayerWon) {
         gameService.gameWin(socketService.socket, 'The Game is a TIE!');
@@ -91,7 +91,7 @@ export function Game() {
 
   const handleGameUpdate = () => {
     if (socketService.socket)
-      gameService.onGameUpdate(socketService.socket, (newMatrix) => {
+      gameService.onStageUpdate(socketService.socket, (newMatrix) => {
         setMatrix(newMatrix);
         checkGameState(newMatrix);
         setPlayerTurn(true);
