@@ -1,41 +1,33 @@
 #!/usr/bin/env node
+import { Request, Response, NextFunction } from "express";
 
-/**
- * Module dependencies.
- */
-
+import { createServer } from "http";
 import "reflect-metadata";
 import app from "./app";
 var debug = require("debug")("socketio-server:server");
-import * as http from "http";
 import socketServer from "./socket";
 
-/**
- * Get port from environment and store in Express.
- */
+type User = {
+  id: string;
+  name: string;
+};
 
-var port = normalizePort(process.env.PORT || "9000");
+declare module "express-session" {
+  interface SessionData {
+    user: User;
+  }
+}
+
+let port = normalizePort(process.env.PORT || "9000");
 app.set("port", port);
 
-/**
- * Create HTTP server.
- */
+let server = createServer(app);
 
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
+const io = socketServer(server);
 
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
-
-const io = socketServer(server);
-
-/**
- * Normalize a port into a number, string, or false.
- */
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -52,10 +44,6 @@ function normalizePort(val) {
 
   return false;
 }
-
-/**
- * Event listener for HTTP server "error" event.
- */
 
 function onError(error) {
   if (error.syscall !== "listen") {
@@ -78,10 +66,6 @@ function onError(error) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   var addr = server.address();

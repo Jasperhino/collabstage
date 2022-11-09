@@ -1,30 +1,46 @@
-import React, { useContext, useState } from 'react';
-import gameContext from '../../gameContext';
+import { atom, useAtom } from 'jotai';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import socketService from '../../services/socketService';
 import stageService from '../../services/stageService';
+import HeroLayout from '../layout/HeroLayout';
+import NamePicker from './NamePicker';
 
-interface IJoinStageProps {}
+const stageIdAtom = atom<string>('');
+const playerNameAtom = atom<string>('');
+const isJoiningAtom = atom<boolean>(false);
+const isInStageAtom = atom<boolean>(false);
 
-function JoinStage(props: IJoinStageProps) {
-  const [stageName, setStageName] = useState('');
-  const [isJoining, setJoining] = useState(false);
+function JoinStage() {
+  const [stageId, setStageId] = useAtom(stageIdAtom);
+  const [playerName, setPlayerName] = useAtom(playerNameAtom);
+  const [isJoining, setJoining] = useAtom(isJoiningAtom);
+  const [isInStage, setInStage] = useAtom(isInStageAtom);
+  const { id } = useParams<string>();
 
-  const { setInRoom: setInStage, isInStage } = useContext(gameContext);
+  useEffect(() => {
+    if (isInStage) {
+      setJoining(false);
+    }
+    console.log('paramStageId: ', id);
 
-  const handleStageNameChange = (e: React.ChangeEvent<any>) => {
-    const value = e.target.value;
-    setStageName(value);
-  };
+    if (id?.length == 4 && id?.match(/^[a-zA-Z]+$/)) {
+      setStageId(id);
+    }
+  }, []);
 
-  const stageRoom = async (e: React.FormEvent) => {
+  const joinStage = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const socket = socketService.socket;
-    if (!stageName || stageName.trim() === '' || !socket) return;
+    if (!stageId || stageId.trim() === '' || !socket) {
+      console.warn('No stageId or socket');
+      return;
+    }
 
     setJoining(true);
 
-    const joined = await stageService.joinStage(socket, stageName).catch((err) => {
+    const joined = await stageService.joinStage(socket, stageId, playerName).catch((err) => {
       alert(err);
     });
 
@@ -34,13 +50,13 @@ function JoinStage(props: IJoinStageProps) {
   };
 
   return (
-    <div>
-      <h4>scan qr code to Join the Game</h4>
-      <NamePicker />
-      <button className="btn" onClick={stageRoom} disabled={isJoining}>
-        {isJoining ? 'Joining...' : 'Joing'}
+    <HeroLayout>
+      <h1 className="text-5xl font-bold">Pick a name</h1>
+      <NamePicker onNameChange={setPlayerName} />
+      <button className="btn btn-primary" onClick={joinStage} disabled={isJoining || playerName.length < 3}>
+        {isJoining ? 'Joining...' : 'Join'}
       </button>
-    </div>
+    </HeroLayout>
   );
 }
 

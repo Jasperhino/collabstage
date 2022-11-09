@@ -8,10 +8,6 @@ export default (httpServer) => {
     },
   });
 
-  // io.on("connection", (socket) => {
-
-  // });
-
   useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
 
   return io;
