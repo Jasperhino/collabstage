@@ -62,12 +62,12 @@ export class StageController {
       await socket.join(message.stageId);
       const state = stages.get(message.stageId);
       state.actors.push(message.actorName);
-      io.to(message.stageId).emit("on_actor_joined", {
+      io.to(message.stageId).emit("actor_joined", {
         actorName: message.actorName,
       } as IActorJoinedMessage);
       socket
         .to(message.stageId)
-        .emit("on_stage_update", stages.get(message.stageId));
+        .emit("stage_update", stages.get(message.stageId));
       console.log("Sucessfully joined Stage: ", socket.id, message);
       if (io.sockets.adapter.rooms.get(message.stageId).size === 3) {
         io.to(message.stageId).emit("start_play");
@@ -90,7 +90,7 @@ export class StageController {
     });
     await socket.join(stageId);
     socket.emit("stage_created", stageId);
-    socket.emit("on_stage_update", stages.get(stageId));
+    socket.emit("stage_update", stages.get(stageId));
     console.log("Created new stage: ", socket.id, stageId, message);
     console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
   }
@@ -103,6 +103,6 @@ export class StageController {
   ) {
     const stage = this.getSocketStage(socket);
     console.log("Starting Play on ", message.stageId);
-    socket.to(stage).emit("on_play_start", message);
+    socket.to(stage).emit("play_start", message);
   }
 }

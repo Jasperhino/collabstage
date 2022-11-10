@@ -21,14 +21,6 @@ class StageService {
   public castSpell(socket: Socket, spell: ISpellMessage) {
     socket.emit('cast_spell', spell);
   }
-
-  public async onStageUpdate(socket: Socket, listiner: (state: IStageState) => void) {
-    socket.on('on_stage_update', (state) => listiner(state));
-  }
-
-  public async onActorJoined(socket: Socket, listiner: (message: IActorJoinedMessage) => void) {
-    socket.on('on_actor_joined', (message) => listiner(message));
-  }
 }
 
 export default new StageService();

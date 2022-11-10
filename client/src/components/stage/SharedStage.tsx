@@ -28,11 +28,12 @@ export default function SharedStage() {
       console.error('No stageId');
       return;
     }
-    stageService.onActorJoined(socket, (message: IActorJoinedMessage) => {
+    socket.on('actor_joined', (message: IActorJoinedMessage) => {
       console.log(`${message.actorName} joined the Stage `);
       updateToasts((toasts) => [...toasts, { message: `${message.actorName} joined` }]);
     });
-    stageService.onStageUpdate(socket, (state) => {
+
+    socket.on('stage_update', (state) => {
       console.log('Stage: ', state);
       setState(state);
     });
@@ -40,7 +41,7 @@ export default function SharedStage() {
     socket.on('cast_spell', (spell: ISpellMessage) => {
       console.log('Spell: ', spell);
     });
-  }, [toasts]);
+  }, []);
 
   return (
     <HeroLayout>
