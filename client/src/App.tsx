@@ -8,15 +8,23 @@ import Home from './components/home/Home';
 import NoMatch from './components/NoMatch';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/stage/SharedStage';
-import { atom } from 'jotai';
 import Stage from './components/stage/Stage';
+import { IStagesMessage } from '@server/types';
 
 function App() {
-  const playerName = atom<string>('');
+  const host = 'http://localhost:9000';
 
   const connectSocket = async () => {
-    const socket = await socketService.connect('http://localhost:9000').catch((err) => {
+    const socket = await socketService.connect(host).catch((err) => {
       console.error('Error: ', err);
+    });
+    if (!socket) {
+      console.error('Could not connect to socket');
+      return;
+    }
+    console.log(`Socket connected to server ${host}`);
+    socket.on('list_stages', (message: IStagesMessage) => {
+      console.log('stages', message);
     });
   };
 
@@ -28,7 +36,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="stage/join" element={<FindStage />} />
-      <Route path="stage/join/:stageId" element={<JoinStage />} />
+      <Route path="stage/:stageId/join" element={<JoinStage />} />
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />

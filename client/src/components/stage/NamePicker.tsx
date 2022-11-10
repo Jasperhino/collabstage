@@ -16,6 +16,7 @@ export default function NamePicker(props: INamePickerProps) {
         onChange={(e) => {
           props.onNameChange(e.target.value);
         }}
+        autoFocus
       />
     </div>
   );

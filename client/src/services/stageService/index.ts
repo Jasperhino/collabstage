@@ -1,10 +1,10 @@
 import { Socket } from 'socket.io-client';
-import { IStageOptions, IStageState } from '@server/types';
+import { IActorJoinedMessage, IJoinStageMessage, ISpellMessage, IStageOptions, IStageState } from '@server/types';
 
 class StageService {
-  public async joinStage(socket: Socket, stageId: string, playerName: string): Promise<boolean> {
+  public async joinStage(socket: Socket, stageId: string, actorName: string): Promise<boolean> {
     return new Promise((rs, rj) => {
-      socket.emit('join_stage', { stageId, playerName });
+      socket.emit('join_stage', { stageId, actorName } as IJoinStageMessage);
       socket.on('stage_joined', () => rs(true));
       socket.on('stage_join_error', ({ error }) => rj(error));
     });
@@ -18,12 +18,19 @@ class StageService {
     });
   }
 
-  public async updateStage(socket: Socket, playState: IStageState) {
-    socket.emit('update_stage', { playState: playState });
+  public castSpell(socket: Socket, spell: ISpellMessage) {
+    socket.emit('cast_spell', spell);
   }
 
   public async onStageUpdate(socket: Socket, listiner: (state: IStageState) => void) {
-    socket.on('on_game_update', ({ state }) => listiner(state));
+    socket.on('on_stage_update', (state) => listiner(state));
+  }
+
+  public async onActorJoined(socket: Socket, listiner: (message: IActorJoinedMessage) => void) {
+    socket.on('on_actor_joined', (message) => {
+      console.log('on_actor_joined', message);
+      listiner(message);
+    });
   }
 }
 

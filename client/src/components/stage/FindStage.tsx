@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import HeroLayout from '../layout/HeroLayout';
 import AuthCode from 'react-auth-code-input';
 import { QrReader } from 'react-qr-reader';
+import { useNavigate } from 'react-router-dom';
 
 export default function FindStage() {
-  const [stageId, setStageId] = useState<string>('');
+  const navigate = useNavigate();
 
-  const handleScan = (stageId: string) => {
-    if (data) {
+  const handleInputUpdate = (update: string) => {
+    console.log(update);
+    if (update.length === 4 && update.match(/^[a-zA-Z]+$/)) {
+      navigate(`/stage/${update.toUpperCase()}/join`);
     }
   };
 
@@ -17,9 +20,9 @@ export default function FindStage() {
       <AuthCode
         length={4}
         allowedCharacters="alpha"
-        inputClassName="input w-10 h-10 max-w-10 p-2 m-2 text-2xl text-center border border-gray-300 rounded-md flex"
+        inputClassName="input w-10 h-10 max-w-10 p-2 m-2 text-2xl text-center border border-gray-300 rounded-md flex uppercase"
         containerClassName="max-w-full flex justify-center"
-        onChange={setStageId}
+        onChange={handleInputUpdate}
       />
 
       <QrReader
@@ -30,19 +33,18 @@ export default function FindStage() {
           if (!result) return;
           const text = result?.text;
           if (!text) return;
-
-          if (text.length === 4 && text.test(/^[a-zA-Z]+$/)) {
-            setStageId(text);
+          console.log('qr reader', text);
+          if (text.length === 4 && text.match(/^[a-zA-Z]+$/)) {
+            handleInputUpdate(text);
           } else {
-            const match = text.match(/stage\/join\/([a-zA-Z]+)/);
+            const match = text.match(/stage\/([a-zA-Z]+)/);
             if (match) {
-              setStageId(match[1]);
+              handleInputUpdate(match[1]);
             }
           }
         }}
         constraints={{ facingMode: { ideal: 'environment' } }}
       />
-      <p>{stageId}</p>
     </HeroLayout>
   );
 }

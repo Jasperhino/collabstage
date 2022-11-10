@@ -33,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.8",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
@@ -51,7 +52,7 @@
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
-    "daisyui": "^2.38.1",
+    "daisyui": "^2.39.0",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -59,9 +60,9 @@
     "eslint-plugin-react": "^7.31.10",
     "jotai": "^1.9.1",
     "qrcode.react": "^3.1.0",
-    "react": "^18.2.0",
+    "react": "^17.0.2",
     "react-auth-code-input": "^3.2.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^17.0.2",
     "react-qr-reader": "^3.0.0-beta-1",
     "react-router-dom": "^6.4.3",
     "socket.io-client": "^4.5.3",
