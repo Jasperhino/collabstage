@@ -12,9 +12,9 @@ import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
 
 function App() {
-  const host = 'http://localhost:9000';
-
   const connectSocket = async () => {
+    const host = `${window.location.hostname}:9000`;
+    console.log(`connecting to ${host}`);
     const socket = await socketService.connect(host).catch((err) => {
       console.error('Error: ', err);
     });
