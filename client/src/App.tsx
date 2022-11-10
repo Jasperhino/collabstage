@@ -22,7 +22,7 @@ function App() {
       console.error('Could not connect to socket');
       return;
     }
-    console.log(`Socket connected to server ${host}`);
+    console.log(`Connected to server ${host} via socket ${socket.id}`);
     socket.on('list_stages', (message: IStagesMessage) => {
       console.log('stages', message);
     });

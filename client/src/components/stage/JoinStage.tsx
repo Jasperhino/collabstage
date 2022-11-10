@@ -39,10 +39,12 @@ function JoinStage() {
   return (
     <HeroLayout>
       <h1 className="text-5xl font-bold">Pick a name</h1>
-      <NamePicker onNameChange={setActorName} />
-      <button className="btn btn-primary" onClick={joinStage} disabled={isJoining || actorName.length < 3}>
-        {isJoining ? 'Joining...' : 'Join'}
-      </button>
+      <form onSubmit={joinStage}>
+        <NamePicker onNameChange={setActorName} />
+        <button className="btn btn-primary" type="submit" disabled={isJoining || actorName.length < 3}>
+          {isJoining ? 'Joining...' : 'Join'}
+        </button>
+      </form>
     </HeroLayout>
   );
 }

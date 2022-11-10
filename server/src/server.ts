@@ -1,22 +1,10 @@
 #!/usr/bin/env node
-import { Request, Response, NextFunction } from "express";
 
 import { createServer } from "http";
 import "reflect-metadata";
 import app from "./app";
 var debug = require("debug")("socketio-server:server");
 import socketServer from "./socket";
-
-type User = {
-  id: string;
-  name: string;
-};
-
-declare module "express-session" {
-  interface SessionData {
-    user: User;
-  }
-}
 
 let port = normalizePort(process.env.PORT || "9000");
 app.set("port", port);

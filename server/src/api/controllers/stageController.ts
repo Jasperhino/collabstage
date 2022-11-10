@@ -10,8 +10,11 @@ import {
   IActorJoinedMessage,
   IJoinStageMessage,
   IStageOptions,
+  IStageState,
 } from "../../types";
 import { makeid } from "../../utils/helpers";
+
+const stages = new Map<string, IStageState>();
 
 @SocketController()
 export class StageController {
@@ -47,7 +50,7 @@ export class StageController {
 
     if (
       socketStages.length > 0 ||
-      (connectedSockets && connectedSockets.size >= 3)
+      (connectedSockets && connectedSockets.size >= 100)
     ) {
       socket.emit("stage_join_error", {
         error:
@@ -57,14 +60,17 @@ export class StageController {
       });
     } else {
       await socket.join(message.stageId);
-      socket.emit("stage_joined");
+      const state = stages.get(message.stageId);
+      state.actors.push(message.actorName);
       io.to(message.stageId).emit("on_actor_joined", {
         actorName: message.actorName,
       } as IActorJoinedMessage);
+      socket
+        .to(message.stageId)
+        .emit("on_stage_update", stages.get(message.stageId));
       console.log("Sucessfully joined Stage: ", socket.id, message);
       if (io.sockets.adapter.rooms.get(message.stageId).size === 3) {
-        socket.emit("start_play", { start: true });
-        socket.to(message.stageId).emit("start_play", { start: false });
+        io.to(message.stageId).emit("start_play");
       }
     }
   }
@@ -76,8 +82,15 @@ export class StageController {
     @MessageBody() message: IStageOptions
   ) {
     const stageId = makeid(4, Array.from(io.sockets.adapter.rooms.keys()));
+    stages.set(stageId, {
+      stageId,
+      scenario: message.scenario,
+      started: false,
+      actors: [],
+    });
     await socket.join(stageId);
     socket.emit("stage_created", stageId);
+    socket.emit("on_stage_update", stages.get(stageId));
     console.log("Created new stage: ", socket.id, stageId, message);
     console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
   }

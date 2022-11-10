@@ -1,3 +1,4 @@
+import { IStageOptions } from '@server/types';
 import { atom, useAtom } from 'jotai';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +21,7 @@ function CreateStage() {
     }
     setCreating(true);
 
-    const stageId = await stageService.createStage(socket, { scenario: 'hogwarts' }).catch((err) => {
+    const stageId = await stageService.createStage(socket, { scenario: 'hogwarts' } as IStageOptions).catch((err) => {
       alert(err);
     });
     setCreating(false);

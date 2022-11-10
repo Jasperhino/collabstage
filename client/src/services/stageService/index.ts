@@ -12,7 +12,7 @@ class StageService {
 
   public async createStage(socket: Socket, options: IStageOptions): Promise<string> {
     return new Promise((rs, rj) => {
-      socket.emit('create_stage', { options });
+      socket.emit('create_stage', options);
       socket.on('stage_created', (stageId) => rs(stageId));
       socket.on('stage_create_error', ({ error }) => rj(error));
     });
@@ -27,10 +27,7 @@ class StageService {
   }
 
   public async onActorJoined(socket: Socket, listiner: (message: IActorJoinedMessage) => void) {
-    socket.on('on_actor_joined', (message) => {
-      console.log('on_actor_joined', message);
-      listiner(message);
-    });
+    socket.on('on_actor_joined', (message) => listiner(message));
   }
 }
 

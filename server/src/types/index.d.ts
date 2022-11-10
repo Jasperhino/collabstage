@@ -4,6 +4,7 @@ export interface IStageOptions {
 
 export interface IStageState {
   stageId: string;
+  actors: string[];
   scenario: string;
   started: boolean;
 }

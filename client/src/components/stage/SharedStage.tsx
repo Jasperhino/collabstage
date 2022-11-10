@@ -5,7 +5,7 @@ import HeroLayout from '../layout/HeroLayout';
 import socketService from '../../services/socketService';
 import { useNavigate, useParams } from 'react-router-dom';
 import stageService from '../../services/stageService';
-import { IActorJoinedMessage, ISpellMessage } from '@server/types';
+import { IActorJoinedMessage, ISpellMessage, IStageState } from '@server/types';
 
 interface IToast {
   message: string;
@@ -14,7 +14,8 @@ interface IToast {
 export default function SharedStage() {
   const navigate = useNavigate();
   const { stageId } = useParams();
-  const [toasts] = useState<IToast[]>([]);
+  const [toasts, updateToasts] = useState<IToast[]>([]);
+  const [state, setState] = useState<IStageState | null>(null);
 
   useEffect(() => {
     const socket = socketService.socket;
@@ -28,11 +29,12 @@ export default function SharedStage() {
       return;
     }
     stageService.onActorJoined(socket, (message: IActorJoinedMessage) => {
-      console.log(message);
-      toasts.push({ message: `${message.actorName} joined` });
+      console.log(`${message.actorName} joined the Stage `);
+      updateToasts((toasts) => [...toasts, { message: `${message.actorName} joined` }]);
     });
-    stageService.onStageUpdate(socket, (stage) => {
-      console.log('Stage: ', stage);
+    stageService.onStageUpdate(socket, (state) => {
+      console.log('Stage: ', state);
+      setState(state);
     });
 
     socket.on('cast_spell', (spell: ISpellMessage) => {
@@ -42,9 +44,14 @@ export default function SharedStage() {
 
   return (
     <HeroLayout>
+      <div
+        style={{
+          backgroundImage: `url(/image.png'})`,
+        }}
+      ></div>
       <div className="py-6">
         <h2>SharedStage</h2>
-        <p>This is where you should be able to see people join a stage.</p>
+        <p>Waiting for fellow actors...</p>
       </div>
       <div className="card lg:card-side bg-base-100 shadow-xl">
         <div className="m-4">
@@ -55,8 +62,8 @@ export default function SharedStage() {
           </figure>
         </div>
         <div className="card-body">
-          <h2 className="card-title">Waiting for actors...</h2>
-          <p>Scan the QR-Code to join this stage.</p>
+          <h1 className="card-title text-6xl">{state && state.stageId}</h1>
+          <p className="text-left">Scan the QR-Code or enter the code above to join this stage.</p>
         </div>
       </div>
       <div className="toast toast-top">
