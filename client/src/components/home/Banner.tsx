@@ -15,7 +15,7 @@ function Banner() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Download<span class="hidden sm:inline"> on GitHub</span>
+                Download<span className="hidden sm:inline"> on GitHub</span>
               </a>{' '}
               <span className="italic px-1.5">or</span>{' '}
               <a
