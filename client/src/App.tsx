@@ -8,8 +8,8 @@ import NoMatch from './components/NoMatch';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/stage/SharedStage';
 import Stage from './components/stage/Stage';
+import Sensor from './components/sensor/Sensor';
 import { IStagesMessage } from '@server/types';
-import Feather from './components/stage/Feather';
 
 function App() {
   const connectSocket = async () => {
@@ -40,7 +40,7 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
-      <Route path="feather" element={<Feather />} />
+      <Route path="sensor" element={<Sensor />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );
