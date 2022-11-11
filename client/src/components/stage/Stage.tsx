@@ -16,9 +16,6 @@ export default function Stage() {
       console.warn('No socket');
       return;
     }
-    stageService.onStageUpdate(socket, (stage) => {
-      console.log('Stage: ', stage);
-    });
   }, []);
 
   function handleButton(): void {
@@ -26,6 +23,7 @@ export default function Stage() {
       console.warn('Could not send button Press. No socket');
       return;
     }
+    console.log('Sending button press');
     stageService.castSpell(socket, { spell: 'stupor' });
   }
 
@@ -34,7 +32,7 @@ export default function Stage() {
       <h1>Mobile Stage</h1>
       <p>This is supposed to be shown on the mobiles</p>
       <button className="btn btn-primary" onClick={handleButton}>
-        Test me!
+        Wingardium leviosa
       </button>
     </HeroLayout>
   );

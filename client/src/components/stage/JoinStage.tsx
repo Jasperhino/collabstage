@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai';
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import socketService from '../../services/socketService';
 import stageService from '../../services/stageService';
 import HeroLayout from '../layout/HeroLayout';
@@ -14,6 +14,7 @@ function JoinStage() {
   const [isJoining, setJoining] = useAtom(isJoiningAtom);
   const { stageId } = useParams<string>();
   const navigate = useNavigate();
+  let joined = false;
 
   const joinStage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,14 +27,16 @@ function JoinStage() {
 
     setJoining(true);
 
-    const joined = await stageService.joinStage(socket, stageId, actorName).catch((err) => {
+    console.log('Joining stage: ', stageId);
+    const success = await stageService.joinStage(socket, stageId, actorName).catch((err) => {
       alert(err);
     });
-    if (joined) {
+    if (success) {
+      joined = true;
       console.log(`${socket.id} joined ${stageId}`);
     }
-    setJoining(false);
     navigate(`/stage/${stageId}`);
+    setJoining(false);
   };
 
   return (
@@ -41,10 +44,15 @@ function JoinStage() {
       <h1 className="text-5xl font-bold">Pick a name</h1>
       <form onSubmit={joinStage}>
         <NamePicker onNameChange={setActorName} />
-        <button className="btn btn-primary" type="submit" disabled={isJoining || actorName.length < 3}>
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={isJoining || actorName.length < 3 || actorName.length > 12}
+        >
           {isJoining ? 'Joining...' : 'Join'}
         </button>
       </form>
+      {joined && <Navigate to={`/stage/${stageId}`} />}
     </HeroLayout>
   );
 }

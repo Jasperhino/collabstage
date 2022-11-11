@@ -5,6 +5,7 @@ import socketService from '../../services/socketService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IActorJoinedMessage, ISpellMessage, IStageState } from '@server/types';
 import ActorList from './ActorList';
+import Feather from './Feather';
 
 interface IToast {
   message: string;
@@ -15,6 +16,17 @@ export default function SharedStage() {
   const { stageId } = useParams();
   const [toasts, updateToasts] = useState<IToast[]>([]);
   const [state, setState] = useState<IStageState | null>(null);
+  const [flying, setFlying] = useState<boolean>(false);
+
+  const vengadiumLeviosa = () => {
+    if (flying) {
+      return;
+    }
+    setFlying(true);
+    setTimeout(() => {
+      setFlying(false);
+    }, 1000 * 10);
+  };
 
   useEffect(() => {
     const socket = socketService.socket;
@@ -38,7 +50,7 @@ export default function SharedStage() {
     });
 
     socket.on('cast_spell', (spell: ISpellMessage) => {
-      console.log('Spell: ', spell);
+      vengadiumLeviosa();
     });
   }, []);
 
@@ -47,11 +59,11 @@ export default function SharedStage() {
   };
 
   return (
-    <div className="flex w-screen h-screen items-center bg-opacity-50" style={backdrop}>
+    <div className="flex w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
       <div className="flex flex-row justify-center mx-32">
-        <div className="card bg-base-100 shadow-xl mx-8">
+        <div className="card h-full bg-base-100 shadow-xl mx-8">
           <a href={'join'} target="_blank" rel="noreferrer">
-            <QRCodeSVG className="m-4" value={`${window.location.host}/stage/join/${stageId}`} size={400} />
+            <QRCodeSVG className="m-4" value={`${window.location.host}/stage/${stageId}/join`} size={400} />
           </a>
         </div>
         <div className="card w-1/3 h-full bg-base-100 shadow-xl mx-8">
@@ -61,6 +73,7 @@ export default function SharedStage() {
           </div>
         </div>
         {state && <ActorList actors={state.actors} />}
+        <Feather flying={flying} />
       </div>
 
       <div className="toast toast-top">

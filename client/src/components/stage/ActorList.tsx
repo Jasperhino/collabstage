@@ -6,7 +6,7 @@ interface IActorListProps {
 
 export default function ActorList(props: IActorListProps) {
   return (
-    <div className="card bg-base-100 shadow-xl justify-start items-center">
+    <div className="card h-full bg-base-100 shadow-xl justify-start items-center">
       {props.actors.map((actor, i) => (
         <div key={i} className="stat p-4">
           <div className="stat-figure">

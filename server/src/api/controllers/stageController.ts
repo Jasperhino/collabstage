@@ -8,7 +8,9 @@ import {
 import { Server, Socket } from "socket.io";
 import {
   IActorJoinedMessage,
+  ICastSpellMessage,
   IJoinStageMessage,
+  ISpellMessage,
   IStageOptions,
   IStageState,
 } from "../../types";
@@ -52,22 +54,21 @@ export class StageController {
       socketStages.length > 0 ||
       (connectedSockets && connectedSockets.size >= 100)
     ) {
-      socket.emit("stage_join_error", {
-        error:
-          socketStages.length > 0
-            ? "You are already in a stage"
-            : "This Stage is already full. Please choose another stage to play!",
-      });
+      socket.emit(
+        "stage_joined_error",
+        socketStages.length > 0
+          ? "You are already in a stage"
+          : "This Stage is already full. Please choose another stage to play!"
+      );
     } else {
       await socket.join(message.stageId);
       const state = stages.get(message.stageId);
       state.actors.push(message.actorName);
+      socket.emit("stage_joined", socket.id);
       io.to(message.stageId).emit("actor_joined", {
         actorName: message.actorName,
       } as IActorJoinedMessage);
-      socket
-        .to(message.stageId)
-        .emit("stage_update", stages.get(message.stageId));
+      io.to(message.stageId).emit("stage_update", stages.get(message.stageId));
       console.log("Sucessfully joined Stage: ", socket.id, message);
       if (io.sockets.adapter.rooms.get(message.stageId).size === 3) {
         io.to(message.stageId).emit("start_play");
@@ -93,6 +94,21 @@ export class StageController {
     socket.emit("stage_update", stages.get(stageId));
     console.log("Created new stage: ", socket.id, stageId, message);
     console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
+  }
+
+  @OnMessage("cast_spell")
+  public async castSpell(
+    @SocketIO() io: Server,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() message: ICastSpellMessage
+  ) {
+    const stage = this.getSocketStage(socket);
+    console.log(`${socket.id} cast spell on ${stage} - ${message.spell}`);
+    socket.to(stage).emit("cast_spell", {
+      stageId: stage,
+      spell: message.spell,
+      socketId: socket.id,
+    } as ISpellMessage);
   }
 
   @OnMessage("start_play")
