@@ -10,6 +10,9 @@ import SharedStage from './components/stage/SharedStage';
 import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
 import Feather from './components/stage/Feather';
+import DialogBox from './components/dialog/DialogBox';
+import "./components/dialog/style.css";
+
 
 function App() {
   const connectSocket = async () => {
@@ -22,7 +25,7 @@ function App() {
       console.error('Could not connect to socket');
       return;
     }
-    console.log(`Connected to server ${host} via socket ${socket.id}`);
+    console.log(`Connected to server  ${host} via socket ${socket.id}`);
     socket.on('list_stages', (message: IStagesMessage) => {
       console.log('stages', message);
     });
@@ -32,6 +35,12 @@ function App() {
     connectSocket();
   }, []);
 
+  const messages = [
+    "This is a very cool RPG dialog message.",
+    "If you would like to see more awesome stuff, check out the other writeups at codeworkshop.dev!",
+    "Remember to wash your hands!"
+  ];
+  
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -40,8 +49,9 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
-      <Route path="feather" element={<Feather />} />
-      <Route path="*" element={<NoMatch />} />
+      <Route path="stage/:stageId/dialog" element={<DialogBox />} />
+      <Route path="feather" element={<Feather flying={false} />} />
+      <Route path="*" element={<Home />} />
     </Routes>
   );
 }
