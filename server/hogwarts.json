@@ -1,0 +1,41 @@
+{
+    "id": 0,
+    "Name of the play": "Harry Potter",
+    "Description of the play": "The students are in their charm class; they must use a spell to make feathers levitate. Harry , Ron and Hermione are working as a group.",
+    "Characters": [
+        "Harry",
+        "Ron",
+        "Hermione"
+    ],
+    "Soundscape": [
+        "Hogwarts theme Classroom noise"
+    ],
+    "Script": [
+        {
+            "id": 0,
+            "Character": "Harry",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Line": "We need to figure out how to do this!",
+                "Emotion": "Confused"
+            }
+        },
+        {
+            "id": 6,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "True",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Line": " Wingardium Leviosa!",
+                "Emotion": "Nervous"
+            }
+        }
+    ]
+}

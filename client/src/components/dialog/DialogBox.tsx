@@ -44,12 +44,14 @@ export default function DialogBox() {
                 <div className="hero-content flex-col lg:flex-row">
                     <img src={character_images[currentMessage]} className="max-w-sm rounded-lg shadow-2xl" />
                     <div className="DialogWindow">
-                        <div className="DialogBox">
-                            <div className="dialogTitle">{character[currentMessage]}</div>
-                            <p>{lines[currentMessage]}</p>
-                            <button onClick={handleButton} className="dialogFooter">
-                                Next
-                            </button>
+                        <div className="card w-96 bg-base-100 shadow-xl">
+                            <div className="card-body">
+                                <h2 className="card-title">{character[currentMessage]}</h2>
+                                <p>{lines[currentMessage]}</p>
+                                <div className="card-actions justify-end">
+                                    <button onClick={handleButton} className="btn btn-primary">Next</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -57,4 +59,10 @@ export default function DialogBox() {
         </div>
     );
 }
+
+//harry: line
+//new class
+//String name; String line;
+
+//
 

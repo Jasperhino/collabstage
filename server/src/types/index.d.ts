@@ -35,3 +35,11 @@ export interface ISpellMessage {
 export interface ICastSpellMessage {
   spell: string;
 }
+
+export interface Play{
+  play_name: string;
+  chararacter: string;
+  line: string;
+  event: BigInteger;
+   
+}
