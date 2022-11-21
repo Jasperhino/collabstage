@@ -20,12 +20,84 @@
             },
             "Line": {
                 "isDecision": "False",
-                "Line": "We need to figure out how to do this!",
-                "Emotion": "Confused"
+                "Lines" :[
+                    "We need to figure out how to do this!"
+                ],
+                "Emotions" : [
+                    "Confused"
+                ]
             }
         },
         {
-            "id": 6,
+            "id": 1,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Whenever we try it, it nothing works!"
+                ],
+                "Emotions" : [
+                    "Angry"
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Well, it’s obviously, because you’re not saying it properly!"
+                ],
+                "Emotions" : [
+                    "Bossy"
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Why don’t you try it, Miss. Granger."
+                ],
+                "Emotions" : [
+                    "Sarcastically"
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    " No. I’m researching on the spell, why don’t you try Mr. Weasley!"
+                ],
+                "Emotions" : [
+                    "Mean"
+                ]
+            }
+        },
+        {
+            "id": 5,
             "Character": "Ron",
             "Interaction": {
                 "isInteractive": "True",
@@ -33,8 +105,335 @@
             },
             "Line": {
                 "isDecision": "False",
-                "Line": " Wingardium Leviosa!",
-                "Emotion": "Nervous"
+                "Lines" :[
+                    "Wingardium Leviosaaa!"
+                ],
+                "Emotions" : [
+                    "Nervous"
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "You said it wrong! It isn’t Wingardia Leviosaaaa!"
+                ],
+                "Emotions" : [
+                    "Calm"
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "True",
+                "interactionScale": "6"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "It’s Wingardia Leviosa!"
+                ],
+                "Emotions" : [
+                    "Assertive"
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "Character": "Harry",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Well, she did it, I want to try!"
+                ],
+                "Emotions" : [
+                    "Excited"
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "It was only a onetime thing; she won’t be able to do it again!"
+                ],
+                "Emotions" : [
+                    "Grumpy"
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "What? Are you jealous?"
+                ],
+                "Emotions" : [
+                    "Mocking voice"
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Ha-ha so funny!"
+                ],
+                "Emotions" : [
+                    "Sarcastically"
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "Character": "Harry",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Okay guys stop!"
+                ],
+                "Emotions" : [
+                    "Impatient"
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "True",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Wingardia Leviosaa!"
+                ],
+                "Emotions" : [
+                    "Angry"
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "True",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Wingardia Leviosaaaaa!"
+                ],
+                "Emotions" : [
+                    "Angry x2"
+                ]
+            }
+        },
+        {
+            "id": 15,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "WHY ISN’T IT WORKING!"
+                ],
+                "Emotions" : [
+                    "Angry x10"
+                ]
+            }
+        },
+        {
+            "id": 16,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "I told you! You’re not saying it correctly"
+                ],
+                "Emotions" : [
+                    "Bossy"
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Ugh! You’re always correcting me!"
+                ],
+                "Emotions" : [
+                    "Impatient"
+                ]
+            }
+        },
+        {
+            "id": 18,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "I was just trying to help"
+                ],
+                "Emotions" : [
+                    "Embarrassed"
+                ]
+            }
+        },
+        {
+            "id": 19,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "True",
+                "interactionScale": "10"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "WINGARDIA LEVIOSA!"
+                ],
+                "Emotions" : [
+                    "Angry * 100"
+                ]
+            }
+        },
+        {
+            "id": 20,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    " I told you I could do it!"
+                ],
+                "Emotions" : [
+                    "Excited"
+                ]
+            }
+        },
+        {
+            "id": 21,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "No Comment!"
+                ],
+                "Emotions" : [
+                    "Surprised"
+                ]
+            }
+        },
+        {
+            "id": 22,
+            "Character": "Harry",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "Well, Done Ron!"
+                ],
+                "Emotions" : [
+                    "Happy"
+                ]
+            }
+        },
+        {
+            "id": 23,
+            "Character": "Hermione",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "You didn’t say it correctly, although you showed you could handle this spell, you need to say it like a TRUE wizard!"
+                ],
+                "Emotions" : [
+                    "Grumpy"
+                ]
+            }
+        },
+        {
+            "id": 24,
+            "Character": "Ron",
+            "Interaction": {
+                "isInteractive": "False",
+                "interactionScale": "0"
+            },
+            "Line": {
+                "isDecision": "False",
+                "Lines" :[
+                    "That doesn’t matter!"
+                ],
+                "Emotions" : [
+                    "Proud"
+                ]
             }
         }
     ]
