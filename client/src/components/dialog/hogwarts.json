@@ -1,437 +1,463 @@
 {
     "id": 0,
-    "Name of the play": "Harry Potter",
-    "Description of the play": "The students are in their charm class; they must use a spell to make feathers levitate. Harry , Ron and Hermione are working as a group.",
-    "Characters": [
+    "size": 25,
+    "name of the play": "Harry Potter",
+    "description of the play": "The students are in their charm class; they must use a spell to make feathers levitate. Harry , Ron and Hermione are working as a group.",
+    "characters": [
         "Harry",
         "Ron",
         "Hermione"
     ],
-    "Soundscape": [
+    "soundscape": [
         "Hogwarts theme Classroom noise"
     ],
-    "Script": [
+    "script": [
         {
             "id": 0,
-            "Character": "Harry",
-            "Interaction": {
+            "character": "Harry",
+            "characterImage": "https://images6.alphacoders.com/691/691559.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "We need to figure out how to do this!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Confused"
                 ]
             }
         },
         {
             "id": 1,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Whenever we try it, it nothing works!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Angry"
                 ]
             }
         },
         {
             "id": 2,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Well, it’s obviously, because you’re not saying it properly!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Bossy"
                 ]
             }
         },
         {
             "id": 3,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Why don’t you try it, Miss. Granger."
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Sarcastically"
                 ]
             }
         },
         {
             "id": 4,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     " No. I’m researching on the spell, why don’t you try Mr. Weasley!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Mean"
                 ]
             }
         },
         {
             "id": 5,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "True",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Wingardium Leviosaaa!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Nervous"
                 ]
             }
         },
         {
             "id": 6,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "You said it wrong! It isn’t Wingardia Leviosaaaa!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Calm"
                 ]
             }
         },
         {
             "id": 7,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "True",
                 "interactionScale": "6"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "It’s Wingardia Leviosa!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Assertive"
                 ]
             }
         },
         {
             "id": 8,
-            "Character": "Harry",
-            "Interaction": {
+            "character": "Harry",
+            "characterImage": "https://images6.alphacoders.com/691/691559.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Well, she did it, I want to try!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Excited"
                 ]
             }
         },
         {
             "id": 9,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "It was only a onetime thing; she won’t be able to do it again!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Grumpy"
                 ]
             }
         },
         {
             "id": 10,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "What? Are you jealous?"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Mocking voice"
                 ]
             }
         },
         {
             "id": 11,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Ha-ha so funny!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Sarcastically"
                 ]
             }
         },
         {
             "id": 12,
-            "Character": "Harry",
-            "Interaction": {
+            "character": "Harry",
+            "characterImage": "https://images6.alphacoders.com/691/691559.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Okay guys stop!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Impatient"
                 ]
             }
         },
         {
             "id": 13,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "True",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Wingardia Leviosaa!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Angry"
                 ]
             }
         },
         {
             "id": 14,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "True",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Wingardia Leviosaaaaa!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Angry x2"
                 ]
             }
         },
         {
             "id": 15,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "WHY ISN’T IT WORKING!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Angry x10"
                 ]
             }
         },
         {
             "id": 16,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "I told you! You’re not saying it correctly"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Bossy"
                 ]
             }
         },
         {
             "id": 17,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Ugh! You’re always correcting me!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Impatient"
                 ]
             }
         },
         {
             "id": 18,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "I was just trying to help"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Embarrassed"
                 ]
             }
         },
         {
             "id": 19,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "True",
                 "interactionScale": "10"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "WINGARDIA LEVIOSA!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Angry * 100"
                 ]
             }
         },
         {
             "id": 20,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     " I told you I could do it!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Excited"
                 ]
             }
         },
         {
             "id": 21,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "No Comment!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Surprised"
                 ]
             }
         },
         {
             "id": 22,
-            "Character": "Harry",
-            "Interaction": {
+            "character": "Harry",
+            "characterImage" : "https://images6.alphacoders.com/691/691559.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "Well, Done Ron!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Happy"
                 ]
             }
         },
         {
             "id": 23,
-            "Character": "Hermione",
-            "Interaction": {
+            "character": "Hermione",
+            "characterImage": "https://wallpaper.dog/large/201223.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "You didn’t say it correctly, although you showed you could handle this spell, you need to say it like a TRUE wizard!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Grumpy"
                 ]
             }
         },
         {
             "id": 24,
-            "Character": "Ron",
-            "Interaction": {
+            "character": "Ron",
+            "characterImage": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "interaction": {
                 "isInteractive": "False",
                 "interactionScale": "0"
             },
-            "Line": {
+            "line": {
                 "isDecision": "False",
-                "Lines" :[
+                "lines": [
                     "That doesn’t matter!"
                 ],
-                "Emotions" : [
+                "emotions": [
                     "Proud"
                 ]
             }

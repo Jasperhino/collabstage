@@ -11,7 +11,6 @@ import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
 import Feather from './components/stage/Feather';
 import DialogBox from './components/dialog/DialogBox';
-import "./components/dialog/style.css";
 
 
 function App() {
