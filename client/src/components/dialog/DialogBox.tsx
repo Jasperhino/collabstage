@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import socketService from '../../services/socketService';
 import stageService from '../../services/stageService';
-import CharacterLayout from '../dialog/CharacterLayout';
 import myData from '../dialog/hogwarts.json';
 
 const socketAtom = atom<Socket | null>(null);
@@ -25,12 +24,11 @@ export default function DialogBox() {
     };
 
 
-    function populateArray(){
+    function populateArray() {
     }
 
     const [currentMessage, setCurrentMessage] = useState(0);
     const handleButton = () => {
-        //I have to fix this, im cheating
         if (currentMessage < myData.size - 1) {
             setCurrentMessage(currentMessage + 1);
         } else {
@@ -39,11 +37,12 @@ export default function DialogBox() {
 
         console.log("button");
     };
-    
+
     //https://blenderartists.org/t/hogwarts-classroom/1215909
     return (
+
         <div className="flex w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
-            <div className="hero min-h-screen   bg-opacity-0 -z-100 bg-base-200">
+            <div className="hero min-h-screen  bg-opacity-0 -z-100 bg-base-200" >
                 <div className="hero-content flex-col lg:flex-row">
                     <img src={myData.script[currentMessage].characterImage} className="max-w-sm rounded-lg shadow-2xl" />
                     <div className="DialogWindow">

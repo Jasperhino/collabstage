@@ -11,6 +11,7 @@ import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
 import Feather from './components/stage/Feather';
 import DialogBox from './components/dialog/DialogBox';
+import Teleprompter from './components/teleprompter/Teleprompter';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
       <Route path="stage/:stageId/dialog" element={<DialogBox />} />
+      <Route path="stage/:stageId/teleprompter" element={<Teleprompter />} />
       <Route path="feather" element={<Feather flying={false} />} />
       <Route path="*" element={<Home />} />
     </Routes>
