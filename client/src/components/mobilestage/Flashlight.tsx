@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
+import classNames from 'classnames';
 export default function Flashlight() {
   let hasTorch = false;
-  const [torchOn, settorchOn] = useState(false);
+  let torchOn = false;
   let track = null;
 
   const toggleTorch = () => {
@@ -48,7 +48,7 @@ export default function Flashlight() {
 
   return (
     <>
-      <button className="btn btn-primary" onClick={toggle}>
+      <button className={classNames('btn btn-primary', { 'btn-disabled': !hasTorch })} onClick={toggleTorch}>
         Flash {torchOn ? 'off' : 'on'}
       </button>
       <video autoPlay style={hidden}></video>
