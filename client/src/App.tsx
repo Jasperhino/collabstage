@@ -4,12 +4,13 @@ import socketService from './services/socketService';
 import JoinStage from './components/stage/JoinStage';
 import CreateStage from './components/stage/CreateStage';
 import Home from './components/home/Home';
-import NoMatch from './components/NoMatch';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/stage/SharedStage';
 import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
-import Feather from './components/stage/Feather';
+import MobileSpellInteraction from './components/mobilestage/MobileSpellInteraction';
+import { Vibration } from './components/mobilestage/Vibration';
+import Flashlight from './components/mobilestage/Flashlight';
 
 function App() {
   const connectSocket = async () => {
@@ -40,7 +41,9 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
-      <Route path="feather" element={<Feather />} />
+      <Route path="spell" element={<MobileSpellInteraction />} />
+      <Route path="vibrate" element={<Vibration />} />
+      <Route path="flashlight" element={<Flashlight />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );
