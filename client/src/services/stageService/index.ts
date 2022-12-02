@@ -1,12 +1,17 @@
 import { Socket } from 'socket.io-client';
-import { IActorJoinedMessage, IJoinStageMessage, ISpellMessage, IStageOptions, IStageState } from '@server/types';
+import { ICastSpellMessage, IJoinStageMessage, ISpellMessage, IStageOptions } from '@server/types';
 
 class StageService {
   public async joinStage(socket: Socket, stageId: string, actorName: string): Promise<boolean> {
     return new Promise((rs, rj) => {
       socket.emit('join_stage', { stageId, actorName } as IJoinStageMessage);
-      socket.on('stage_joined', () => rs(true));
-      socket.on('stage_join_error', ({ error }) => rj(error));
+      socket.on('stage_joined', (socketId: string) => {
+        console.log('checking stage joined', socketId, socket.id);
+        if (socketId === socket.id) rs(true);
+      });
+      socket.on('stage_joined_error', (error: string) => {
+        rj(error);
+      });
     });
   }
 
@@ -14,20 +19,12 @@ class StageService {
     return new Promise((rs, rj) => {
       socket.emit('create_stage', options);
       socket.on('stage_created', (stageId) => rs(stageId));
-      socket.on('stage_create_error', ({ error }) => rj(error));
+      socket.on('stage_create_error', (error) => rj(error));
     });
   }
 
-  public castSpell(socket: Socket, spell: ISpellMessage) {
+  public castSpell(socket: Socket, spell: ICastSpellMessage) {
     socket.emit('cast_spell', spell);
-  }
-
-  public async onStageUpdate(socket: Socket, listiner: (state: IStageState) => void) {
-    socket.on('on_stage_update', (state) => listiner(state));
-  }
-
-  public async onActorJoined(socket: Socket, listiner: (message: IActorJoinedMessage) => void) {
-    socket.on('on_actor_joined', (message) => listiner(message));
   }
 }
 

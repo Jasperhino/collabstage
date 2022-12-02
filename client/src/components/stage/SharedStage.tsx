@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { useEffect } from 'react';
-import HeroLayout from '../layout/HeroLayout';
 import socketService from '../../services/socketService';
 import { useNavigate, useParams } from 'react-router-dom';
-import stageService from '../../services/stageService';
 import { IActorJoinedMessage, ISpellMessage, IStageState } from '@server/types';
+import ActorList from './ActorList';
+import Feather from './Feather';
 
 interface IToast {
   message: string;
@@ -16,65 +16,75 @@ export default function SharedStage() {
   const { stageId } = useParams();
   const [toasts, updateToasts] = useState<IToast[]>([]);
   const [state, setState] = useState<IStageState | null>(null);
+  const [flying, setFlying] = useState<boolean>(false);
+
+  const vengadiumLeviosa = () => {
+    if (flying) {
+      return;
+    }
+    setFlying(true);
+    setTimeout(() => {
+      setFlying(false);
+    }, 1000 * 10);
+  };
 
   useEffect(() => {
     const socket = socketService.socket;
     if (!socket) {
       console.error('No socket');
-      navigate('/');
+      //navigate('/');
       return;
     }
     if (!stageId) {
       console.error('No stageId');
       return;
     }
-    stageService.onActorJoined(socket, (message: IActorJoinedMessage) => {
+    socket.on('actor_joined', (message: IActorJoinedMessage) => {
       console.log(`${message.actorName} joined the Stage `);
       updateToasts((toasts) => [...toasts, { message: `${message.actorName} joined` }]);
     });
-    stageService.onStageUpdate(socket, (state) => {
+
+    socket.on('stage_update', (state) => {
       console.log('Stage: ', state);
       setState(state);
     });
 
     socket.on('cast_spell', (spell: ISpellMessage) => {
-      console.log('Spell: ', spell);
+      vengadiumLeviosa();
     });
-  }, [toasts]);
+  }, []);
+
+  const backdrop = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/backgrounds/hogwarts.jpg')`,
+  };
 
   return (
-    <HeroLayout>
-      <div
-        style={{
-          backgroundImage: `url(/image.png'})`,
-        }}
-      ></div>
-      <div className="py-6">
-        <h2>SharedStage</h2>
-        <p>Waiting for fellow actors...</p>
-      </div>
-      <div className="card lg:card-side bg-base-100 shadow-xl">
-        <div className="m-4">
-          <figure>
-            <a href={'join'} target="_blank">
-              <QRCodeSVG value={`${window.location.host}/stage/join/${stageId}`} size={200} />
-            </a>
-          </figure>
+    <div className="flex w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
+      <div className="flex flex-row justify-center mx-32">
+        <div className="card h-full bg-base-100 shadow-xl mx-8">
+          <a href={'join'} target="_blank" rel="noreferrer">
+            <QRCodeSVG className="m-4" value={`${window.location.host}/stage/${stageId}/join`} size={400} />
+          </a>
         </div>
-        <div className="card-body">
-          <h1 className="card-title text-6xl">{state && state.stageId}</h1>
-          <p className="text-left">Scan the QR-Code or enter the code above to join this stage.</p>
+        <div className="card w-1/3 h-full bg-base-100 shadow-xl mx-8">
+          <div className="card-body">
+            <h1 className="card-title text-6xl">{state ? state.stageId : 'XXXX'}</h1>
+            <p className="text-left">Scan the QR-Code or enter the code above to join this stage.</p>
+          </div>
         </div>
+        {state && <ActorList actors={state.actors} />}
+        <Feather flying={flying} />
       </div>
+
       <div className="toast toast-top">
         {toasts.map((toast: IToast, i) => (
-          <div key={i} className="alert bg-base-100">
+          <div key={i} className="alert h-10 bg-base-100">
             <div>
               <span>{toast.message}</span>
             </div>
           </div>
         ))}
       </div>
-    </HeroLayout>
+    </div>
   );
 }

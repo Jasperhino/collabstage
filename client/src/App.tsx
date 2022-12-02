@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
 import socketService from './services/socketService';
 import JoinStage from './components/stage/JoinStage';
 import CreateStage from './components/stage/CreateStage';
@@ -10,11 +9,12 @@ import FindStage from './components/stage/FindStage';
 import SharedStage from './components/stage/SharedStage';
 import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
+import Feather from './components/stage/Feather';
 
 function App() {
-  const host = 'http://localhost:9000';
-
   const connectSocket = async () => {
+    const host = `${window.location.hostname}:9000`;
+    console.log(`connecting to ${host}`);
     const socket = await socketService.connect(host).catch((err) => {
       console.error('Error: ', err);
     });
@@ -40,6 +40,7 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
+      <Route path="feather" element={<Feather />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

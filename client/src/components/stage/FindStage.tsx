@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import HeroLayout from '../layout/HeroLayout';
 import AuthCode from 'react-auth-code-input';
-import { QrReader } from 'react-qr-reader';
+import QrReader from 'react-qr-reader-es6';
 import { useNavigate } from 'react-router-dom';
 
 export default function FindStage() {
@@ -26,12 +26,7 @@ export default function FindStage() {
       />
 
       <QrReader
-        onResult={(result, error) => {
-          if (error) {
-            console.info(error);
-          }
-          if (!result) return;
-          const text = result?.text;
+        onScan={(text) => {
           if (!text) return;
           console.log('qr reader', text);
           if (text.length === 4 && text.match(/^[a-zA-Z]+$/)) {
@@ -43,7 +38,9 @@ export default function FindStage() {
             }
           }
         }}
-        constraints={{ facingMode: { ideal: 'environment' } }}
+        onError={(error) => {
+          console.info(error);
+        }}
       />
     </HeroLayout>
   );

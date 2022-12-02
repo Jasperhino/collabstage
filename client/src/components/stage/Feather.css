@@ -1,0 +1,19 @@
+.feather {
+  offset-path: path(
+    'm 0 0 Q -50 -500 0 -600 C 0 -550 -1 -512 50 -550 C 43 -535 -29 -370 7 -272 C 19 -209 -21 -107 -63 -145 C -39 25 0 0 40 -21 C 19 4 16 -7 0 0'
+  );
+  offset-rotate: 0deg;
+  animation: move 10s ease-in-out;
+}
+
+@keyframes move {
+  0% {
+    offset-distance: 0%;
+  }
+  5% {
+    offset-distance: 43%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}

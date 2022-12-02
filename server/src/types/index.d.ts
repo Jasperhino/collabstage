@@ -14,6 +14,10 @@ export interface IJoinStageMessage {
   actorName: string;
 }
 
+export interface IStageJoinedMessage {
+  socketId: string;
+}
+
 export interface IStagesMessage {
   stages: string[];
 }
@@ -23,5 +27,11 @@ export interface IActorJoinedMessage {
 }
 
 export interface ISpellMessage {
+  socketId: string;
+  stageId: string;
+  spell: string;
+}
+
+export interface ICastSpellMessage {
   spell: string;
 }
