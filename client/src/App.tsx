@@ -41,7 +41,7 @@ function App() {
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
       <Route path="feather" element={<Feather />} />
-      <Route path="*" element={<NoMatch />} />
+      <Route path="*" element={<Home />} />
     </Routes>
   );
 }
