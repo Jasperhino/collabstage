@@ -54,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "@use-gesture/react": "^10.2.22",
+    "classnames": "^2.3.2",
     "daisyui": "^2.39.0",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
