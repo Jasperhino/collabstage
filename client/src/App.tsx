@@ -10,6 +10,11 @@ import SharedStage from './components/stage/SharedStage';
 import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
 import Feather from './components/stage/Feather';
+import CharacterSelection from './components/stage/CharacterSelection';
+import HarryExplanation from './components/stage/HarryExplanation';
+import HermioneExplanation from './components/stage/HermioneExplanation';
+import RonExplanation from './components/stage/RonExplanation';
+import ActorList from './components/stage/ActorList';
 
 function App() {
   const connectSocket = async () => {
@@ -38,6 +43,11 @@ function App() {
       <Route path="stage/join" element={<FindStage />} />
       <Route path="stage/:stageId/join" element={<JoinStage />} />
       <Route path="stage/create" element={<CreateStage />} />
+      <Route path="character" element={<CharacterSelection />} />
+      <Route path="character/Harry" element={<HarryExplanation />} />
+      <Route path="character/Hermione" element={<HermioneExplanation />} />
+      <Route path="actor" element={<ActorList actors={["Diogo"]} />} />
+      <Route path="character/Ron" element={<RonExplanation />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
       <Route path="feather" element={<Feather />} />
