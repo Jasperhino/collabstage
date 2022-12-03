@@ -50,7 +50,7 @@ function App() {
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<Stage />} />
       <Route path="stage/:stageId/dialog" element={<DialogBox />} />
-      <Route path="stage/:stageId/teleprompter" element={<Teleprompter />} />
+      <Route path="stage/:stageId/teleprompter/:character" element={<Teleprompter />} />
       <Route path="feather" element={<Feather flying={false} />} />
       <Route path="*" element={<Home />} />
     </Routes>
