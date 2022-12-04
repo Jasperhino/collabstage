@@ -19,8 +19,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": { "@server/*": ["./server/src/*"], },
+    "baseUrl": "./",
+    "paths": { "@server/*": ["../server/src/*"], },
 
   },
-  "include": ["client", "server"],
+  "include": ["src", "..server/src/*"],
 }

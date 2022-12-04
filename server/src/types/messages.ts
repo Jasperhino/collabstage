@@ -1,6 +1,8 @@
 export interface IStepDoneMessage {
   stageId: string;
-  actorName: string;
-  stepIndex: number;
-  branchId: string;
+  character: string;
+}
+
+export interface IStartPlayMessage {
+  stageId: string;
 }

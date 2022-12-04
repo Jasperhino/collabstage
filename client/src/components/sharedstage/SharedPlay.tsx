@@ -2,24 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { IPlayState } from '@server/types';
 import SharedDialog from './SharedDialog';
 import SharedInteraction from './SharedInteraction';
+import { IPlay, IStep } from '@server/types/play';
 
 interface ISharedPlayProps {
   playState: IPlayState;
-  scenario: string;
+  play: IPlay;
 }
 
-export default function SharedPlay({ playState, scenario }: ISharedPlayProps) {
-  const [step, setStep] = useState<IStep | null>(null);
+export default function SharedPlay({ playState, play }: ISharedPlayProps) {
+  const [step, setStep] = useState<IStep | undefined | null>(null);
 
   useEffect(() => {
     const currentBranch = play.script.find((e) => e.id == playState.currentBranchId);
-    if (!currentBranch) {
-      console.error(`No branch found for ${playState.currentBranchId} in ${scenario}`);
-      return;
-    }
 
-    setStep(currentBranch.steps[playState.currentStepIndex]);
-  }, [playState]);
+    setStep(currentBranch?.steps[playState.currentStepIndex]);
+  }, [playState, play]);
 
   //Render Interaction or Dialog Screen dependent on playState
 

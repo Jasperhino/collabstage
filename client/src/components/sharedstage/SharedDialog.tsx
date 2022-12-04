@@ -1,14 +1,19 @@
 import { IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
-import stageService from '../../services/stageService';
+import { stepDone } from '../../services/stageService';
 
-export default function SharedDialog({ step }: { step: IStep }) {
+interface ISharedDialogProps {
+  step: IStep;
+}
+
+export default function SharedDialog({ step }: ISharedDialogProps) {
   const backdrop = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/backgrounds/hogwarts.jpg')`,
   };
 
+  //This button is only for testing purposes, it should be removed later
   function handleButton() {
-    stageService.stepDone();
+    stepDone(step.character);
   }
 
   return (

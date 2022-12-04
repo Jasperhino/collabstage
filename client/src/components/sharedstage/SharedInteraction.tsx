@@ -1,8 +1,9 @@
+import { IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
 import socketService from '../../services/socketService';
 import Feather from '../stage/Feather';
 
-export default function SharedInteraction() {
+export default function SharedInteraction({ step }: { step: IStep }) {
   const [flying, setFlying] = useState<boolean>(false);
 
   const letFeatherFly = () => {

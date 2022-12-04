@@ -15,9 +15,12 @@ import {
   IStageState,
   IStageStatus,
 } from "../../types";
-import { makeid } from "../../utils/helpers";
+import { IStartPlayMessage } from "../../types/messages";
+import { IPlay } from "../../types/play";
+import { loadPlay, makeid } from "../../utils/helpers";
 
 const stages = new Map<string, IStageState>();
+const plays = new Map<string, IPlay>();
 
 @SocketController()
 export class StageController {
@@ -98,8 +101,16 @@ export class StageController {
     stages.set(stageId, stageState);
     await socket.join(stageId);
     socket.emit("stage_created", stageId);
-    socket.emit("stage_update", stages.get(stageId));
     console.log("Created new stage: ", socket.id, stageId, message);
+
+    socket.emit("stage_update", stages.get(stageId));
+    console.log(
+      "Pushing state update: ",
+      socket.id,
+      stageId,
+      stages.get(stageId)
+    );
+
     console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
   }
 
@@ -122,10 +133,40 @@ export class StageController {
   public async startPlay(
     @SocketIO() io: Server,
     @ConnectedSocket() socket: Socket,
-    @MessageBody() message: any
+    @MessageBody() message: IStartPlayMessage
   ) {
-    const stage = this.getSocketStage(socket);
-    console.log("Starting Play on ", message.stageId);
-    socket.to(stage).emit("play_start", message);
+    const stageId = this.getSocketStage(socket);
+    const state = stages.get(stageId);
+    state.status = IStageStatus.IN_PROGRESS;
+
+    console.log("Starting Play on", message.stageId);
+    plays.set(message.stageId, await loadPlay(state.scenario));
+    socket.emit("play_update", plays.get(stageId));
+    socket.emit("stage_update", stages.get(stageId));
+  }
+
+  @OnMessage("step_done")
+  public async stepDone(
+    @SocketIO() io: Server,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() message: IStartPlayMessage
+  ) {
+    const stageId = this.getSocketStage(socket);
+    const state = stages.get(stageId);
+    const play = plays.get(stageId);
+    const branch = play.script.find(
+      (e) => e.id == state.playState.currentBranchId
+    );
+    const step = branch.steps[state.playState.currentStepIndex];
+
+    if (step.type === "dialog") {
+      if (branch.steps.length < state.playState.currentStepIndex + 1) {
+        state.status = IStageStatus.FINISHED;
+      } else {
+        state.playState.currentStepIndex++;
+      }
+    }
+
+    socket.emit("stage_update", stages.get(stageId));
   }
 }

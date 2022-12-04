@@ -38,7 +38,7 @@ export interface IBranch {
 }
 
 export interface IPlay {
-  name: string;
+  scenario: string;
   description: string;
   characters: ICharacter[];
   shared_soundscape: string;

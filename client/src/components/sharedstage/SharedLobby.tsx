@@ -1,27 +1,14 @@
 import React, { useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import ActorList from '../stage/ActorList';
-import Feather from '../stage/Feather';
-import socketService from '../../services/socketService';
 import { IActorJoinedMessage, IStageState } from '@server/types';
+import { startPlay } from 'src/services/stageService';
 
 interface ISharedLobbyProps {
   state: IStageState;
 }
 
 export default function SharedLobby({ state }: ISharedLobbyProps) {
-  useEffect(() => {
-    const socket = socketService.socket;
-    if (!socket) {
-      console.error('No socket');
-      return;
-    }
-    if (!socketService.stageId) {
-      console.error('No stageId, did you forget to join a stage?');
-      return;
-    }
-  }, []);
-
   const backdrop = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/backgrounds/hogwarts.jpg')`,
   };
@@ -41,6 +28,9 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
           </div>
         </div>
         {state && <ActorList actors={state.actors} />}
+        <button className="btn btn-primary" onClick={() => startPlay({ stageId: state.stageId })}>
+          Start Play
+        </button>
       </div>
     </div>
   );

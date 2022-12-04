@@ -24,8 +24,22 @@
     "shared_soundscape":  "classroom_ambience.mp3",
     "script": [
         {
-            "branch": "start",
+            "id": "start",
             "steps": [
+                {
+                    "type": "dialog",
+                    "character": "Harry Potter",
+                    "avatar": "https://images6.alphacoders.com/691/thumb-1920-691559.jpg",
+                    "text": "Well, Done Ron!",
+                    "emotions": "Happy"
+                },
+                {
+                    "type": "dialog",
+                    "character": "Hermione Granger",
+                    "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                    "text": "Well, it’s obviously, because you’re not saying it properly!",
+                    "emotion": "Bossy"
+                },
                 {
                     "type": "interaction",
                     "character": "Ron Weasley",
@@ -60,20 +74,14 @@
                             }
                         ]
                     }
-                },
-                {
-                    "type": "dialog",
-                    "character": "Hermione Granger",
-                    "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
-                    "text": "Well, it’s obviously, because you’re not saying it properly!",
-                    "emotion": "Bossy"
                 }
             ]
         },
         {
-            "branch": "success",
+            "id": "success",
             "steps": [
                 {
+                    "type": "dialog",
                     "character": "Harry Potter",
                     "text": "Well, Done Ron!",
                     "emotions": "Happy"

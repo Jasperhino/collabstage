@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import SharedLobby from './SharedLobby';
 import SharedPlay from './SharedPlay';
-import { IStageState } from '@server';
+import { IActorJoinedMessage, IStageState, IStageStatus } from '@server/types';
+import { IPlay } from '@server/types/play';
 
 interface IToast {
   message: string;
@@ -15,6 +16,7 @@ export default function SharedStage() {
   const { stageId } = useParams();
   const [toasts, updateToasts] = useState<IToast[]>([]);
   const [state, setState] = useState<IStageState | null>(null);
+  const [play, setPlay] = useState<IPlay | null>(null);
 
   function pushToast(message: string) {
     updateToasts([...toasts, { message }]);
@@ -33,12 +35,17 @@ export default function SharedStage() {
     }
     socket.on('actor_joined', (message: IActorJoinedMessage) => {
       console.log(`${message.actorName} joined the Stage`);
-      updateToasts((toasts) => [...toasts, { message: `${message.actorName} joined` }]);
+      pushToast(`${message.actorName} joined`);
     });
 
     socket.on('stage_update', (state) => {
-      console.log('Stage: ', state);
+      console.log('Stage Updated: ', state);
       setState(state);
+    });
+
+    socket.on('play_update', (state) => {
+      console.log('Play Updated: ', state);
+      setPlay(state);
     });
   }, []);
 
@@ -54,8 +61,8 @@ export default function SharedStage() {
         ))}
       </div>
       {state && state.status == IStageStatus.NOT_STARTED && <SharedLobby state={state} />}
-      {state && state.status == IStageStatus.IN_PROGRESS && (
-        <SharedPlay playState={state.playState} scenario={state.scenario} />
+      {state && play && state.status == IStageStatus.IN_PROGRESS && (
+        <SharedPlay playState={state.playState} play={play} />
       )}
     </>
   );
