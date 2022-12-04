@@ -38,6 +38,7 @@
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
+    "eslint-import-resolver-typescript": "^3.5.2",
     "husky": "^8.0.2",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",

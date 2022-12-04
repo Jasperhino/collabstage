@@ -4,13 +4,11 @@ import socketService from './services/socketService';
 import JoinStage from './components/stage/JoinStage';
 import CreateStage from './components/stage/CreateStage';
 import Home from './components/home/Home';
-import NoMatch from './components/NoMatch';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/sharedstage/SharedStage';
 import Stage from './components/stage/Stage';
 import { IStagesMessage } from '@server/types';
 import Feather from './components/stage/Feather';
-import DialogBox from './components/sharedstage/SharedDialog';
 
 function App() {
   const connectSocket = async () => {

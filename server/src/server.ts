@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { createServer } from "http";
 import "reflect-metadata";
 import app from "./app";
@@ -57,7 +55,7 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
   debug("Listening on " + bind);
 
   console.log("Server Running on Port: ", port);
