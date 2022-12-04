@@ -1,6 +1,5 @@
-import { IPlayState } from '@server/types';
-import { IPlay, IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
+import { IPlayState } from '@server/types';
 import SharedDialog from './SharedDialog';
 import SharedInteraction from './SharedInteraction';
 
@@ -10,8 +9,6 @@ interface ISharedPlayProps {
 }
 
 export default function SharedPlay({ playState, scenario }: ISharedPlayProps) {
-  const play = (await import(`./${scenario}.json`, { assert: { type: 'json' } })) as IPlay;
-
   const [step, setStep] = useState<IStep | null>(null);
 
   useEffect(() => {
