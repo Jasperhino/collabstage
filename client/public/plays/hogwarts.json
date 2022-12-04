@@ -1,0 +1,84 @@
+{
+    "name": "Harry Potter",
+    "description": "The students are in their charm class; they must use a spell to make feathers levitate. Harry , Ron and Hermione are working as a group.",
+    "characters": [
+        {
+            "name": "Harry Potter",
+            "avatar": "https://images6.alphacoders.com/691/691559.jpg",
+            "description": "Harry is a fresh wizard who is in his first year at Hogwarts School of Witchcraft and Wizardry. He is a Gryffindor student and is the son of James and Lily Potter. He is the best friend of Ron Weasley and Hermione Granger. He is the main character of the series.",
+            "age": 15
+        },
+        {
+            "name": "Ron Weasley",
+            "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+            "description": "Ron is Harry's best friend and is a Gryffindor student. He is the son of Arthur and Molly Weasley. He is the brother of Ginny Weasley and Bill Weasley. He is the best friend of Harry Potter and Hermione Granger.",
+            "age": 15
+        },
+        {
+            "name": "Hermione Granger",
+            "avatar": "https://wallpaper.dog/large/201223.jpg",
+            "description": "Hermione is also a Gryffindor student and is Harry's best friend. She is the daughter of Mr. and Mrs. Granger. She is the best friend of Harry Potter and Ron Weasley.",
+            "age": 15
+        }
+    ],
+    "shared_soundscape":  "classroom_ambience.mp3",
+    "script": [
+        {
+            "branch": "start",
+            "steps": [
+                {
+                    "type": "interaction",
+                    "character": "Ron Weasley",
+                    "avatar": "../assets/characters/ron_frustrated.png",
+                    "text": "Whenever we try it, it nothing works!",
+                    "emotion": "frustrated",
+                    "interaction": {
+                        "type": "spell",
+                        "strength": 0
+                    }
+                },
+                {
+                    "type": "sound",
+                    "sound": "spell.mp3",
+                    "character": "Harry Potter"
+                },
+                {
+                    "type": "decision",
+                    "character": "Ron Weasley",
+                    "avatar": "../assets/characters/ron_frustrated.png",
+                    "text": "Whenever we try it, it nothing works!",
+                    "emotion": "frustrated",
+                    "decision": {
+                        "options": [
+                            {
+                                "text": "Try again",
+                                "branch": "start"
+                            },
+                            {
+                                "text": "Finish",
+                                "branch": "success"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "dialog",
+                    "character": "Hermione Granger",
+                    "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                    "text": "Well, it’s obviously, because you’re not saying it properly!",
+                    "emotion": "Bossy"
+                }
+            ]
+        },
+        {
+            "branch": "success",
+            "steps": [
+                {
+                    "character": "Harry Potter",
+                    "text": "Well, Done Ron!",
+                    "emotions": "Happy"
+                }
+            ]
+        }
+    ]
+}

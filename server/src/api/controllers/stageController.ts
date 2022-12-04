@@ -13,6 +13,7 @@ import {
   ISpellMessage,
   IStageOptions,
   IStageState,
+  IStageStatus,
 } from "../../types";
 import { makeid } from "../../utils/helpers";
 
@@ -83,12 +84,18 @@ export class StageController {
     @MessageBody() message: IStageOptions
   ) {
     const stageId = makeid(4, Array.from(io.sockets.adapter.rooms.keys()));
-    stages.set(stageId, {
+    const stageState: IStageState = {
       stageId,
-      scenario: message.scenario,
-      started: false,
       actors: [],
-    });
+      scenario: message.scenario,
+      status: IStageStatus.NOT_STARTED,
+      characters: {},
+      playState: {
+        currentBranchId: "start",
+        currentStepIndex: 0,
+      },
+    };
+    stages.set(stageId, stageState);
     await socket.join(stageId);
     socket.emit("stage_created", stageId);
     socket.emit("stage_update", stages.get(stageId));

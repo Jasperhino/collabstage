@@ -1,0 +1,36 @@
+import { IStep } from '@server/types/play';
+import React, { useEffect, useState } from 'react';
+import stageService from '../../services/stageService';
+
+export default function SharedDialog({ step }: { step: IStep }) {
+  const backdrop = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/backgrounds/hogwarts.jpg')`,
+  };
+
+  function handleButton() {
+    stageService.stepDone();
+  }
+
+  return (
+    <div className="flex w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
+      <div className="hero min-h-screen   bg-opacity-0 -z-100 bg-base-200">
+        <div className="hero-content flex-col lg:flex-row">
+          <img src={step.avatar} className="max-w-sm rounded-lg shadow-2xl" alt={step.avatar} />
+          <div className="DialogWindow">
+            <div className="card w-96 bg-base-100 shadow-xl">
+              <div className="card-body">
+                <h2 className="card-title">{step.character}</h2>
+                <p>{step.text}</p>
+                <div className="card-actions justify-end">
+                  <button onClick={handleButton} className="btn btn-primary">
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

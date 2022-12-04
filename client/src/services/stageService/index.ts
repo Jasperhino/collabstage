@@ -26,6 +26,10 @@ class StageService {
   public castSpell(socket: Socket, spell: ICastSpellMessage) {
     socket.emit('cast_spell', spell);
   }
+
+  public stepDone(socket: Socket, message: IStepDoneMessage) {
+    socket.emit('step_done', message);
+  }
 }
 
 export default new StageService();
