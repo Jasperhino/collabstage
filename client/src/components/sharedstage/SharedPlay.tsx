@@ -22,7 +22,7 @@ export default function SharedPlay({ playState, play }: ISharedPlayProps) {
 
   return (
     <>
-      {step && step.type == 'dialog' && <SharedDialog step={step} />}
+      {step && <SharedDialog step={step} />}
       {step && step.type == 'interaction' && <SharedInteraction step={step} />}
     </>
   );
