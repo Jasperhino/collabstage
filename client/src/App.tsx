@@ -8,6 +8,7 @@ import FindStage from './components/stage/FindStage';
 import SharedStage from './components/sharedstage/SharedStage';
 import MobileStage from './components/mobilestage/MobileStage';
 import Feather from './components/stage/Feather';
+import Soundscape from './components/mobilestage/soundscape';
 
 function App() {
   const connectSocket = async () => {
@@ -30,6 +31,7 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId" element={<MobileStage />} />
+      <Route path="sound" element={<Soundscape />} />
       <Route path="feather" element={<Feather flying={false} />} />
       <Route path="*" element={<Home />} />
     </Routes>
