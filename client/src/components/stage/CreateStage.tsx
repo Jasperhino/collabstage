@@ -1,9 +1,8 @@
+import React from 'react';
 import { IStageOptions } from '@server/types';
 import { atom, useAtom } from 'jotai';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import socketService from '../../services/socketService';
-import stageService from '../../services/stageService';
+import { createStage } from '../../services/stageService';
 import PlayPicker from './PlayPicker';
 
 const creatingAtom = atom<boolean>(false);
@@ -13,15 +12,10 @@ function CreateStage() {
 
   const [creating, setCreating] = useAtom(creatingAtom);
 
-  const createStage = async () => {
-    const socket = socketService.socket;
-    if (!socket) {
-      console.error('No socket');
-      return;
-    }
+  const handleButton = async () => {
     setCreating(true);
 
-    const stageId = await stageService.createStage(socket, { scenario: 'hogwarts' } as IStageOptions).catch((err) => {
+    const stageId = await createStage({ scenario: 'hogwarts' } as IStageOptions).catch((err) => {
       alert(err);
     });
     setCreating(false);
@@ -36,7 +30,7 @@ function CreateStage() {
         <div className="max-w-md">
           <p>Select a play for your stage.</p>
           <PlayPicker />
-          <button className="btn btn-primary m-4" onClick={createStage} disabled={creating}>
+          <button className="btn btn-primary m-4" onClick={handleButton} disabled={creating}>
             Create Play
           </button>
         </div>

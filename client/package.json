@@ -1,5 +1,5 @@
 {
-  "name": "collabStageClient",
+  "name": "collabstage-client",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
@@ -34,9 +34,11 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",
+    "@types/node": "^18.11.9",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
+    "eslint-import-resolver-typescript": "^3.5.2",
     "husky": "^8.0.2",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
@@ -47,7 +49,6 @@
     "vite-tsconfig-paths": "^3.5.2"
   },
   "dependencies": {
-    "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",

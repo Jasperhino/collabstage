@@ -6,7 +6,20 @@ export interface IStageState {
   stageId: string;
   actors: string[];
   scenario: string;
-  started: boolean;
+  status: IStageStatus;
+  characters: { [actor: string]: string | null };
+  playState: IPlayState;
+}
+
+export enum IStageStatus {
+  NOT_STARTED = "NOT_STARTED",
+  IN_PROGRESS = "IN_PROGRESS",
+  FINISHED = "FINISHED",
+}
+
+export interface IPlayState {
+  currentBranchId: string;
+  currentStepIndex: number;
 }
 
 export interface IJoinStageMessage {

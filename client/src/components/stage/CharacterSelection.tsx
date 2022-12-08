@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
-import { IStageOptions } from '@server/types';
-import { atom, useAtom } from 'jotai';
-
+import { IStageOptions, IStageState } from '@server/types';
 import { Link, useNavigate } from 'react-router-dom';
-import socketService from '../../services/socketService';
-import stageService from '../../services/stageService';
-import Home from '../home/Home';
-import Harry from '../../../public/characters.png';
-import Hermione from '../../../public/character2.png';
-import Ron from '../../../public/character3.png';
 import myData from '../stage/hogwarts.json';
 import Explanation from './Explanation';
 
-export default function CharacterSelection() {
-    console.log(myData.characters[0].img);
+interface ICharacterSelectionProps {
+    state: IStageState
+}
+export default function CharacterSelection({state}: ICharacterSelectionProps) {
     return (
-        <ul className="menu " >
+        <ul className="menu" >
             {myData.characters.map((character, i) => (
                 <li>
                     <Link to={{
@@ -28,41 +22,9 @@ export default function CharacterSelection() {
                         </a>
                     </Link>
                 </li>
-            ))
-            };
-            
+            ))};
         </ul>
     )
-
-    /*
-    <ul className="menu " >
-    
-    <li>
-    
-    <a className="card-title" href='http://localhost:3000/character/Harry'>
-        <img src={Harry} ></img>
-        Harry Potter
-    
-    </a>
-    
-    
-    
-    </li>
-    <li>
-    <a className="card-title" href='http://localhost:3000/character/Hermione'>
-        <img src={Hermione} ></img>
-        Hermione Granger
-    </a>
-    </li>
-    <li>
-    <a className="card-title" href='http://localhost:3000/character/Ron'>
-        <img src={Ron} ></img>
-        Ron Weasley
-    </a>
-    </li>
-    
-    </ul>
-    */
 }
 
 

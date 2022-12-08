@@ -1,6 +1,6 @@
 {
-  "name": "collabStageServer",
-  "version": "0.0.0",
+  "name": "collabstage-server",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "scripts": {
