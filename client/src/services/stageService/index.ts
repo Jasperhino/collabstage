@@ -1,5 +1,5 @@
 import { ICastSpellMessage, IJoinStageMessage, IStageOptions } from '@server/types';
-import { IStartPlayMessage, IStepDoneMessage } from '@server/types/messages';
+import { ISelectCharacterMessage, IStartPlayMessage, IStepDoneMessage } from '@server/types/messages';
 //import { socket } from '../socketService';
 import socketService from '../socketService';
 
@@ -54,4 +54,12 @@ export function stepDone(character: string) {
   const message = { character } as IStepDoneMessage;
   if (!socket) return;
   socket.emit('step_done', message);
+}
+
+export function selectCharacter(character: string) {
+  const socket = socketService.socket;
+
+  const message = { character } as ISelectCharacterMessage;
+  if (!socket) return;
+  socket.emit('select_character', message);
 }

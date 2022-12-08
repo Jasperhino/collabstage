@@ -1,14 +1,15 @@
 import React from 'react';
+import { IActor } from '@server/types';
 
 interface IActorListProps {
-  actors: string[];
+  actors: IActor[];
 }
 
-export default function ActorList(props: IActorListProps) {
+export default function ActorList({ actors }: IActorListProps) {
   return (
     <div className="card h-full bg-base-100 shadow-xl justify-start items-center">
-      {props.actors.map((actor, i) => (
-        <div key={i} className="stat p-4">
+      {actors.map((actor, i) => (
+        <div key={i} className="stat p-4 border-1">
           <div className="stat-figure">
             <div className="avatar online">
               <div className="w-16 rounded-full">
@@ -16,8 +17,8 @@ export default function ActorList(props: IActorListProps) {
               </div>
             </div>
           </div>
-          <div className="stat-value">{actor}</div>
-          <div className="stat-title">selecting character...</div>
+          <div className="stat-value">{actor.name}</div>
+          <div className="stat-title">{actor.character ? actor.character : 'selecting character...'}</div>
         </div>
       ))}
     </div>

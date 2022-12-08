@@ -3,16 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { castSpell } from '../../services/stageService';
 import HeroLayout from '../layout/HeroLayout';
 import socketService from 'src/services/socketService';
-import { IPlay } from '@server/types/play'
-import { IActorJoinedMessage } from '@server/types'
+import { IPlay } from '@server/types/play';
+import { IActorJoinedMessage } from '@server/types';
 import CharacterSelection from '../stage/CharacterSelection';
 
 /*interface IMobileStageProps {
   state: IStageState
 }*/
-  //Todo: refactor to share one source of game state with SharedStage
+//Todo: refactor to share one source of game state with SharedStage
 
-export default function MobileStage(){ //{state}: IStageState) {
+export default function MobileStage() {
+  //{state}: IStageState) {
 
   const [state, setState] = useState<IStageState | null>(null);
   const [play, setPlay] = useState<IPlay | null>(null);
@@ -46,8 +47,6 @@ export default function MobileStage(){ //{state}: IStageState) {
   }
 
   return (
-    <>
-      {state && state.status == IStageStatus.NOT_STARTED && <CharacterSelection state={state} />}
-      </>
+    <>{play && state && state.status == IStageStatus.NOT_STARTED && <CharacterSelection state={state} play={play} />}</>
   );
 }

@@ -4,11 +4,16 @@ export interface IStageOptions {
 
 export interface IStageState {
   stageId: string;
-  actors: string[];
+  actors: IActor[];
   scenario: string;
   status: IStageStatus;
-  characters: { [actor: string]: string | null };
   playState: IPlayState;
+}
+
+export interface IActor {
+  socketId: string;
+  name: string;
+  character: string | null;
 }
 
 export enum IStageStatus {

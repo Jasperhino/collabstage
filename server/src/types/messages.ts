@@ -6,3 +6,7 @@ export interface IStepDoneMessage {
 export interface IStartPlayMessage {
   stageId: string;
 }
+
+export interface ISelectCharacterMessage {
+  character: string;
+}

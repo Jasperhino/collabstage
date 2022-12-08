@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
-import { IStageOptions, IStageState } from '@server/types';
-import { Link, useNavigate } from 'react-router-dom';
-import myData from '../stage/hogwarts.json';
-import Explanation from './Explanation';
+import React from 'react';
+import { IStageState } from '@server/types';
+import { IPlay } from '@server/types/play';
+import { selectCharacter } from 'src/services/stageService';
+//import classNames from 'classnames';
 
 interface ICharacterSelectionProps {
-    state: IStageState
-}
-export default function CharacterSelection({state}: ICharacterSelectionProps) {
-    return (
-        <ul className="menu" >
-            {myData.characters.map((character, i) => (
-                <li>
-                    <Link to={{
-                        pathname: `${character.name.split(' ')[0]}`
-                    }}
-                        state={{ character: JSON.stringify(character) }}>
-                        <a className="card-title">
-                            <img src={character.img} ></img>
-                            {character.name}
-                        </a>
-                    </Link>
-                </li>
-            ))};
-        </ul>
-    )
+  state: IStageState;
+  play: IPlay;
 }
 
+export default function CharacterSelection({ state, play }: ICharacterSelectionProps) {
+  // const isSelected = (characterName: string) => {
+  //   return characterName == state.;
+  // }
+  function handleClick(characterName: string) {
+    console.log('selected character: ', characterName);
+    selectCharacter(characterName);
+  }
 
-
-
-
+  return (
+    <ul className="menu">
+      {play.characters.map((character, i) => (
+        <div key={i} className="flex m-4 items-center hover:bg-primary" onClick={() => handleClick(character.name)}>
+          <div className="avatar">
+            <div className="w-24 rounded">
+              <img src={character.avatar} />
+            </div>
+          </div>
+          <p className="mx-4">{character.name}</p>
+        </div>
+      ))}
+    </ul>
+  );
+}
