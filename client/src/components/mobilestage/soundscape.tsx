@@ -2,8 +2,8 @@ import React from 'react';
 import { useSound } from 'use-sound';
 
 // Define the sound files that we want to use
-const sound1 = require('sound1.mp3');
-const sound2 = require('sound2.mp3');
+import sound1 from './sounds/sound1.mp3';
+import sound2 from './sounds/sound2.mp3';
 
 // Create a function that will be called when the user performs a specific action
 function handleClick() {
@@ -24,3 +24,4 @@ const App = () => {
     </button>
   );
 }
+export default App;

@@ -30,7 +30,7 @@ function App() {
       <Route path="stage/:stageId/join" element={<JoinStage />} />
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
-      <Route path="stage/:stageId" element={<MobileStage />} />
+      
       <Route path="sound" element={<Soundscape />} />
       <Route path="feather" element={<Feather flying={false} />} />
       <Route path="*" element={<Home />} />
