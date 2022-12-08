@@ -1,3 +1,4 @@
+import { ISpellMessage } from '@server/types';
 import { IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
 import socketService from '../../services/socketService';
