@@ -13,20 +13,65 @@ import {
   ISpellMessage,
   IStageOptions,
   IStageState,
+  IStageStatus,
 } from "../../types";
-import { makeid } from "../../utils/helpers";
+import {
+  ISelectCharacterMessage,
+  IStartPlayMessage,
+} from "../../types/messages";
+import { IPlay } from "../../types/play";
+import { loadPlay, makeid } from "../../utils/helpers";
 
 const stages = new Map<string, IStageState>();
+const plays = new Map<string, IPlay>();
+const actorNames = new Map<string, string>();
+const actorCharacters = new Map<string, string>();
 
 @SocketController()
 export class StageController {
-  private getSocketStage(socket: Socket): string {
+  private getSocketStageId(socket: Socket): string {
     const socketStages = Array.from(socket.rooms.values()).filter(
       (r) => r !== socket.id
     );
-    const stage = socketStages && socketStages[0];
+    const stageId = socketStages && socketStages[0];
 
-    return stage;
+    return stageId;
+  }
+
+  @OnMessage("create_stage")
+  public async createStage(
+    @SocketIO() io: Server,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() message: IStageOptions
+  ) {
+    const stageId = makeid(4, Array.from(io.sockets.adapter.rooms.keys()));
+    const stageState: IStageState = {
+      stageId,
+      actors: [],
+      scenario: message.scenario,
+      status: IStageStatus.NOT_STARTED,
+      playState: {
+        currentBranchId: "start",
+        currentStepIndex: 0,
+      },
+    };
+    stages.set(stageId, stageState);
+    plays.set(stageId, await loadPlay(message.scenario));
+    await socket.join(stageId);
+    socket.emit("stage_created", stageId);
+    console.log("Created new stage: ", socket.id, stageId, message);
+
+    socket.emit("stage_update", stages.get(stageId));
+    socket.emit("play_update", plays.get(stageId));
+
+    console.log(
+      "Pushing state update: ",
+      socket.id,
+      stageId,
+      stages.get(stageId)
+    );
+
+    console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
   }
 
   @OnMessage("join_stage")
@@ -54,6 +99,7 @@ export class StageController {
       socketStages.length > 0 ||
       (connectedSockets && connectedSockets.size >= 100)
     ) {
+      console.log("Error joining stage: ", socket.id, message);
       socket.emit(
         "stage_joined_error",
         socketStages.length > 0
@@ -63,37 +109,24 @@ export class StageController {
     } else {
       await socket.join(message.stageId);
       const state = stages.get(message.stageId);
-      state.actors.push(message.actorName);
+      actorNames.set(socket.id, message.actorName);
+      state.actors.push({
+        name: message.actorName,
+        socketId: socket.id,
+        character: null,
+      });
       socket.emit("stage_joined", socket.id);
       io.to(message.stageId).emit("actor_joined", {
         actorName: message.actorName,
       } as IActorJoinedMessage);
       io.to(message.stageId).emit("stage_update", stages.get(message.stageId));
       console.log("Sucessfully joined Stage: ", socket.id, message);
+      socket.emit("play_update", plays.get(message.stageId));
+
       if (io.sockets.adapter.rooms.get(message.stageId).size === 3) {
         io.to(message.stageId).emit("start_play");
       }
     }
-  }
-
-  @OnMessage("create_stage")
-  public async createStage(
-    @SocketIO() io: Server,
-    @ConnectedSocket() socket: Socket,
-    @MessageBody() message: IStageOptions
-  ) {
-    const stageId = makeid(4, Array.from(io.sockets.adapter.rooms.keys()));
-    stages.set(stageId, {
-      stageId,
-      scenario: message.scenario,
-      started: false,
-      actors: [],
-    });
-    await socket.join(stageId);
-    socket.emit("stage_created", stageId);
-    socket.emit("stage_update", stages.get(stageId));
-    console.log("Created new stage: ", socket.id, stageId, message);
-    console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
   }
 
   @OnMessage("cast_spell")
@@ -102,10 +135,10 @@ export class StageController {
     @ConnectedSocket() socket: Socket,
     @MessageBody() message: ICastSpellMessage
   ) {
-    const stage = this.getSocketStage(socket);
-    console.log(`${socket.id} cast spell on ${stage} - ${message.spell}`);
-    socket.to(stage).emit("cast_spell", {
-      stageId: stage,
+    const stageId = this.getSocketStageId(socket);
+    console.log(`${socket.id} cast spell on ${stageId} - ${message.spell}`);
+    socket.to(stageId).emit("cast_spell", {
+      stageId,
       spell: message.spell,
       socketId: socket.id,
     } as ISpellMessage);
@@ -115,10 +148,85 @@ export class StageController {
   public async startPlay(
     @SocketIO() io: Server,
     @ConnectedSocket() socket: Socket,
-    @MessageBody() message: any
+    @MessageBody() message: IStartPlayMessage
   ) {
-    const stage = this.getSocketStage(socket);
-    console.log("Starting Play on ", message.stageId);
-    socket.to(stage).emit("play_start", message);
+    const stageId = this.getSocketStageId(socket);
+    const state = stages.get(stageId);
+    state.status = IStageStatus.IN_PROGRESS;
+
+    console.log("Starting Play on", message.stageId);
+    socket.emit("stage_update", stages.get(stageId));
+  }
+
+  @OnMessage("step_done")
+  public async stepDone(
+    @SocketIO() io: Server,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() message: IStartPlayMessage
+  ) {
+    const stageId = this.getSocketStageId(socket);
+    const state = stages.get(stageId);
+    const play = plays.get(stageId);
+    const branch = play.script.find(
+      (e) => e.id == state.playState.currentBranchId
+    );
+    const step = branch.steps[state.playState.currentStepIndex];
+
+    if (step.type === "dialog") {
+      if (branch.steps.length < state.playState.currentStepIndex + 1) {
+        state.status = IStageStatus.FINISHED;
+      } else {
+        state.playState.currentStepIndex++;
+      }
+    }
+
+    socket.emit("stage_update", stages.get(stageId));
+  }
+
+  @OnMessage("select_character")
+  public async selectCharacter(
+    @SocketIO() io: Server,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() message: ISelectCharacterMessage
+  ) {
+    const stageId = this.getSocketStageId(socket);
+    const state = stages.get(stageId);
+    const play = plays.get(stageId);
+
+    console.log("Selecting Character", message.character, "on", stageId);
+
+    if (state.status !== IStageStatus.NOT_STARTED) {
+      console.log("Game not started");
+      socket.emit("select_character_error", "Game already started");
+      return;
+    }
+    if (
+      message.character != null &&
+      !play.characters.map((c) => c.name).includes(message.character)
+    ) {
+      console.log("Character does not exist");
+      socket.emit("select_character_error", "Character does not exist");
+      return;
+    }
+    const takenCharacters = state.actors.map((a) => a.character);
+    if (takenCharacters.includes(message.character)) {
+      console.log("Character already taken");
+      socket.emit("select_character_error", "Character already taken");
+      return;
+    }
+
+    actorCharacters.set(socket.id, message.character);
+
+    const actor = state.actors.find((a) => a.socketId === socket.id);
+    if (actor) {
+      actor.character = message.character;
+    }
+    console.log("Actor", actor);
+    state.actors = state.actors.map((a) =>
+      a.socketId !== socket.id ? a : actor
+    );
+
+    stages.set(stageId, state);
+    io.to(stageId).emit("stage_update", stages.get(stageId));
   }
 }

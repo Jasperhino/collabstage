@@ -1,3 +1,5 @@
+import { IPlay } from "../types/play";
+
 export function makeid(length: number, exclude: string[] = []): string {
   var result = "";
   var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -8,4 +10,10 @@ export function makeid(length: number, exclude: string[] = []): string {
     }
   } while (exclude.indexOf(result) !== -1);
   return result;
+}
+
+export async function loadPlay(scenario: string): Promise<IPlay> {
+  console.log("Loading Play:", scenario);
+  const play = (await import(`../plays/${scenario}.json`)).default as IPlay;
+  return play;
 }

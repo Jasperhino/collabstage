@@ -2,10 +2,13 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "vite-plugin-svgr/client", "node"],
+    "types": ["vite/client", "vite-plugin-svgr/client","node"],
     "allowJs": false,
     "skipLibCheck": false,
-    "esModuleInterop": false,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,8 +19,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "./",
     "paths": { "@server/*": ["../server/src/*"], },
-
+    
   },
-  "include": ["src"]
+  "include": ["src", "..server/src/*"],
 }
