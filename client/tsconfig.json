@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "types": ["vite/client", "vite-plugin-svgr/client","node"],
     "allowJs": false,
     "skipLibCheck": false,
     "noImplicitAny": false,
@@ -21,7 +21,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": { "@server/*": ["../server/src/*"], },
-
+    
   },
   "include": ["src", "..server/src/*"],
 }

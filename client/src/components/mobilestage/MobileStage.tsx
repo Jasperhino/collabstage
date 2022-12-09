@@ -1,7 +1,6 @@
 import { IStageState, IStageStatus } from '@server/types';
 import React, { useEffect, useState } from 'react';
 import { castSpell } from '../../services/stageService';
-import HeroLayout from '../layout/HeroLayout';
 import socketService from 'src/services/socketService';
 import { IPlay } from '@server/types/play';
 import { IActorJoinedMessage } from '@server/types';
