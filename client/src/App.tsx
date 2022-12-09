@@ -7,8 +7,6 @@ import Home from './components/home/Home';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/sharedstage/SharedStage';
 import MobileStage from './components/mobilestage/MobileStage';
-import Feather from './components/stage/Feather';
-import Soundscape from './components/mobilestage/Soundscape';
 
 function App() {
   const connectSocket = async () => {

@@ -56,7 +56,7 @@ export function stepDone(character: string) {
   socket.emit('step_done', message);
 }
 
-export function selectCharacter(character: string) {
+export function selectCharacter(character: string | null) {
   const socket = socketService.socket;
 
   const message = { character } as ISelectCharacterMessage;

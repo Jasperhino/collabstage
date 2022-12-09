@@ -200,7 +200,10 @@ export class StageController {
       socket.emit("select_character_error", "Game already started");
       return;
     }
-    if (!play.characters.map((c) => c.name).includes(message.character)) {
+    if (
+      message.character != null &&
+      !play.characters.map((c) => c.name).includes(message.character)
+    ) {
       console.log("Character does not exist");
       socket.emit("select_character_error", "Character does not exist");
       return;
@@ -224,6 +227,6 @@ export class StageController {
     );
 
     stages.set(stageId, state);
-    socket.emit("stage_update", stages.get(stageId));
+    io.to(stageId).emit("stage_update", stages.get(stageId));
   }
 }

@@ -8,5 +8,5 @@ export interface IStartPlayMessage {
 }
 
 export interface ISelectCharacterMessage {
-  character: string;
+  character: string | null;
 }
