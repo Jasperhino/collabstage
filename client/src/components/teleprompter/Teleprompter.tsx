@@ -41,8 +41,8 @@ export default function Teleprompter() {
                             </label>
                         </th>
                         <th>Name</th>
-                        <th>Line</th>
                         <th>Emotion</th>
+                        <th>Line</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -51,13 +51,17 @@ export default function Teleprompter() {
                         <tr>
                             <th>
                                 <label>
-                                    <input type="checkbox" className="checkbox" />
+                                    {line.character == "Harry" ?  
+                                    <span className="badge">This is you</span>
+ 
+                                    : <div className="badge badge-lg"></div>
+                                    }
                                 </label>
                             </th>
                             <td>
-                                <div className="flex items-center space-x-3">
+                                <div className=" flex items-center space-x-4 ">
                                     <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
+                                        <div className="w-32 rounded">
                                             <img src={line.characterImage} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
@@ -67,63 +71,19 @@ export default function Teleprompter() {
                                     </div>
                                 </div>
                             </td>
+                            <td>{line.line.emotions}</td>
                             <td>
                                 {line.line.lines}
                                 <br />
                                 <span className="badge badge-ghost badge-sm">something</span>
                             </td>
-                            <td>{line.line.emotions}</td>
-                            
                         </tr>
-                    ))};
+                    ))}
                     <button onClick={handleButton} className="btn btn-primary">Next</button>
-
                 </tbody>
             </table>
         </div >
 
     );
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-        <div className="flex w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
-            <table className="table-auto">
-                <tbody>
-                    <div className="flex flex-line justify-center mx-32">
-                        {myData.script.slice(0, currentMessage).map((line, i) => (
-                            <tr>
-                                <div className="hero min-h-screen bg-base-200">
-                                    <div className="hero-content flex-col lg:flex-row">
-                                        <img src={line.characterImage} className="max-w-sm rounded-lg shadow-2xl" />
-                                        <div>
-                                            <h1 className="text-5xl font-bold">{line.character}</h1>
-                                            <p className="py-6">{line.line.lines}</p>
-                                            <p className="py-6">{line.line.emotions}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tr>
-
-                        ))};
-                        <button onClick={handleButton} className="btn btn-primary">Next</button>
-
-                    </div>
-                </tbody>
-
-            </table >
-        </div>
-
-
-    );
-    */
 }
