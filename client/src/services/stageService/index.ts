@@ -37,7 +37,7 @@ export function startPlay(message: IStartPlayMessage): Promise<boolean> {
   return new Promise((rs, rj) => {
     if (!socket) return rj(false);
     socket.emit('start_play', message);
-    socket.on('play_stared', (stageId) => rs(stageId));
+    socket.on('play_started', (stageId) => rs(stageId));
   });
 }
 

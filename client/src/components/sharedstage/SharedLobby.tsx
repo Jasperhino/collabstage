@@ -28,9 +28,19 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
           </div>
         </div>
         {state && <ActorList actors={state.actors} />}
-        <button className="btn btn-primary" onClick={() => startPlay({ stageId: state.stageId })}>
+        {state && (
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            //const actorsWithCharacters = state.actors.filter((actor) => actor.character != null);
+            //if (state.actors.length === 3) {
+              startPlay({ stageId: state.stageId });
+            //}
+          }}
+        >
           Start Play
         </button>
+      )}
       </div>
     </div>
   );

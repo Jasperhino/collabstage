@@ -62,6 +62,8 @@ export class StageController {
     console.log("Created new stage: ", socket.id, stageId, message);
 
     socket.emit("stage_update", stages.get(stageId));
+    io.to(stageId).emit("stage_update", stages.get(stageId));
+
     socket.emit("play_update", plays.get(stageId));
 
     console.log(
@@ -156,6 +158,8 @@ export class StageController {
 
     console.log("Starting Play on", message.stageId);
     socket.emit("stage_update", stages.get(stageId));
+    io.to(stageId).emit("stage_update", stages.get(stageId));
+
   }
 
   @OnMessage("step_done")
@@ -179,6 +183,8 @@ export class StageController {
         state.playState.currentStepIndex++;
       }
     }
+
+    io.to(stageId).emit("stage_update", stages.get(stageId));
 
     socket.emit("stage_update", stages.get(stageId));
   }

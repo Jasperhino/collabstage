@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import socketService from '../../services/socketService';
 import stageService from '../../services/stageService';
 import Harry from '../../../public/characters.png';
-import back from '../stage/CharacterSelection';
+import back from '../mobilestage/MobileCharacterSelection';
 
 
 export default function HarryExplanation() {

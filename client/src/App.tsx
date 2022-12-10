@@ -6,7 +6,7 @@ import CreateStage from './components/stage/CreateStage';
 import Home from './components/home/Home';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/sharedstage/SharedStage';
-import Teleprompter from './components/teleprompter/Teleprompter';
+import MobileStage from './components/mobilestage/MobileStage';
 
 function App() {
   const connectSocket = async () => {
@@ -28,7 +28,7 @@ function App() {
       <Route path="stage/:stageId/join" element={<JoinStage />} />
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
-      <Route path="stage/:stageId/teleprompter/:character" element={<Teleprompter />} />
+      <Route path="stage/:stageId/mobile" element={<MobileStage />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

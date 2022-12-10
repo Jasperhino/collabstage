@@ -4,9 +4,11 @@ import { castSpell } from '../../services/stageService';
 import socketService from 'src/services/socketService';
 import { IPlay } from '@server/types/play';
 import { IActorJoinedMessage } from '@server/types';
-import CharacterSelection from '../stage/CharacterSelection';
+import CharacterSelection from './MobileCharacterSelection';
 import { Socket } from 'socket.io-client';
-import Briefing from '../stage/Briefing';
+import Briefing from './MobileBriefing';
+import Teleprompter from './MobileDialog';
+import MobilePlay from './MobilePlay';
 
 /*interface IMobileStageProps {
   state: IStageState
@@ -60,6 +62,9 @@ export default function MobileStage() {
       {socket && play && state && state.status == IStageStatus.NOT_STARTED && character && (
         <Briefing play={play} characterName={character} />
       )}
+      {state && play && state.status == IStageStatus.IN_PROGRESS &&(
+        <MobilePlay playState={state.playState} play={play} />
+        )}
     </>
   );
 }

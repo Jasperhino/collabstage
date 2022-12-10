@@ -6,6 +6,7 @@ import SharedLobby from './SharedLobby';
 import SharedPlay from './SharedPlay';
 import { IActorJoinedMessage, IStageState, IStageStatus } from '@server/types';
 import { IPlay } from '@server/types/play';
+import ActorList from '../stage/ActorList';
 
 interface IToast {
   message: string;
@@ -48,6 +49,7 @@ export default function SharedStage() {
       setPlay(state);
     });
   }, []);
+  
 
   return (
     <>
@@ -61,7 +63,7 @@ export default function SharedStage() {
         ))}
       </div>
       {state && state.status == IStageStatus.NOT_STARTED && <SharedLobby state={state} />}
-      {state && play && state.status == IStageStatus.IN_PROGRESS && (
+      {state && play && state.status == IStageStatus.IN_PROGRESS &&(
         <SharedPlay playState={state.playState} play={play} />
       )}
     </>

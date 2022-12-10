@@ -34,7 +34,7 @@
                     "character": "Ron Weasley",
                     "avatar": "../assets/characters/ron_frustrated.png",
                     "text": "Whenever we try it, it nothing works!",
-                    "emotion": "frustrated",
+                    "emotions": "frustrated",
                     "interaction": {
                         "type": "spell",
                         "strength": 0
@@ -50,7 +50,7 @@
                     "character": "Ron Weasley",
                     "avatar": "../assets/characters/ron_frustrated.png",
                     "text": "Whenever we try it, it nothing works!",
-                    "emotion": "frustrated",
+                    "emotions": "frustrated",
                     "decision": {
                         "options": [
                             {
@@ -69,7 +69,7 @@
                     "character": "Hermione Granger",
                     "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
                     "text": "Well, it’s obviously, because you’re not saying it properly!",
-                    "emotion": "Bossy"
+                    "emotions": "Bossy"
                 }
             ]
         },
@@ -79,7 +79,7 @@
                 {
                     "character": "Harry Potter",
                     "text": "Well, Done Ron!",
-                    "emotions": "Happy"
+                    "emotionss": "Happy"
                 }
             ]
         }
