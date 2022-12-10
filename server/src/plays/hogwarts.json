@@ -31,7 +31,7 @@
                     "character": "Harry Potter",
                     "avatar": "https://images6.alphacoders.com/691/691559.jpg",
                     "text": "We need to figure out how to do this!",
-                    "emotions": "Confused"
+                    "emotion": "Confused"
                 },
                 {
                     "type": "dialog",
@@ -95,7 +95,7 @@
                     "character": "Harry Potter",
                     "avatar": "https://images6.alphacoders.com/691/691559.jpg",
                     "text": "Well, she did it, I want to try!",
-                    "emotions": "Excited"
+                    "emotion": "Excited"
                 },
                 {
                     "type": "dialog",
@@ -123,7 +123,7 @@
                     "character": "Harry Potter",
                     "avatar": "https://images6.alphacoders.com/691/691559.jpg",
                     "text": "Okay guys stop!",
-                    "emotions": "Impatient"
+                    "emotion": "Impatient"
                 },
                 {
                     "type": "interaction",
@@ -205,7 +205,7 @@
                     "character": "Harry Potter",
                     "avatar": "https://images6.alphacoders.com/691/691559.jpg",
                     "text": "Well, Done Ron!",
-                    "emotions": "Happy"
+                    "emotion": "Happy"
                 },
                 {
                     "type": "dialog",
