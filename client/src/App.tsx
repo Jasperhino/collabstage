@@ -5,27 +5,15 @@ import JoinStage from './components/stage/JoinStage';
 import CreateStage from './components/stage/CreateStage';
 import Home from './components/home/Home';
 import FindStage from './components/stage/FindStage';
-import SharedStage from './components/stage/SharedStage';
-import Stage from './components/stage/Stage';
-import { IStagesMessage } from '@server/types';
-import MobileSpellInteraction from './components/mobilestage/MobileSpellInteraction';
-import { Vibration } from './components/mobilestage/Vibration';
-import Flashlight from './components/mobilestage/Flashlight';
+import SharedStage from './components/sharedstage/SharedStage';
+import MobileStage from './components/mobilestage/MobileStage';
 
 function App() {
   const connectSocket = async () => {
     const host = `${window.location.hostname}:9000`;
     console.log(`connecting to ${host}`);
-    const socket = await socketService.connect(host).catch((err) => {
+    await socketService.connect(host).catch((err) => {
       console.error('Error: ', err);
-    });
-    if (!socket) {
-      console.error('Could not connect to socket');
-      return;
-    }
-    console.log(`Connected to server ${host} via socket ${socket.id}`);
-    socket.on('list_stages', (message: IStagesMessage) => {
-      console.log('stages', message);
     });
   };
 
@@ -40,10 +28,7 @@ function App() {
       <Route path="stage/:stageId/join" element={<JoinStage />} />
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
-      <Route path="stage/:stageId" element={<Stage />} />
-      <Route path="spell" element={<MobileSpellInteraction />} />
-      <Route path="vibrate" element={<Vibration />} />
-      <Route path="flashlight" element={<Flashlight />} />
+      <Route path="stage/:stageId/mobile" element={<MobileStage />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

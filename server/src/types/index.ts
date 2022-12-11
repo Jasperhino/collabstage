@@ -4,9 +4,27 @@ export interface IStageOptions {
 
 export interface IStageState {
   stageId: string;
-  actors: string[];
+  actors: IActor[];
   scenario: string;
-  started: boolean;
+  status: IStageStatus;
+  playState: IPlayState;
+}
+
+export interface IActor {
+  socketId: string;
+  name: string;
+  character: string | null;
+}
+
+export enum IStageStatus {
+  NOT_STARTED = "NOT_STARTED",
+  IN_PROGRESS = "IN_PROGRESS",
+  FINISHED = "FINISHED",
+}
+
+export interface IPlayState {
+  currentBranchId: string;
+  currentStepIndex: number;
 }
 
 export interface IJoinStageMessage {
