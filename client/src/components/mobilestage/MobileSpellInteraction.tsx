@@ -1,8 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
+import { IStep } from '@server/types/play';
+import { stepDone } from 'src/services/stageService';
 
-export default function MobileSpellInteraction() {
+
+export default function MobileSpellInteraction({ step }: { step: IStep }) {
+  console.log("Entreiiiiiiiiii");
   const startX = 0;
   const startY = 300;
   const targetRef = useRef(null);
@@ -17,6 +21,10 @@ export default function MobileSpellInteraction() {
       api.start({ x2: 0, y2: attached ? 0 : startY });
     } else {
       api.start({ x2: startX + mx, y2: startY + my, immediate: true });
+    }
+    if (attached) {
+      console.log("I'm attached")
+      stepDone(step.character);
     }
   });
 
