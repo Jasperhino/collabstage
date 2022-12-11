@@ -7,7 +7,7 @@ import { IActorJoinedMessage } from '@server/types';
 import CharacterSelection from './MobileCharacterSelection';
 import { Socket } from 'socket.io-client';
 import Briefing from './MobileBriefing';
-import Teleprompter from './MobileDialog';
+import MobileDialog from './MobileDialog';
 import MobilePlay from './MobilePlay';
 
 /*interface IMobileStageProps {

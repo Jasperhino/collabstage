@@ -15,6 +15,7 @@ export default function SharedPlay({ playState, play }: ISharedPlayProps) {
   useEffect(() => {
     console.log("Shared play log");
     console.log(play)
+    console.log(playState)
     const currentBranch = play.script.find((e) => e.id == playState.currentBranchId);
     setStep(currentBranch?.steps[playState.currentStepIndex]);
   }, [playState, play]);
@@ -23,7 +24,7 @@ export default function SharedPlay({ playState, play }: ISharedPlayProps) {
 
   return (
     <>
-        {step && <SharedDialog step={step} />}
+        {step && <SharedDialog step={step} play={play}/>}
     </>
   );
 }

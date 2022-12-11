@@ -23,9 +23,11 @@ import { IPlay } from "../../types/play";
 import { loadPlay, makeid } from "../../utils/helpers";
 
 const stages = new Map<string, IStageState>();
-const plays = new Map<string, IPlay>();
 const actorNames = new Map<string, string>();
 const actorCharacters = new Map<string, string>();
+const plays = new Map<string, IPlay>();
+
+  
 
 @SocketController()
 export class StageController {
@@ -176,7 +178,7 @@ export class StageController {
     );
     const step = branch.steps[state.playState.currentStepIndex];
 
-    if (step.type === "dialog") {
+    if (step.type === "dialog" || step.type === "interaction" ) {
       if (branch.steps.length < state.playState.currentStepIndex + 1) {
         state.status = IStageStatus.FINISHED;
       } else {
@@ -185,8 +187,6 @@ export class StageController {
     }
 
     io.to(stageId).emit("stage_update", stages.get(stageId));
-
-    socket.emit("stage_update", stages.get(stageId));
   }
 
   @OnMessage("select_character")

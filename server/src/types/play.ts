@@ -39,8 +39,11 @@ export interface IBranch {
 
 export interface IPlay {
   scenario: string;
+  background: string;
   description: string;
   characters: ICharacter[];
   shared_soundscape: string;
   script: IBranch[];
 }
+
+

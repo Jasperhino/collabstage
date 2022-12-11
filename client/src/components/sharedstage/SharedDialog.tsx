@@ -1,16 +1,17 @@
-import { IStep } from '@server/types/play';
+import { IPlay, IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
 import { stepDone } from '../../services/stageService';
 
 interface ISharedDialogProps {
   step: IStep;
+  play: IPlay;
 }
 
-export default function SharedDialog({ step }: ISharedDialogProps) {
+export default function SharedDialog({ step, play }: ISharedDialogProps) {
+  
   const backdrop = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/backgrounds/hogwarts.jpg')`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${play.background}')`,
   };
-
 
 
   //This button is only for testing purposes, it should be removed later

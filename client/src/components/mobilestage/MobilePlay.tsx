@@ -24,7 +24,7 @@ export default function MobilePlay({ playState, play }: ISharedPlayProps) {
 
   return (
     <>
-      {step  && <MobileDialog step={step} />}
+      {step  && <MobileDialog step={step} play={play} playState={playState}/>}
       {step && step.type == 'interaction' && <MobileSpellInteraction step={step} />}
     </>
   );

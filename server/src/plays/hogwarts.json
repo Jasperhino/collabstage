@@ -1,6 +1,7 @@
     {
         "name": "Harry Potter",
         "description": "The students are in their charm class; they must use a spell to make feathers levitate. Harry , Ron and Hermione are working as a group.",
+        "background": "/assets/backgrounds/hogwarts.jpg",
         "characters": [
             {
                 "name": "Harry Potter",
