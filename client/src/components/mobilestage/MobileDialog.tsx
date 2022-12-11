@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import socketService from '../../services/socketService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IActorJoinedMessage, ISpellMessage, IStageState } from '@server/types';
-import myData from '../dialog/hogwarts.json';
 import { IPlay , IStep } from '@server/types/play';
 import { ChatBubble } from 'daisyui';
 import { stepDone } from 'src/services/stageService';
