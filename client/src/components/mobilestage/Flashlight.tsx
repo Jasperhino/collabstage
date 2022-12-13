@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-export default function Flashlight() {
-  let hasTorch = false;
-  let torchOn = false;
+
+export default function Flashlight({ torchOn }: { torchOn: boolean }) {
+  const [hasTorch, setHasTorch] = useState(false);
   let track = null;
 
   const toggleTorch = () => {
     if (!hasTorch || !track) return;
+    console.log('Toggling torch', torchOn);
     track.applyConstraints({
-      advanced: [{ torch: !torchOn }],
+      advanced: [{ torch: torchOn }],
     });
   };
   useEffect(() => {
@@ -33,7 +34,8 @@ export default function Flashlight() {
         function onCapabilitiesReady(capabilities) {
           console.log(capabilities);
           if (capabilities.torch) {
-            hasTorch = true;
+            setHasTorch(true);
+            console.log('We have a torch!');
           } else {
             console.log('No torch capability');
           }

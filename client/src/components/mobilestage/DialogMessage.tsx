@@ -31,9 +31,9 @@ export default function MobileDialogMessage({
           <img src={avatar} />
         </div>
       </div>
-      <div className="chat-header">
+      <div className="chat-header text-white">
         {character}
-        <p className="text-xs opacity-50">{emotion}</p>
+        <span className="text-xs opacity-50 mx-2">({emotion})</span>
       </div>
       <div className={`chat-bubble ${color[state]}`}>{text}</div>
     </div>

@@ -23,8 +23,12 @@ export default function MobilePlay({ playState, play, character }: ISharedPlayPr
 
   return (
     <>
-      {step && <MobileTeleprompter currentStep={step} play={play} playState={playState} character={character} />}
-      {step && step.type == 'interaction' && <MobileSpellInteraction step={step} />}
+      {step && (step.type == 'dialog' || (step.type == 'interaction' && character != step.character)) && (
+        <MobileTeleprompter currentStep={step} play={play} playState={playState} character={character} />
+      )}
+      {step && step.type == 'interaction' && character == step.character && (
+        <MobileSpellInteraction step={step} character={character} />
+      )}
     </>
   );
 }

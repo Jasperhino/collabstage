@@ -13,20 +13,14 @@ export default function SharedPlay({ playState, play }: ISharedPlayProps) {
   const [step, setStep] = useState<IStep | undefined | null>(null);
 
   useEffect(() => {
-    console.log("Shared play log");
-    console.log(play)
-    console.log(playState)
+    console.log('Shared play log');
+    console.log(play);
+    console.log(playState);
     const currentBranch = play.script.find((e) => e.id == playState.currentBranchId);
     setStep(currentBranch?.steps[playState.currentStepIndex]);
   }, [playState, play]);
 
   //Render Interaction or Dialog Screen dependent on playState
 
-  return (
-    <>
-        {step && <SharedDialog step={step} play={play}/>}
-    </>
-  );
+  return <>{step && <SharedDialog step={step} play={play} />}</>;
 }
-//        {step && step.type == 'interaction' && <SharedInteraction step={step} />}
-

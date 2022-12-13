@@ -4,52 +4,51 @@ import { useDrag } from '@use-gesture/react';
 import { IStep } from '@server/types/play';
 import { stepDone } from 'src/services/stageService';
 import MobileDialogMessage from './DialogMessage';
+import Flashlight from './Flashlight';
 
 export default function MobileSpellInteraction({ step, character }: { step: IStep; character: string }) {
   const startX = 0;
-  const startY = 300;
+  const startY = -500;
   const targetRef = useRef(null);
   const [{ x2, y2 }, api] = useSpring(() => ({ x2: startX, y2: startY }));
   const [dragging, setDragging] = useState(false);
   const [attached, setAttached] = useState(false);
+  const [torchOn, setTorchOn] = useState(false);
 
   const bind = useDrag(({ xy: [x, y], active, last, movement: [mx, my] }) => {
     setDragging(active);
-    setAttached(document.elementFromPoint(x, y) === targetRef.current);
+    //setAttached(document.elementFromPoint(x, y) === targetRef.current);
+    console.log(`Dragging x: ${x}, y: ${y}, active: ${active}, last: ${last}, mx: ${mx}, my: ${my}`);
     if (last) {
-      api.start({ x2: 0, y2: attached ? 0 : startY });
-    } else {
-      api.start({ x2: startX + mx, y2: startY + my, immediate: true });
-    }
-    if (attached) {
-      console.log('Casted Spell');
-      stepDone(step.character);
+      spellComplete();
     }
   });
 
+  function spellComplete() {
+    console.log('Spell complete');
+    console.log('vibrate', navigator.vibrate(200));
+    // setTorchOn(true);
+    // setTimeout(() => {
+    //   setTorchOn(false);
+    // }, 1000);
+  }
+
   return (
-    <div className="flex items-center justify-center m-4 h-screen sm:w-96 m-auto relative">
-      <MobileDialogMessage
-        character={step.character}
-        avatar={step.avatar}
-        text={step.text}
-        emotion={step.emotion}
-        right={step.character === character}
-        state={'current'}
-      />
-      <img src="/assets/wand.png" alt="wand" className="w-96" />
-      <svg
-        className="absolute"
-        height="1000"
-        width="1000"
-        viewBox="-500 -500 1000 1000"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <animated.line x1={startX} y1={startY} x2={x2} y2={y2} stroke="orange" strokeLinecap="square" strokeWidth="5" />
-        <circle {...bind()} fill="orange" cx={startX} cy={startY} r="12" />
-        <circle ref={targetRef} cx="0" cy="0" r="12" fill={attached ? 'orange' : 'yellow'} />
-      </svg>
+    <div {...bind()} className="flex items-center justify-center m-4 h-screen sm:w-96 m-auto relative touch-none">
+      <div className="absolute top-0 left-0 w-full h-full">
+        <img src="/assets/wand.png" alt="wand" className="w-96" />
+      </div>
+      <div className="absolute top-0 left-0 w-full h-full">
+        <MobileDialogMessage
+          character={step.character}
+          avatar={step.avatar}
+          text={step.text}
+          emotion={step.emotion}
+          right={step.character === character}
+          state={'current'}
+        />
+      </div>
+      <Flashlight torchOn={torchOn} />
     </div>
   );
 }

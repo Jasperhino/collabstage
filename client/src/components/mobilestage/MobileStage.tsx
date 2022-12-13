@@ -7,7 +7,6 @@ import { IActorJoinedMessage } from '@server/types';
 import CharacterSelection from './MobileCharacterSelection';
 import { Socket } from 'socket.io-client';
 import Briefing from './MobileBriefing';
-import MobileTeleprompter from './MobileTeleprompter';
 import MobilePlay from './MobilePlay';
 
 /*interface IMobileStageProps {
@@ -58,7 +57,9 @@ export default function MobileStage() {
 
   return (
     <>
-      {play && state && state.status == IStageStatus.NOT_STARTED && <CharacterSelection state={state} play={play} />}
+      {play && state && state.status == IStageStatus.NOT_STARTED && !character && (
+        <CharacterSelection state={state} play={play} />
+      )}
       {socket && play && state && state.status == IStageStatus.NOT_STARTED && character && (
         <Briefing play={play} character={character} />
       )}
