@@ -56,6 +56,13 @@ export function stepDone(character: string) {
   socket.emit('step_done', message);
 }
 
+export function stepBack() {
+  const socket = socketService.socket;
+
+  if (!socket) return;
+  socket.emit('step_back');
+}
+
 export function selectCharacter(character: string | null) {
   const socket = socketService.socket;
 

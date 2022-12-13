@@ -7,6 +7,7 @@ import Home from './components/home/Home';
 import FindStage from './components/stage/FindStage';
 import SharedStage from './components/sharedstage/SharedStage';
 import MobileStage from './components/mobilestage/MobileStage';
+import Torch from './components/mobilestage/Torch';
 
 function App() {
   const connectSocket = async () => {
@@ -29,6 +30,7 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/shared" element={<SharedStage />} />
       <Route path="stage/:stageId/mobile" element={<MobileStage />} />
+      <Route path="flash" element={<Torch torchOn={true} />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

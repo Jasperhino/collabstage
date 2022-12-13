@@ -34,6 +34,11 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
 
   console.log('refs', refs);
 
+  const bind = () =>
+    useDoubleTap((event) => {
+      console.log('Double tapped');
+    });
+
   useEffect(() => {
     if (autoscroll) {
       const i = playState.currentStepIndex;
@@ -47,7 +52,11 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
   }
 
   return (
-    <div className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto " style={backdrop}>
+    <div
+      {...bind}
+      className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto "
+      style={backdrop}
+    >
       {steps.map((step) => (
         <div ref={refs[step.key]} key={step.key}>
           <MobileDialogMessage
@@ -60,11 +69,16 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
           />
         </div>
       ))}
-      <button className="fixed bottom-0 w-full h-12 bg-primary text-white" onClick={handleButton}>
-        Next
-      </button>
+      {currentStep.character === character && (
+        <button className="fixed bottom-0 w-full h-12 bg-primary text-white" onClick={handleButton}>
+          Next
+        </button>
+      )}
     </div>
   );
 }
 
+function useDoubleTap(arg0: (event: any) => void) {
+  throw new Error('Function not implemented.');
+}
 ///*{play?.script.slice(0, playState?.currentStepIndex).map((line, i) => (

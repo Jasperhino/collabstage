@@ -187,6 +187,20 @@ export class StageController {
     io.to(stageId).emit("stage_update", stages.get(stageId));
   }
 
+  @OnMessage("step_back")
+  public async stepBack(
+    @SocketIO() io: Server,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() message: IStartPlayMessage
+  ) {
+    const stageId = this.getSocketStageId(socket);
+    const state = stages.get(stageId);
+    state.playState.currentStepIndex--;
+
+    stages.set(stageId, state);
+    io.to(stageId).emit("stage_update", stages.get(stageId));
+  }
+
   @OnMessage("select_character")
   public async selectCharacter(
     @SocketIO() io: Server,

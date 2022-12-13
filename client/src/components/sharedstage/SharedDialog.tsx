@@ -1,6 +1,6 @@
 import { IPlay, IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
-import { stepDone } from '../../services/stageService';
+import { stepBack, stepDone } from '../../services/stageService';
 
 interface ISharedDialogProps {
   step: IStep;
@@ -28,6 +28,9 @@ export default function SharedDialog({ step, play }: ISharedDialogProps) {
                 <h2 className="card-title">{step.character}</h2>
                 <p>{step.text}</p>
                 <div className="card-actions justify-end">
+                  <button onClick={stepBack} className="btn btn-primary">
+                    Back
+                  </button>
                   <button onClick={handleButton} className="btn btn-primary">
                     Next
                   </button>

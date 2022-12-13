@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-export default function Flashlight({ torchOn }: { torchOn: boolean }) {
+export default function Torch({ torchOn }: { torchOn: boolean }) {
   const [hasTorch, setHasTorch] = useState(false);
-  let track = null;
+  const [track, setTrack] = useState<MediaStreamTrack | null>(null);
 
-  const toggleTorch = () => {
-    if (!hasTorch || !track) return;
-    console.log('Toggling torch', torchOn);
+  useEffect(() => {
+    if (!track || !hasTorch) return;
     track.applyConstraints({
       advanced: [{ torch: torchOn }],
     });
-  };
+  }, [torchOn]);
+
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({
@@ -26,16 +26,17 @@ export default function Flashlight({ torchOn }: { torchOn: boolean }) {
           return;
         }
         video.srcObject = stream;
-        track = stream.getVideoTracks()[0];
+        setTrack(stream.getVideoTracks()[0]);
+
         video.addEventListener('loadedmetadata', (e) => {
-          window.setTimeout(() => onCapabilitiesReady(track.getCapabilities()), 500);
+          window.setTimeout(() => onCapabilitiesReady(track.getCapabilities()), 1000);
         });
 
         function onCapabilitiesReady(capabilities) {
           console.log(capabilities);
           if (capabilities.torch) {
+            console.log('Found torch!');
             setHasTorch(true);
-            console.log('We have a torch!');
           } else {
             console.log('No torch capability');
           }
@@ -50,9 +51,6 @@ export default function Flashlight({ torchOn }: { torchOn: boolean }) {
 
   return (
     <>
-      <button className={classNames('btn btn-primary', { 'btn-disabled': !hasTorch })} onClick={toggleTorch}>
-        Flash {torchOn ? 'off' : 'on'}
-      </button>
       <video autoPlay style={hidden}></video>
     </>
   );
