@@ -4,11 +4,11 @@ import { IPlay } from '@server/types';
 import { selectCharacter } from '../../services/stageService';
 
 interface ICharacterBriefingProps {
-  characterName: string;
+  character: string;
   play: IPlay;
 }
 
-export default function Briefing({ characterName, play }: ICharacterBriefingProps) {
+export default function Briefing({ character: characterName, play }: ICharacterBriefingProps) {
   const [character, setCharacter] = useState<ICharacter | null>(play.characters.find((c) => c.name == characterName));
 
   function handleClick() {

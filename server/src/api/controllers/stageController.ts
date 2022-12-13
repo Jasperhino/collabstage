@@ -27,8 +27,6 @@ const actorNames = new Map<string, string>();
 const actorCharacters = new Map<string, string>();
 const plays = new Map<string, IPlay>();
 
-  
-
 @SocketController()
 export class StageController {
   private getSocketStageId(socket: Socket): string {
@@ -157,11 +155,11 @@ export class StageController {
     const stageId = this.getSocketStageId(socket);
     const state = stages.get(stageId);
     state.status = IStageStatus.IN_PROGRESS;
+    stages.set(stageId, state);
 
     console.log("Starting Play on", message.stageId);
     socket.emit("stage_update", stages.get(stageId));
     io.to(stageId).emit("stage_update", stages.get(stageId));
-
   }
 
   @OnMessage("step_done")
@@ -178,7 +176,7 @@ export class StageController {
     );
     const step = branch.steps[state.playState.currentStepIndex];
 
-    if (step.type === "dialog" || step.type === "interaction" ) {
+    if (step.type === "dialog" || step.type === "interaction") {
       if (branch.steps.length < state.playState.currentStepIndex + 1) {
         state.status = IStageStatus.FINISHED;
       } else {

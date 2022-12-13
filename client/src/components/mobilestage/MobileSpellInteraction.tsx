@@ -3,10 +3,9 @@ import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { IStep } from '@server/types/play';
 import { stepDone } from 'src/services/stageService';
+import MobileDialogMessage from './DialogMessage';
 
-
-export default function MobileSpellInteraction({ step }: { step: IStep }) {
-  console.log("Entreiiiiiiiiii");
+export default function MobileSpellInteraction({ step, character }: { step: IStep; character: string }) {
   const startX = 0;
   const startY = 300;
   const targetRef = useRef(null);
@@ -23,13 +22,21 @@ export default function MobileSpellInteraction({ step }: { step: IStep }) {
       api.start({ x2: startX + mx, y2: startY + my, immediate: true });
     }
     if (attached) {
-      console.log("I'm attached")
+      console.log('Casted Spell');
       stepDone(step.character);
     }
   });
 
   return (
     <div className="flex items-center justify-center m-4 h-screen sm:w-96 m-auto relative">
+      <MobileDialogMessage
+        character={step.character}
+        avatar={step.avatar}
+        text={step.text}
+        emotion={step.emotion}
+        right={step.character === character}
+        state={'current'}
+      />
       <img src="/assets/wand.png" alt="wand" className="w-96" />
       <svg
         className="absolute"

@@ -28,8 +28,7 @@ export interface IStep {
   emotion: string;
   interaction?: IInteraction;
   decision?: IDecision;
-  sound: string;
-  emotions: string;
+  sound?: string;
 }
 
 export interface IBranch {
@@ -45,5 +44,3 @@ export interface IPlay {
   shared_soundscape: string;
   script: IBranch[];
 }
-
-
