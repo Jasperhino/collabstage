@@ -183,7 +183,7 @@ export class StageController {
         state.playState.currentStepIndex++;
       }
     }
-
+    stages.set(stageId, state);
     io.to(stageId).emit("stage_update", stages.get(stageId));
   }
 
