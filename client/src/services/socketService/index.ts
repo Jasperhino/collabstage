@@ -13,17 +13,16 @@ class SocketService {
 
   public socket: Socket | null = null;
 
-  public connect(url: string): Promise<Socket<DefaultEventsMap, DefaultEventsMap>> {
+  public connect(url: string): Promise<Socket> {
     return new Promise((rs, rj) => {
-      const socket = SocketService.instance;
       this.socket = io(url);
 
       if (!this.socket) return rj();
 
       this.socket.on('connect', () => {
         if (!this.socket) return rj('Socket was null');
-        console.log(`Connected to server  ${url} via socket ${this.socket.id}`);
-        rs(this.socket as Socket);
+        console.log(`Connected to server ${url} via socket ${this.socket.id}`);
+        rs(this.socket);
       });
 
       this.socket.on('connect_error', (err) => {

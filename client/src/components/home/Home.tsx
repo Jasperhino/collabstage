@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../header/Header';
 import Footer from './Footer';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -26,9 +27,7 @@ function Home() {
           </div>
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            {/* Hero content */}
             <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-              {/* Section header */}
               <div className="text-center pb-12 md:pb-16">
                 <h1
                   className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
@@ -49,17 +48,17 @@ function Home() {
                     data-aos-delay="300"
                   >
                     <div>
-                      <a className="btn text-white btn-primary w-full mb-4 sm:w-auto sm:mb-0" href="/stage/create">
+                      <Link className="btn text-white btn-primary w-full mb-4 sm:w-auto sm:mb-0" to="/stage/create">
                         Create new stage
-                      </a>
+                      </Link>
                     </div>
                     <div>
-                      <a
+                      <Link
                         className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4"
-                        href="/stage/join"
+                        to="/stage/join"
                       >
                         Join a stage
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

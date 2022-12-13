@@ -27,6 +27,7 @@ function JoinStage() {
     console.log('Joining stage: ', stageId);
     const success = await joinStage(stageId, actorName).catch((err) => {
       alert(err);
+      navigate('/stage/join');
     });
     setJoining(false);
     navigate(`/stage/${stageId}/mobile`);

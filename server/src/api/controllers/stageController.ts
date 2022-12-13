@@ -18,6 +18,7 @@ import {
 import {
   ISelectCharacterMessage,
   IStartPlayMessage,
+  IStepDoneMessage,
 } from "../../types/messages";
 import { IPlay } from "../../types/play";
 import { loadPlay, makeid } from "../../utils/helpers";
@@ -62,16 +63,8 @@ export class StageController {
     console.log("Created new stage: ", socket.id, stageId, message);
 
     socket.emit("stage_update", stages.get(stageId));
-    io.to(stageId).emit("stage_update", stages.get(stageId));
 
     socket.emit("play_update", plays.get(stageId));
-
-    console.log(
-      "Pushing state update: ",
-      socket.id,
-      stageId,
-      stages.get(stageId)
-    );
 
     console.log("Current Stages: ", io.sockets.adapter.rooms.keys());
   }
@@ -99,7 +92,7 @@ export class StageController {
 
     if (
       socketStages.length > 0 ||
-      (connectedSockets && connectedSockets.size >= 100)
+      (connectedSockets && connectedSockets.size >= 4) //+1 for shared stage
     ) {
       console.log("Error joining stage: ", socket.id, message);
       socket.emit(
@@ -124,10 +117,6 @@ export class StageController {
       io.to(message.stageId).emit("stage_update", stages.get(message.stageId));
       console.log("Sucessfully joined Stage: ", socket.id, message);
       socket.emit("play_update", plays.get(message.stageId));
-
-      if (io.sockets.adapter.rooms.get(message.stageId).size === 3) {
-        io.to(message.stageId).emit("start_play");
-      }
     }
   }
 
@@ -154,6 +143,19 @@ export class StageController {
   ) {
     const stageId = this.getSocketStageId(socket);
     const state = stages.get(stageId);
+
+    if (state.status !== IStageStatus.NOT_STARTED) {
+      console.log("Game already running");
+      socket.emit("start_play_error", "Game already running");
+      return;
+    }
+    if (state.actors.length < 3) {
+      socket.emit("stage_join_error", {
+        error: "You need at least 3 actors to start playing",
+      });
+      return;
+    }
+
     state.status = IStageStatus.IN_PROGRESS;
     stages.set(stageId, state);
 
@@ -166,7 +168,7 @@ export class StageController {
   public async stepDone(
     @SocketIO() io: Server,
     @ConnectedSocket() socket: Socket,
-    @MessageBody() message: IStartPlayMessage
+    @MessageBody() message: IStepDoneMessage
   ) {
     const stageId = this.getSocketStageId(socket);
     const state = stages.get(stageId);
@@ -176,6 +178,8 @@ export class StageController {
     );
     const step = branch.steps[state.playState.currentStepIndex];
 
+    // const actor = state.actors.find((a) => a.socketId === socket.id);
+    // if (actor && message.character === actor.character) { }
     if (step.type === "dialog" || step.type === "interaction") {
       if (branch.steps.length < state.playState.currentStepIndex + 1) {
         state.status = IStageStatus.FINISHED;
@@ -183,6 +187,7 @@ export class StageController {
         state.playState.currentStepIndex++;
       }
     }
+
     stages.set(stageId, state);
     io.to(stageId).emit("stage_update", stages.get(stageId));
   }
@@ -195,7 +200,9 @@ export class StageController {
   ) {
     const stageId = this.getSocketStageId(socket);
     const state = stages.get(stageId);
-    state.playState.currentStepIndex--;
+    if (state.playState.currentStepIndex > 0) {
+      state.playState.currentStepIndex--;
+    }
 
     stages.set(stageId, state);
     io.to(stageId).emit("stage_update", stages.get(stageId));

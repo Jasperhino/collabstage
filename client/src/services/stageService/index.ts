@@ -1,6 +1,5 @@
 import { ICastSpellMessage, IJoinStageMessage, IStageOptions } from '@server/types';
 import { ISelectCharacterMessage, IStartPlayMessage, IStepDoneMessage } from '@server/types/messages';
-//import { socket } from '../socketService';
 import socketService from '../socketService';
 
 export async function joinStage(stageId: string, actorName: string): Promise<boolean> {

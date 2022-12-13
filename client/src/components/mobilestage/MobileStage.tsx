@@ -3,52 +3,24 @@ import React, { useEffect, useState } from 'react';
 import { castSpell } from '../../services/stageService';
 import socketService from 'src/services/socketService';
 import { IPlay } from '@server/types/play';
-import { IActorJoinedMessage } from '@server/types';
 import CharacterSelection from './MobileCharacterSelection';
-import { Socket } from 'socket.io-client';
 import Briefing from './MobileBriefing';
 import MobilePlay from './MobilePlay';
 
-/*interface IMobileStageProps {
-  state: IStageState
-}*/
-//Todo: refactor to share one source of game state with SharedStage
+interface IMobileStageProps {
+  play: IPlay | null;
+  state: IStageState | null;
+}
 
-export default function MobileStage() {
-  const [state, setState] = useState<IStageState | null>(null);
-  const [play, setPlay] = useState<IPlay | null>(null);
-  const [socket, setSocket] = useState<Socket | null>(null);
+export default function MobileStage({ play, state }: IMobileStageProps) {
   const [character, setCharacter] = useState<string | null>(null);
 
   useEffect(() => {
     const socket = socketService.socket;
-    setSocket(socket);
-    if (!socket) {
-      console.error('No socket');
-      //navigate('/');
-      return;
-    }
-
-    socket.on('actor_joined', (message: IActorJoinedMessage) => {
-      console.log(`${message.actorName} joined the Stage`);
-    });
-
-    socket.on('stage_update', (state: IStageState) => {
-      console.log('Stage Updated: ', state);
-      setState(state);
-      if (socket) {
-        const actor = state.actors.find((a) => a.socketId == socket.id);
-        if (actor) {
-          setCharacter(actor.character);
-        }
-      }
-    });
-
-    socket.on('play_update', (state) => {
-      console.log('Play Updated: ', state);
-      setPlay(state);
-    });
-  }, []);
+    if (!state || !socket) return;
+    const actor = state.actors.find((a) => a.socketId == socket.id);
+    if (actor) setCharacter(actor.character);
+  }, [state]);
 
   function handleButton(): void {
     console.log('Sending button press');
@@ -60,10 +32,10 @@ export default function MobileStage() {
       {play && state && state.status == IStageStatus.NOT_STARTED && !character && (
         <CharacterSelection state={state} play={play} />
       )}
-      {socket && play && state && state.status == IStageStatus.NOT_STARTED && character && (
+      {play && state && state.status == IStageStatus.NOT_STARTED && character && (
         <Briefing play={play} character={character} />
       )}
-      {state && play && state.status == IStageStatus.IN_PROGRESS && character && (
+      {play && state && state.status == IStageStatus.IN_PROGRESS && character && (
         <MobilePlay playState={state.playState} play={play} character={character} />
       )}
     </>
