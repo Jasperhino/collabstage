@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import socketService from '../../services/socketService';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -18,11 +20,6 @@ interface ISharedStageProps {
 
 export default function SharedStage({ play, state }: ISharedStageProps) {
   const navigate = useNavigate();
-  const [toasts, updateToasts] = useState<IToast[]>([]);
-
-  function pushToast(message: string) {
-    updateToasts([...toasts, { message }]);
-  }
 
   useEffect(() => {
     const socket = socketService.socket;
@@ -33,7 +30,16 @@ export default function SharedStage({ play, state }: ISharedStageProps) {
     }
     socket.on('actor_joined', (message: IActorJoinedMessage) => {
       console.log(`${message.actorName} joined the Stage`);
-      pushToast(`${message.actorName} joined`);
+      toast(`${message.actorName} joined`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     });
 
     return () => {
@@ -43,19 +49,11 @@ export default function SharedStage({ play, state }: ISharedStageProps) {
 
   return (
     <>
-      <div className="toast toast-top">
-        {toasts.map((toast: IToast, i) => (
-          <div key={i} className="alert h-10 bg-base-100">
-            <div>
-              <span>{toast.message}</span>
-            </div>
-          </div>
-        ))}
-      </div>
       {state && state.status == IStageStatus.NOT_STARTED && <SharedLobby state={state} />}
       {state && play && state.status == IStageStatus.IN_PROGRESS && (
         <SharedPlay playState={state.playState} play={play} />
       )}
+      <ToastContainer />
     </>
   );
 }
