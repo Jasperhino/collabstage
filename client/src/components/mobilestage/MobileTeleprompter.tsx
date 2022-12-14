@@ -114,7 +114,7 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
         </div>
         <div className="navbar-end bg-opacity-100" >
           <button onClick={playPause} className="btn btn-primary bg-opacity-100">
-            {state.isPlaying ? "Pause" : "Play"}
+            {state.isPlaying ? "Pause" : "Sound"}
           </button>
 
 
@@ -141,7 +141,7 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
           </button>
         )}
         {currentStep.character === character && (
-          <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-neutral" onClick={handleButton}>
+          <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-primary" onClick={handleButton}>
             Next
           </button>
         )}
