@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { joinStage } from '../../services/stageService';
 import HeroLayout from '../layout/HeroLayout';
+import Navbar from '../layout/Navbar';
 import NamePicker from './NamePicker';
 
 const actorNameAtom = atom<string>('');
@@ -30,24 +31,27 @@ function JoinStage() {
       navigate('/stage/join');
     });
     setJoining(false);
-    navigate(`/stage/${stageId}`);
+    navigate(`/stage/${stageId}`, { replace: true });
   };
 
   return (
-    <HeroLayout>
-      <h1 className="text-5xl font-bold">Pick a name</h1>
-      <form onSubmit={handleForm}>
-        <NamePicker onNameChange={setActorName} />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={isJoining || actorName.length < 2 || actorName.length > 12}
-        >
-          {isJoining ? 'Joining...' : 'Join'}
-        </button>
-      </form>
-      {joined && <Navigate to={`/stage/${stageId}`} />}
-    </HeroLayout>
+    <>
+      <Navbar />
+      <HeroLayout>
+        <h1 className="text-5xl font-bold">Pick a name</h1>
+        <form onSubmit={handleForm}>
+          <NamePicker onNameChange={setActorName} />
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={isJoining || actorName.length < 2 || actorName.length > 12}
+          >
+            {isJoining ? 'Joining...' : 'Join'}
+          </button>
+        </form>
+        {joined && <Navigate to={`/stage/${stageId}`} />}
+      </HeroLayout>
+    </>
   );
 }
 

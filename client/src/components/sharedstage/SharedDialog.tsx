@@ -1,5 +1,5 @@
+import React from 'react';
 import { IPlay, IStep } from '@server/types/play';
-import React, { useEffect, useState } from 'react';
 import { stepBack, stepDone } from '../../services/stageService';
 
 interface ISharedDialogProps {

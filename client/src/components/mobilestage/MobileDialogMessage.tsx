@@ -24,7 +24,7 @@ export default function MobileDialogMessage({
   };
 
   return (
-    <ul className="menu rounded-box" style={{ zIndex: '10' }}>
+    <ul className="menu rounded-box">
       <li>
         {!right ? (
           <div className={`flex m-4  place-items-start ${color[state]}`}>
@@ -35,8 +35,8 @@ export default function MobileDialogMessage({
             </div>
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <span className="text-lg  font-bold opacity-100">{character}</span>
-                <span className="text-lg font-semibold text-red-900 opacity-60 ">({emotion})</span>
+                <span className="text-lg font-bold opacity-100">{character}</span>
+                <span className="ml-1 text-lg italic opacity-60">({emotion})</span>
               </div>
 
               <span className="text-s opacity-100 ">{text}</span>

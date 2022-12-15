@@ -2,6 +2,7 @@ import { ISession, IStageState } from '@server/types';
 import { IPlay } from '@server/types/play';
 import React, { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import Navbar from '../layout/Navbar';
 import MobileStage from '../mobilestage/MobileStage';
 import SharedStage from '../sharedstage/SharedStage';
 
@@ -15,6 +16,7 @@ export default function Stage({ state, play, session }: IStageProps) {
 
   return (
     <>
+      <Navbar />
       {session && state && state.actors.map((a) => a.sessionId).includes(session.sessionId) ? (
         <MobileStage play={play} state={state} sessionId={session.sessionId} />
       ) : (

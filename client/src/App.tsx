@@ -8,6 +8,7 @@ import FindStage from './components/stage/FindStage';
 import { ISession, IStageState } from '@server/types';
 import { IPlay } from '@server/types/play';
 import Stage from './components/stage/Stage';
+import Navbar from './components/layout/Navbar';
 
 function App() {
   const [session, setSession] = useState<ISession | null>(null);

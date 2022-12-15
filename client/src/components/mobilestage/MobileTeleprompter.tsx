@@ -4,12 +4,9 @@ import { IPlay, IStep } from '@server/types/play';
 import { stepDone } from 'src/services/stageService';
 import MobileDialogMessage from './MobileDialogMessage';
 import { useNavigate } from 'react-router-dom';
-import classroom from '/assets/sounds/School Students 1 - QuickSounds.com.mp3';
-import homeIcon from '/assets/icons/home.png';
-import volume from '/assets/icons/volume.png';
-import mute from '/assets/icons/mute.png';
 
 import { useSound } from 'use-sound';
+import classNames from 'classnames';
 
 interface ISharedDialogProps {
   currentStep: IStep;
@@ -18,6 +15,7 @@ interface ISharedDialogProps {
   character: string;
 }
 export default function MobileTeleprompter({ currentStep, play, playState, character }: ISharedDialogProps) {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const autoscroll = true;
   const navigate = useNavigate();
 
@@ -52,36 +50,8 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
     stepDone();
   }
 
-  function handleLeave() {
-    // Navigate to the main screen when the button is clicked
-    navigate('/');
-  }
-
-  // Create state
-  const state = {
-    // Get audio file in a variable
-    audio: new Audio(classroom),
-
-    // Set initial state of song
-    isPlaying: false,
-  };
-
-  // Main function to handle both play and pause operations
-  const playPause = () => {
-    // Get state of song
-    let isPlaying = state.isPlaying;
-    state.audio.console.log('Is playing? ' + isPlaying);
-
-    if (isPlaying) {
-      // Pause the song if it is playing
-      state.audio.pause();
-    } else {
-      // Play the song if it is paused
-      state.audio.play();
-    }
-    state.isPlaying = !isPlaying;
-    // Change the state of song
-    useState({ isPlaying: !isPlaying });
+  window.onpopstate = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -89,38 +59,22 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
       className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto "
       style={{ ...backdrop }}
     >
-      <div className="fixed navbar bg-neutral bg-opacity-100 " style={{ zIndex: '10' }}>
-        <div className="navbar-start bg-opacity-100">
-          <a className="btn btn-ghost normal-case text-xl bg-opacity-100">
-            <button onClick={handleLeave} className="btn btn-primary bg-opacity-100">
-              <div className="avatar ">
-                <div className="w-8">
-                  <img src={homeIcon} />
-                </div>
-              </div>
+      <div className={classNames('modal modal-bottom sm:modal-middle', { 'modal-open': modalOpen })}>
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Leaving Lobby</h3>
+          <p className="py-4">
+            Are you sure you want to leave the lobby? You will not be able to rejoin the lobby once you leave.
+          </p>
+          <div className="modal-action">
+            <button className="btn" onClick={() => setModalOpen(false)}>
+              Cancel
             </button>
-          </a>
-        </div>
-        <div className="navbar-end bg-opacity-100">
-          <button onClick={playPause} className="btn btn-primary bg-opacity-100">
-            {state.isPlaying ? (
-              <div className="avatar ">
-                <div className="w-8">
-                  <img src={volume} />
-                </div>
-              </div>
-            ) : (
-              <div className="avatar ">
-                <div className="w-8">
-                  <img src={mute} />
-                </div>
-              </div>
-            )}
-          </button>
+            <button className="btn btn-primary">Leave</button>
+          </div>
         </div>
       </div>
 
-      <div style={{ marginTop: '64px', marginBottom: '64px', zIndex: '-10' }}>
+      <div className="-z-10">
         {steps.map((step) => (
           <div ref={refs[step.key]} key={step.key}>
             <MobileDialogMessage
@@ -133,11 +87,11 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
             />
           </div>
         ))}
-        {
-          <button className="fixed bottom-0 w-full h-12  text-white bg-opacity-100 bg-neutral">
-            {currentStep.character} Speaking...
-          </button>
-        }
+
+        <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-neutral">
+          {currentStep.character} Speaking...
+        </button>
+
         {currentStep.character === character && (
           <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-primary" onClick={handleButton}>
             Next
@@ -147,8 +101,3 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
     </div>
   );
 }
-
-function useDoubleTap(arg0: (event: any) => void) {
-  throw new Error('Function not implemented.');
-}
-///*{play?.script.slice(0, playState?.currentStepIndex).map((line, i) => (
