@@ -25,13 +25,13 @@ function CreateStage() {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen base-content bg-neutral-focus">
       <div className="hero-content text-center">
-        <div className="max-w-md">
-          <p>Select a play for your stage.</p>
+        <div className="max-w-l place-content-center bg-neutral-focus " style={{ overflow:'none'}}>
+          <p className='text-primary text-2xl font-semibold ' style={{marginBottom:'2%'}}>Select a play for your stage</p>
           <PlayPicker />
-          <button className="btn btn-primary m-4" onClick={handleButton} disabled={creating}>
-            Create Play
+          <button className="btn text-white btn-primary m-4 scale-125" style={{marginTop:'6%'}} onClick={handleButton} disabled={creating}>
+            Create Shared Play
           </button>
         </div>
       </div>

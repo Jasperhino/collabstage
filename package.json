@@ -5,6 +5,7 @@
     "eslint-plugin-import": "^2.26.0"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "use-sound": "^4.0.1"
   }
 }

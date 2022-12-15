@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { IStep } from '@server/types/play';
 import { stepDone } from 'src/services/stageService';
-import MobileDialogMessage from './DialogMessage';
+import MobileDialogMessage from './MobileDialogMessage';
 import Torch from './Torch';
 import ParticlesContainer from './ParticlesContainer';
 

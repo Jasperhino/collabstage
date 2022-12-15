@@ -41,7 +41,7 @@ function JoinStage() {
         <button
           className="btn btn-primary"
           type="submit"
-          disabled={isJoining || actorName.length < 3 || actorName.length > 12}
+          disabled={isJoining || actorName.length < 2 || actorName.length > 12}
         >
           {isJoining ? 'Joining...' : 'Join'}
         </button>
