@@ -31,16 +31,9 @@ export default function CreateStage() {
       <div className="hero min-h-screen base-content bg-neutral-focus">
         <div className="hero-content text-center">
           <div className="max-w-l place-content-center bg-neutral-focus " style={{ overflow: 'none' }}>
-            <p className="text-primary text-2xl font-semibold " style={{ marginBottom: '2%' }}>
-              Select a play for your stage
-            </p>
+            <p className="text-primary text-2xl font-semibold mb-2">Select a play for your stage</p>
             <PlayPicker />
-            <button
-              className="btn text-white btn-primary m-4 scale-125"
-              style={{ marginTop: '6%' }}
-              onClick={handleButton}
-              disabled={creating}
-            >
+            <button className="btn text-white btn-primary mt-4" onClick={handleButton} disabled={creating}>
               Create Shared Play
             </button>
           </div>

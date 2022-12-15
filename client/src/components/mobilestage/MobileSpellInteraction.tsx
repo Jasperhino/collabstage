@@ -38,7 +38,7 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
       }
       stepDone();
       castingSpell = false;
-    }, 500);
+    }, 1000);
   }
 
   return (

@@ -1,10 +1,11 @@
+import classNames from 'classnames';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ fixed }: { fixed: boolean }) {
   const navigate = useNavigate();
   return (
-    <div className="navbar bg-base-100 z-100">
+    <div className={classNames('navbar bg-base-100 z-100', { fixed: fixed })}>
       <div className="navbar-start">
         <button className="btn btn-ghost btn-circle" onClick={() => navigate('/')}>
           <svg className="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
