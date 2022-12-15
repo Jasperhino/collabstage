@@ -14,7 +14,7 @@ export default function CharacterSelection({ state, play }: ICharacterSelectionP
   //   return characterName == state.;
   // }
   function handleClick(characterName: string) {
-    console.log('selected character: ', characterName);
+    console.log('selecting character: ', characterName);
     selectCharacter(characterName);
   }
 

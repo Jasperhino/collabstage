@@ -30,7 +30,7 @@ function JoinStage() {
       navigate('/stage/join');
     });
     setJoining(false);
-    navigate(`/stage/${stageId}/mobile`);
+    navigate(`/stage/${stageId}`);
   };
 
   return (

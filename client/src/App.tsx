@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import socketService from './services/socketService';
 import JoinStage from './components/stage/JoinStage';
 import CreateStage from './components/stage/CreateStage';
 import Home from './components/home/Home';
 import FindStage from './components/stage/FindStage';
-import SharedStage from './components/sharedstage/SharedStage';
-import MobileStage from './components/mobilestage/MobileStage';
 import Torch from './components/mobilestage/Torch';
-import { IStageState } from '@server/types';
+import { ISession, IStageState } from '@server/types';
 import { IPlay } from '@server/types/play';
+import ParticlesContainer from './components/mobilestage/ParticlesContainer';
+import Stage from './components/stage/Stage';
 
 function App() {
+  const [session, setSession] = useState<ISession | null>(null);
   const [state, setState] = useState<IStageState | null>(null);
   const [play, setPlay] = useState<IPlay | null>(null);
-
+  const navigate = useNavigate();
   const connectSocket = async () => {
     const host = `${window.location.hostname}:9000`;
+    const sessionId = sessionStorage.getItem('sessionId');
     console.log(`connecting to ${host}`);
-    await socketService.connect(host).catch((err) => {
+    await socketService.connect(host, sessionId).catch((err) => {
       console.error('Error: ', err);
     });
   };
@@ -30,13 +32,20 @@ function App() {
       console.error('No socket');
       return;
     }
+    socket.on('session', (session: ISession) => {
+      console.log('Session: ', session);
+      socket.auth = { sessionId: session.sessionId };
+      sessionStorage.setItem('sessionId', session.sessionId);
+      setSession(session);
+    });
+
     socket.on('stage_update', (state) => {
-      console.log('Stage Updated: ', state);
+      console.log('Stage: ', state);
       setState(state);
     });
 
     socket.on('play_update', (play) => {
-      console.log('Play Updated: ', play);
+      console.log('Play: ', play);
       setPlay(play);
     });
 
@@ -52,9 +61,9 @@ function App() {
       <Route path="stage/join" element={<FindStage />} />
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/join" element={<JoinStage />} />
-      <Route path="stage/:stageId/shared" element={<SharedStage play={play} state={state} />} />
-      <Route path="stage/:stageId/mobile" element={<MobileStage play={play} state={state} />} />
+      <Route path="stage/:stageId" element={<Stage play={play} state={state} session={session} />} />
       <Route path="flash" element={<Torch torchOn={true} />} />
+      <Route path="particles" element={<ParticlesContainer />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

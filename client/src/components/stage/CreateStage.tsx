@@ -20,7 +20,7 @@ function CreateStage() {
     });
     setCreating(false);
     if (stageId) {
-      navigate(`/stage/${stageId}/shared`);
+      navigate(`/stage/${stageId}`);
     }
   };
 

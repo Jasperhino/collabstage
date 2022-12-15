@@ -5,8 +5,10 @@ import {
   SocketIO,
 } from "socket-controllers";
 import { Socket, Server } from "socket.io";
+import playStore from "../stores/playStore";
+import sessionStore from "../stores/sessionStore";
+import stageStateStore from "../stores/stageStateStore";
 
-const SESSION_RELOAD_INTERVAL = 30 * 1000;
 @SocketController()
 export class MainController {
   @OnConnect()
@@ -14,39 +16,27 @@ export class MainController {
     @ConnectedSocket() socket: Socket,
     @SocketIO() io: Server
   ) {
-    const req = socket.request;
+    const { sessionId, stageId } = socket.data.session;
+    socket.join(sessionId);
+    if (stageId) socket.join(stageId);
+    sessionStore.connected(sessionId);
+    const session = sessionStore.findSession(sessionId);
+    socket.emit("session", session);
+    socket.emit("stage_update", stageStateStore.find(session.stageId));
+    socket.emit("play_update", playStore.find(session.stageId));
 
-    socket.use((__, next) => {
-      req.session.reload((err) => {
-        if (err) {
-          socket.disconnect();
-        } else {
-          next();
-        }
-      });
+    console.log(`New Socket ${socket.id} connected to session ${sessionId}`);
+
+    socket.on("disconnect", async () => {
+      const matchingSockets = await io.in(socket.data.sessionId).fetchSockets();
+      const isDisconnected = matchingSockets.length === 0;
+      if (isDisconnected) {
+        // notify other users
+        console.log(`Session ${socket.data.sessionId} disconnected`);
+        socket.broadcast.emit("user disconnected", socket.data.sessionId);
+        // update the connection status of the session
+        sessionStore.disconnected(socket.data.sessionId);
+      }
     });
-
-    // // and then simply
-    // socket.on("my event", () => {
-    //   req.session.count++;
-    //   req.session.save();
-    // });
-
-    const timer = setInterval(() => {
-      console.log(`Reloading session ${req.session.id}`);
-      socket.request.session.reload((err) => {
-        if (err) {
-          socket.conn.close();
-        }
-      });
-    }, SESSION_RELOAD_INTERVAL);
-
-    socket.on("disconnect", () => {
-      clearInterval(timer);
-    });
-
-    console.log("New Socket connected: ", socket.id);
-
-    console.log(socket.request.session);
   }
 }

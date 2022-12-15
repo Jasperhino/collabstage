@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import ActorList from '../stage/ActorList';
-import { IActorJoinedMessage, IStageState } from '@server/types';
+import ActorList from './ActorList';
+import { IStageState } from '@server/types';
 import { startPlay } from 'src/services/stageService';
 
 interface ISharedLobbyProps {
@@ -17,7 +17,7 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
     <div className="flex w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
       <div className="flex flex-row justify-center mx-32">
         <div className="card h-full bg-base-100 shadow-xl mx-8">
-          <a href={'join'} target="_blank" rel="noreferrer">
+          <a href={`${state.stageId}/join`} target="_blank" rel="noreferrer">
             <QRCodeSVG className="m-4" value={`${window.location.host}/stage/${state.stageId}/join`} size={400} />
           </a>
         </div>
@@ -28,20 +28,22 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
           </div>
         </div>
         {state && <ActorList actors={state.actors} />}
-        {state && (
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            //const actorsWithCharacters = state.actors.filter((actor) => actor.character != null);
-            //if (state.actors.length === 3) {
-              startPlay({ stageId: state.stageId });
-            //}
-          }}
-        >
-          Start Play
-        </button>
-      )}
       </div>
+      {state && (
+        <div className="absolute bottom-0 w-full flex flex-row justify-center">
+          <button
+            className="btn btn-primary m-4"
+            onClick={() => {
+              //const actorsWithCharacters = state.actors.filter((actor) => actor.character != null);
+              //if (state.actors.length === 3) {
+              startPlay({ force: true });
+              //}
+            }}
+          >
+            Start Play
+          </button>
+        </div>
+      )}
     </div>
   );
 }

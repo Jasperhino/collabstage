@@ -12,11 +12,15 @@ class SocketService {
   }
 
   public socket: Socket | null = null;
+  public sessionId: string | null = null;
 
-  public connect(url: string): Promise<Socket> {
+  public connect(url: string, sessionId: string | null): Promise<Socket> {
     return new Promise((rs, rj) => {
       this.socket = io(url);
-
+      if (sessionId) {
+        this.socket.auth = { sessionId };
+        this.sessionId = sessionId;
+      }
       if (!this.socket) return rj();
 
       this.socket.on('connect', () => {

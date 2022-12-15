@@ -1,10 +1,7 @@
-export interface IStepDoneMessage {
-  stageId: string;
-  character: string;
-}
+export interface IStepDoneMessage {}
 
 export interface IStartPlayMessage {
-  stageId: string;
+  force: boolean;
 }
 
 export interface ISelectCharacterMessage {

@@ -10,15 +10,24 @@ import MobilePlay from './MobilePlay';
 interface IMobileStageProps {
   play: IPlay | null;
   state: IStageState | null;
+  sessionId: string;
 }
 
-export default function MobileStage({ play, state }: IMobileStageProps) {
+export default function MobileStage({ play, state, sessionId }: IMobileStageProps) {
   const [character, setCharacter] = useState<string | null>(null);
 
   useEffect(() => {
     const socket = socketService.socket;
+    if (!socket) return;
+    socket.on('select_character_error', (error) => {
+      alert(error);
+    });
+  }, []);
+
+  useEffect(() => {
+    const socket = socketService.socket;
     if (!state || !socket) return;
-    const actor = state.actors.find((a) => a.socketId == socket.id);
+    const actor = state.actors.find((a) => a.sessionId == sessionId);
     if (actor) setCharacter(actor.character);
   }, [state]);
 

@@ -32,8 +32,6 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
     return acc;
   }, {});
 
-  console.log('refs', refs);
-
   const bind = () =>
     useDoubleTap((event) => {
       console.log('Double tapped');
@@ -42,13 +40,13 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
   useEffect(() => {
     if (autoscroll) {
       const i = playState.currentStepIndex;
-      console.log('scroll to ', refs[i]);
       refs[i].current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [playState]);
 
   function handleButton() {
-    stepDone(currentStep.character);
+    console.log('Sending step done');
+    stepDone();
   }
 
   return (

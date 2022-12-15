@@ -14,7 +14,7 @@ export default function SharedDialog({ step, play }: ISharedDialogProps) {
 
   //This button is only for testing purposes, it should be removed later
   function handleButton() {
-    stepDone(step.character);
+    stepDone();
   }
 
   return (

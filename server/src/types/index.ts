@@ -1,9 +1,12 @@
+import { IPlay } from "./play";
+
 export interface IStageOptions {
   scenario: string;
 }
 
 export interface IStageState {
   stageId: string;
+  host: string;
   actors: IActor[];
   scenario: string;
   status: IStageStatus;
@@ -11,7 +14,7 @@ export interface IStageState {
 }
 
 export interface IActor {
-  socketId: string;
+  sessionId: string;
   name: string;
   character: string | null;
 }
@@ -45,11 +48,17 @@ export interface IActorJoinedMessage {
 }
 
 export interface ISpellMessage {
-  socketId: string;
+  sessionId: string;
   stageId: string;
   spell: string;
 }
 
 export interface ICastSpellMessage {
   spell: string;
+}
+
+export interface ISession {
+  sessionId: string;
+  connected: boolean;
+  stageId: string | null;
 }

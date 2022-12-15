@@ -19,13 +19,10 @@ interface ISharedStageProps {
 }
 
 export default function SharedStage({ play, state }: ISharedStageProps) {
-  const navigate = useNavigate();
-
   useEffect(() => {
     const socket = socketService.socket;
     if (!socket) {
       console.error('No socket');
-      navigate('/');
       return;
     }
     socket.on('actor_joined', (message: IActorJoinedMessage) => {

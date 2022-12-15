@@ -2,7 +2,7 @@ import { ISpellMessage } from '@server/types';
 import { IStep } from '@server/types/play';
 import React, { useEffect, useState } from 'react';
 import socketService from '../../services/socketService';
-import Feather from '../stage/Feather';
+import Feather from './Feather';
 
 export default function SharedInteraction({ step }: { step: IStep }) {
   const [flying, setFlying] = useState<boolean>(false);

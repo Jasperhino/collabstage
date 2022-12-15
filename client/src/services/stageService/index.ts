@@ -47,12 +47,11 @@ export function castSpell(spell: ICastSpellMessage) {
   socket.emit('cast_spell', spell);
 }
 
-export function stepDone(character: string) {
+export function stepDone() {
   const socket = socketService.socket;
 
-  const message = { character } as IStepDoneMessage;
   if (!socket) return;
-  socket.emit('step_done', message);
+  socket.emit('step_done');
 }
 
 export function stepBack() {
