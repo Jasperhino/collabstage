@@ -29,7 +29,7 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
     setTimeout(() => {
       setTorchOn(false);
       console.log('off');
-      //stepDone();
+      stepDone();
       castingSpell = false;
     }, 500);
   }
