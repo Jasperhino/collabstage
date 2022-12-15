@@ -5,10 +5,8 @@ import JoinStage from './components/stage/JoinStage';
 import CreateStage from './components/stage/CreateStage';
 import Home from './components/home/Home';
 import FindStage from './components/stage/FindStage';
-import Torch from './components/mobilestage/Torch';
 import { ISession, IStageState } from '@server/types';
 import { IPlay } from '@server/types/play';
-import ParticlesContainer from './components/mobilestage/ParticlesContainer';
 import Stage from './components/stage/Stage';
 
 function App() {
@@ -62,8 +60,6 @@ function App() {
       <Route path="stage/create" element={<CreateStage />} />
       <Route path="stage/:stageId/join" element={<JoinStage />} />
       <Route path="stage/:stageId" element={<Stage play={play} state={state} session={session} />} />
-      <Route path="flash" element={<Torch torchOn={true} />} />
-      <Route path="particles" element={<ParticlesContainer />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

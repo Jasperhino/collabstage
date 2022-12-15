@@ -8,13 +8,15 @@ import ParticlesContainer from './ParticlesContainer';
 
 export default function MobileSpellInteraction({ step, character }: { step: IStep; character: string }) {
   const [torchOn, setTorchOn] = useState(false);
-
+  const [dragging, setDragging] = useState(false);
   let castingSpell = false;
 
   const bind = useDrag(({ xy: [x, y], active, last, movement: [mx, my] }) => {
+    setDragging(active);
     console.log(`Dragging x: ${x}, y: ${y}, active: ${active}, last: ${last}, mx: ${mx}, my: ${my}`);
-    if (last) {
+    if (last && Math.abs(mx) > 20 && Math.abs(my) > 20) {
       spellComplete();
+      setDragging(false);
     }
   });
 
@@ -27,7 +29,7 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
     setTimeout(() => {
       setTorchOn(false);
       console.log('off');
-      stepDone();
+      //stepDone();
       castingSpell = false;
     }, 500);
   }
@@ -36,7 +38,8 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
     <div {...bind()} className="flex items-center justify-center m-4 h-screen sm:w-96 m-auto relative touch-none">
       <Torch torchOn={torchOn} />
       <ParticlesContainer />
-      <div className="absolute top-0 left-0 w-full h-full">
+      {!dragging && <img src="/assets/icons/touch.svg" alt="touch" className="w-64 z-10" />}
+      <div className="absolute top-0 left-0 w-full h-full z-1">
         <img src="/assets/wand.png" alt="wand" className="w-96" />
       </div>
       <div className="absolute top-0 left-0 w-full h-full">
