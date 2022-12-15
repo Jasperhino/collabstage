@@ -59,21 +59,6 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
       className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto "
       style={{ ...backdrop }}
     >
-      <div className={classNames('modal modal-bottom sm:modal-middle', { 'modal-open': modalOpen })}>
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Leaving Lobby</h3>
-          <p className="py-4">
-            Are you sure you want to leave the lobby? You will not be able to rejoin the lobby once you leave.
-          </p>
-          <div className="modal-action">
-            <button className="btn" onClick={() => setModalOpen(false)}>
-              Cancel
-            </button>
-            <button className="btn btn-primary">Leave</button>
-          </div>
-        </div>
-      </div>
-
       <div className="-z-10">
         {steps.map((step) => (
           <div ref={refs[step.key]} key={step.key}>

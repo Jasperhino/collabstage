@@ -5,6 +5,7 @@ import { IPlay } from '@server/types/play';
 import CharacterSelection from './MobileCharacterSelection';
 import Briefing from './MobileBriefing';
 import MobilePlay from './MobilePlay';
+import MobileHintModal from './MobileHintModal';
 
 interface IMobileStageProps {
   play: IPlay | null;
@@ -32,6 +33,7 @@ export default function MobileStage({ play, state, sessionId }: IMobileStageProp
 
   return (
     <>
+      <MobileHintModal />
       {play && state && state.status == IStageStatus.NOT_STARTED && !character && (
         <CharacterSelection state={state} play={play} />
       )}
