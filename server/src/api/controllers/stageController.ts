@@ -227,7 +227,6 @@ export class StageController {
     @MessageBody() message: ISelectCharacterMessage
   ) {
     const { sessionId, stageId } = socket.data.session;
-    console.log("Session", socket.data.session);
     const state = stageStateStore.find(stageId);
     const play = playStore.find(stageId);
 

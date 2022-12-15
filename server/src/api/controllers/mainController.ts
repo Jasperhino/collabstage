@@ -28,14 +28,15 @@ export class MainController {
     console.log(`New Socket ${socket.id} connected to session ${sessionId}`);
 
     socket.on("disconnect", async () => {
-      const matchingSockets = await io.in(socket.data.sessionId).fetchSockets();
+      const { sessionId } = socket.data.session;
+      const matchingSockets = await io.in(sessionId).fetchSockets();
       const isDisconnected = matchingSockets.length === 0;
       if (isDisconnected) {
         // notify other users
-        console.log(`Session ${socket.data.sessionId} disconnected`);
-        socket.broadcast.emit("user disconnected", socket.data.sessionId);
+        console.log(`Session ${sessionId} disconnected`);
+        socket.broadcast.emit("user disconnected", sessionId);
         // update the connection status of the session
-        sessionStore.disconnected(socket.data.sessionId);
+        sessionStore.disconnected(sessionId);
       }
     });
   }
