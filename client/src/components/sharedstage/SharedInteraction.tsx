@@ -32,7 +32,7 @@ export default function SharedSpellInteraction({ step }: { step: IStep }) {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-1/4">
+    <div className="fixed bottom-0 left-1/4 scale-150">
       <Feather flying={flying} />{' '}
     </div>
   );

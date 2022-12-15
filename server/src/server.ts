@@ -3,7 +3,7 @@ import "reflect-metadata";
 import app from "./app";
 var debug = require("debug")("socketio-server:server");
 import socketServer from "./socket";
-
+ 
 let port = normalizePort(process.env.PORT || "9000");
 app.set("port", port);
 
