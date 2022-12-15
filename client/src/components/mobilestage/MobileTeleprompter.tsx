@@ -70,8 +70,7 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
   const playPause = () => {
     // Get state of song
     let isPlaying = state.isPlaying;
-
-    console.log('Is playing? ' + isPlaying);
+    state.audio.console.log('Is playing? ' + isPlaying);
 
     if (isPlaying) {
       // Pause the song if it is playing

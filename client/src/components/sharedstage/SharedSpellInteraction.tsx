@@ -3,9 +3,12 @@ import { ISpellMessage } from '@server/types';
 import { IStep } from '@server/types/play';
 import socketService from '../../services/socketService';
 import Feather from './Feather';
+import useSound from 'use-sound';
+import sound from '/assets/sounds/spell.mp3';
 
 export default function SharedSpellInteraction({ step }: { step: IStep }) {
   const [flying, setFlying] = useState<boolean>(false);
+  const [play] = useSound(sound);
 
   const letFeatherFly = () => {
     if (flying) {
@@ -26,6 +29,7 @@ export default function SharedSpellInteraction({ step }: { step: IStep }) {
 
     socket.on('cast_spell', (spell: ISpellMessage) => {
       if (spell.strength > 0) {
+        play();
         letFeatherFly();
       }
     });

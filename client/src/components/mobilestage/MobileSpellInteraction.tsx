@@ -5,10 +5,13 @@ import { castSpell, stepDone } from 'src/services/stageService';
 import MobileDialogMessage from './MobileDialogMessage';
 import Torch from './Torch';
 import ParticlesContainer from './ParticlesContainer';
+import sound from '/assets/sounds/spell.mp3';
+import useSound from 'use-sound';
 
 export default function MobileSpellInteraction({ step, character }: { step: IStep; character: string }) {
   const [torchOn, setTorchOn] = useState(false);
   const [dragging, setDragging] = useState(false);
+  const [playSound] = useSound(sound);
   let castingSpell = false;
 
   const bind = useDrag(({ xy: [x, y], active, last, movement: [mx, my] }) => {
@@ -24,6 +27,7 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
     if (castingSpell) return;
     castingSpell = true;
     console.log('vibrate', navigator.vibrate(200));
+    playSound();
     setTorchOn(true);
     setTimeout(() => {
       setTorchOn(false);
