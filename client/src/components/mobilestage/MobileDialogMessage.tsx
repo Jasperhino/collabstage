@@ -24,19 +24,6 @@ export default function MobileDialogMessage({
   };
 
   return (
-    /*<div className={`m-4 chat ${right ? 'chat-end' : 'chat-start'}`}>
-      <div className="chat-image avatar">
-        <div className="w-16 rounded-full">
-          <img src={avatar} />
-        </div>
-      </div>
-      <div className="chat-header mb-1 text-white text-xl">
-        {character}
-        <span className="text-lg opacity-80 mx-2">({emotion})</span>
-      </div>
-      <div className={`chat-bubble text-lg ${color[state]}`}>{text}</div>
-    </div>*/
-
     <ul className="menu rounded-box" style={{ zIndex: '10' }}>
       <li>
         {!right ? (
