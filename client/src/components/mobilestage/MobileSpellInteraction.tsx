@@ -6,12 +6,14 @@ import MobileDialogMessage from './MobileDialogMessage';
 import Torch from './Torch';
 import ParticlesContainer from './ParticlesContainer';
 import sound from '/assets/sounds/spell.mp3';
+import smallSound from '/assets/sounds/spell_small.mp3';
 import useSound from 'use-sound';
 
 export default function MobileSpellInteraction({ step, character }: { step: IStep; character: string }) {
   const [torchOn, setTorchOn] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [playSound] = useSound(sound);
+  const [playSmallSound] = useSound(smallSound);
   let castingSpell = false;
 
   const bind = useDrag(({ xy: [x, y], active, last, movement: [mx, my] }) => {
@@ -27,7 +29,7 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
     if (castingSpell) return;
     castingSpell = true;
     console.log('vibrate', navigator.vibrate(200));
-    playSound();
+
     setTorchOn(true);
     setTimeout(() => {
       setTorchOn(false);
@@ -35,10 +37,15 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
       if (step.interaction && step.interaction.type == 'spell') {
         console.log('Casting spell', step.interaction.spell, step.interaction.strength);
         castSpell({ spell: 'wengadium leviosa', strength: step.interaction.strength });
+        if (step.interaction.strength > 0) {
+          playSound();
+        } else {
+          playSmallSound();
+        }
       }
       stepDone();
       castingSpell = false;
-    }, 1000);
+    }, 500);
   }
 
   return (
