@@ -1,6 +1,5 @@
-import { IStageState, IStageStatus } from '@server/types';
 import React, { useEffect, useState } from 'react';
-import { castSpell } from '../../services/stageService';
+import { IStageState, IStageStatus } from '@server/types';
 import socketService from 'src/services/socketService';
 import { IPlay } from '@server/types/play';
 import CharacterSelection from './MobileCharacterSelection';
@@ -30,11 +29,6 @@ export default function MobileStage({ play, state, sessionId }: IMobileStageProp
     const actor = state.actors.find((a) => a.sessionId == sessionId);
     if (actor) setCharacter(actor.character);
   }, [state]);
-
-  function handleButton(): void {
-    console.log('Sending button press');
-    castSpell({ spell: 'stupor' });
-  }
 
   return (
     <>

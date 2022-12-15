@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IPlayState } from '@server/types';
 import SharedDialog from './SharedDialog';
-import SharedInteraction from './SharedInteraction';
+import SharedSpellInteraction from './SharedInteraction';
 import { IPlay, IStep } from '@server/types/play';
 
 interface ISharedPlayProps {
@@ -19,5 +19,10 @@ export default function SharedPlay({ playState, play }: ISharedPlayProps) {
 
   //Render Interaction or Dialog Screen dependent on playState
 
-  return <>{step && <SharedDialog step={step} play={play} />}</>;
+  return (
+    <>
+      {step && <SharedDialog step={step} play={play} />}
+      {step && <SharedSpellInteraction step={step} />}
+    </>
+  );
 }

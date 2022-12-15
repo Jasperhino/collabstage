@@ -8,10 +8,8 @@ import {
 import { Server, Socket } from "socket.io";
 import {
   IActorJoinedMessage,
-  ICastSpellMessage,
-  IJoinStageMessage,
-  ISession,
   ISpellMessage,
+  IJoinStageMessage,
   IStageOptions,
   IStageState,
   IStageStatus,
@@ -112,7 +110,7 @@ export class StageController {
   public async castSpell(
     @SocketIO() io: Server,
     @ConnectedSocket() socket: Socket,
-    @MessageBody() message: ICastSpellMessage
+    @MessageBody() message: ISpellMessage
   ) {
     const { stageId, sessionId } = socket.data.session;
 

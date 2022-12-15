@@ -48,13 +48,8 @@ export interface IActorJoinedMessage {
 }
 
 export interface ISpellMessage {
-  sessionId: string;
-  stageId: string;
   spell: string;
-}
-
-export interface ICastSpellMessage {
-  spell: string;
+  strength: number;
 }
 
 export interface ISession {

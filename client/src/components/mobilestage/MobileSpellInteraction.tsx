@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { IStep } from '@server/types/play';
-import { stepDone } from 'src/services/stageService';
+import { castSpell, stepDone } from 'src/services/stageService';
 import MobileDialogMessage from './MobileDialogMessage';
 import Torch from './Torch';
 import ParticlesContainer from './ParticlesContainer';
@@ -23,13 +23,16 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
   function spellComplete() {
     if (castingSpell) return;
     castingSpell = true;
-    console.log('Spell complete');
     console.log('vibrate', navigator.vibrate(200));
     setTorchOn(true);
     setTimeout(() => {
       setTorchOn(false);
       console.log('off');
-      stepDone();
+      if (step.interaction && step.interaction.type == 'spell') {
+        console.log('Casting spell', step.interaction.spell, step.interaction.strength);
+        castSpell({ spell: 'wengadium leviosa', strength: step.interaction.strength });
+      }
+      //stepDone();
       castingSpell = false;
     }, 500);
   }

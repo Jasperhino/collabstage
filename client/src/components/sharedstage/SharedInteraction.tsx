@@ -1,10 +1,10 @@
+import React, { useEffect, useState } from 'react';
 import { ISpellMessage } from '@server/types';
 import { IStep } from '@server/types/play';
-import React, { useEffect, useState } from 'react';
 import socketService from '../../services/socketService';
 import Feather from './Feather';
 
-export default function SharedInteraction({ step }: { step: IStep }) {
+export default function SharedSpellInteraction({ step }: { step: IStep }) {
   const [flying, setFlying] = useState<boolean>(false);
 
   const letFeatherFly = () => {
@@ -21,14 +21,19 @@ export default function SharedInteraction({ step }: { step: IStep }) {
     const socket = socketService.socket;
     if (!socket) {
       console.error('No socket');
-      //navigate('/');
       return;
     }
 
     socket.on('cast_spell', (spell: ISpellMessage) => {
-      letFeatherFly();
+      if (spell.strength > 0) {
+        letFeatherFly();
+      }
     });
   }, []);
 
-  return <Feather flying={flying} />;
+  return (
+    <div className="fixed bottom-0 left-1/4">
+      <Feather flying={flying} />{' '}
+    </div>
+  );
 }

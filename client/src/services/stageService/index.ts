@@ -1,4 +1,4 @@
-import { ICastSpellMessage, IJoinStageMessage, IStageOptions } from '@server/types';
+import { ISpellMessage, IJoinStageMessage, IStageOptions } from '@server/types';
 import { ISelectCharacterMessage, IStartPlayMessage, IStepDoneMessage } from '@server/types/messages';
 import socketService from '../socketService';
 
@@ -40,11 +40,11 @@ export function startPlay(message: IStartPlayMessage): Promise<boolean> {
   });
 }
 
-export function castSpell(spell: ICastSpellMessage) {
+export function castSpell(message: ISpellMessage) {
   const socket = socketService.socket;
 
   if (!socket) return;
-  socket.emit('cast_spell', spell);
+  socket.emit('cast_spell', message);
 }
 
 export function stepDone() {
