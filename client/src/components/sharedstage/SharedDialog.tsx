@@ -17,16 +17,15 @@ export default function SharedDialog({ step, play }: ISharedDialogProps) {
     stepDone();
   }
 
-  const offset = {
-    Harry: 'mt',
-  };
-
   return (
     <div className="flex w-screen h-screen items-end bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
       <img src={step.avatar} className="max-w-lg rounded-xl shadow-2xl" alt={step.avatar} />
       <div className="card w-1/2 bg-base-100 shadow-xl m-16">
         <div className="card-body">
-          <h2 className="card-title text-6xl">{step.character}</h2>
+          <div className="card-title">
+            <span className="text-6xl">{step.character}</span>
+            <h2 className="ml-4 opacity-50 text-3xl">({step.emotion})</h2>
+          </div>
           <p className="text-6xl">{step.text}</p>
           <div className="card-actions justify-end mt-8">
             <button onClick={stepBack} className="btn btn-primary">
