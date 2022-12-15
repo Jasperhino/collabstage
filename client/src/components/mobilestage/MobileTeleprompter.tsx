@@ -55,34 +55,29 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
   };
 
   return (
-    <div
-      className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto "
-      style={{ ...backdrop }}
-    >
-      <div className="-z-10">
-        {steps.map((step) => (
-          <div ref={refs[step.key]} key={step.key}>
-            <MobileDialogMessage
-              character={step.character}
-              avatar={step.avatar}
-              text={step.text}
-              emotion={step.emotion}
-              state={step.state}
-              right={step.right}
-            />
-          </div>
-        ))}
+    <div className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto" style={{ ...backdrop }}>
+      {steps.map((step) => (
+        <div ref={refs[step.key]} key={step.key}>
+          <MobileDialogMessage
+            character={step.character}
+            avatar={step.avatar}
+            text={step.text}
+            emotion={step.emotion}
+            state={step.state}
+            right={step.right}
+          />
+        </div>
+      ))}
 
-        <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-neutral">
-          {currentStep.character} Speaking...
+      <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-neutral">
+        {currentStep.character} Speaking...
+      </button>
+
+      {currentStep.character === character && (
+        <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-primary" onClick={handleButton}>
+          Next
         </button>
-
-        {currentStep.character === character && (
-          <button className="fixed bottom-0 w-full h-12 text-white bg-opacity-100 bg-primary" onClick={handleButton}>
-            Next
-          </button>
-        )}
-      </div>
+      )}
     </div>
   );
 }
