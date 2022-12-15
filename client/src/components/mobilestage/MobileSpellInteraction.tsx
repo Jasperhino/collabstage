@@ -32,7 +32,7 @@ export default function MobileSpellInteraction({ step, character }: { step: ISte
         console.log('Casting spell', step.interaction.spell, step.interaction.strength);
         castSpell({ spell: 'wengadium leviosa', strength: step.interaction.strength });
       }
-      //stepDone();
+      stepDone();
       castingSpell = false;
     }, 500);
   }

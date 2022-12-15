@@ -114,12 +114,10 @@ export class StageController {
   ) {
     const { stageId, sessionId } = socket.data.session;
 
-    console.log(`${sessionId} cast spell on ${stageId} - ${message.spell}`);
-    socket.to(stageId).emit("cast_spell", {
-      stageId,
-      spell: message.spell,
-      sessionId,
-    } as ISpellMessage);
+    console.log(
+      `${sessionId} cast spell on ${stageId} - ${message.spell}, strength ${message.strength}`
+    );
+    socket.to(stageId).emit("cast_spell", message);
   }
 
   @OnMessage("start_play")
