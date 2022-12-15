@@ -19,7 +19,7 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
         <div className="card w-96 bg-base-100 shadow-xl">
           <div className="card-body ">
             <h1 className="card-title text-6xl font-bold ">{state ? state.stageId : 'XXXX'}</h1>
-            <p className="text-left text-xl font-bold" style={{ marginTop: '5%' }}>
+            <p className="text-left text-xl font-bold mt-2">
               Scan the QR-Code or enter the code above to join this stage.
             </p>
           </div>
@@ -33,21 +33,21 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
         </div>
       </div>
       <div className="flex flex-col mx-32">
-        <div style={{ marginBottom: '6%' }}>{state && <ActorList actors={state.actors} />}</div>
+        <div>{state && <ActorList actors={state.actors} />}</div>
         {state && (
-          
           <button
-            className={state.actors.length === 3 ?   "btn btn-primary text-white" : ""}
+            className={
+              state.actors.length === 3 ? 'btn btn-primary text-white' : 'btn btn-primary btn-disabled btn-outline'
+            }
             onClick={() => {
               const actorsWithCharacters = state.actors.filter((actor) => actor.character != null);
               if (state.actors.length === 3) {
-              startPlay({ force: true });
+                startPlay({ force: true });
               }
             }}
           >
-            {state.actors.length === 3 ?   "Start Play" : ""}
-
-                      </button>
+            {state.actors.length === 3 ? 'Start Play' : 'Waiting for 3 players...'}
+          </button>
         )}
       </div>
     </div>
