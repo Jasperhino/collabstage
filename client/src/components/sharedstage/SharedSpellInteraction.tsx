@@ -32,8 +32,8 @@ export default function SharedSpellInteraction({ step }: { step: IStep }) {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-1/4">
-      <Feather flying={flying} />{' '}
+    <div className="fixed bottom-0 right-0 mr-16">
+      <Feather flying={flying} />
     </div>
   );
 }

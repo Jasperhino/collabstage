@@ -7,8 +7,6 @@ interface ISharedDialogProps {
   play: IPlay;
 }
 
-
-
 export default function SharedDialog({ step, play }: ISharedDialogProps) {
   const backdrop = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${play.background}')`,
@@ -19,100 +17,27 @@ export default function SharedDialog({ step, play }: ISharedDialogProps) {
     stepDone();
   }
 
-  return (
-    <div className="flex w-screen h-screen items-center 	 bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
-      {step.character === "Harry Potter" ? 
-      (<div className="hero min-h-screen  place-items-center  bg-opacity-0 -z-100 bg-base-200" style={{marginTop:"30%"}}>
-        <div className="hero-content flex-col lg:flex-row">
-          <img src={step.avatar} className="max-w-sm rounded-lg shadow-2xl" alt={step.avatar} />
-          <div className="DialogWindow">
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title">{step.character}</h2>
-                <p>{step.text}</p>
-                <div className="card-actions justify-end">
-                  <button onClick={stepBack} className="btn btn-primary">
-                    Back
-                  </button>
-                  <button onClick={handleButton} className="btn btn-primary">
-                    Next
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      ) : step.character === "Ron Wesley" ? 
-      (<div className="hero min-h-screen  place-items-center  bg-opacity-0 -z-100 bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <img src={step.avatar} className="max-w-sm place-items-end rounded-lg shadow-2xl" alt={step.avatar} />
-          <div className="DialogWindow">
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title">{step.character}</h2>
-                <p>{step.text}</p>
-                <div className="card-actions justify-end">
-                  <button onClick={stepBack} className="btn btn-primary">
-                    Back
-                  </button>
-                  <button onClick={handleButton} className="btn btn-primary">
-                    Next
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      ) : step.character === "Hermione Granger" ? 
-      (<div className="hero min-h-screen  place-items-start  bg-opacity-0 -z-100 bg-base-200" style={{marginTop:"62%"}}>
-        <div className="hero-content flex-col lg:flex-row" >
-          <img src={step.avatar} className="max-w-sm rounded-lg shadow-2xl" alt={step.avatar} />
-          <div className="DialogWindow">
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title">{step.character}</h2>
-                <p>{step.text}</p>
-                <div className="card-actions justify-end">
-                  <button onClick={stepBack} className="btn btn-primary">
-                    Back
-                  </button>
-                  <button onClick={handleButton} className="btn btn-primary">
-                    Next
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      ) : 
-      (<div className="hero min-h-screen  place-items-end  bg-opacity-0 -z-100 bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <img src={step.avatar} className="max-w-sm rounded-lg shadow-2xl" alt={step.avatar} />
-          <div className="DialogWindow">
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title">{step.character}</h2>
-                <p>{step.text}</p>
-                <div className="card-actions justify-end">
-                  <button onClick={stepBack} className="btn btn-primary">
-                    Back
-                  </button>
-                  <button onClick={handleButton} className="btn btn-primary">
-                    Next
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      )
-      
-    }
+  const offset = {
+    Harry: 'mt',
+  };
 
+  return (
+    <div className="flex w-screen h-screen items-end bg-opacity-50 -z-100 overflow-auto" style={backdrop}>
+      <img src={step.avatar} className="max-w-lg rounded-xl shadow-2xl" alt={step.avatar} />
+      <div className="card w-1/2 bg-base-100 shadow-xl m-16">
+        <div className="card-body">
+          <h2 className="card-title text-6xl">{step.character}</h2>
+          <p className="text-6xl">{step.text}</p>
+          <div className="card-actions justify-end mt-8">
+            <button onClick={stepBack} className="btn btn-primary">
+              Back
+            </button>
+            <button onClick={handleButton} className="btn btn-primary">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

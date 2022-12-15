@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IPlayState } from '@server/types';
 import SharedDialog from './SharedDialog';
-import SharedSpellInteraction from './SharedInteraction';
+import SharedSpellInteraction from './SharedSpellInteraction';
 import { IPlay, IStep } from '@server/types/play';
 
 interface ISharedPlayProps {
