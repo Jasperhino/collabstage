@@ -12,7 +12,8 @@ function Footer() {
             <li className="ml-4">
               <Link
                 to="/https://github.com/jasperhino/collabstage"
-                className="flex justify-center items-center text-gray-600 hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out"
+                className="flex justify-center items-center text-accent-content
+                hover:text-gray-900 bg-white hover:bg-white-100 rounded-full shadow transition duration-150 ease-in-out"
                 aria-label="Github"
               >
                 <svg className="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +24,7 @@ function Footer() {
           </ul>
 
           {/* Copyrights note */}
-          <div className="text-sm text-gray-600 mr-4">
+          <div className="text-sm text-accent-content mr-4 ">
             Made with 🧡 at{' '}
             <a className="hover:underline" href="https://www.uc.pt/fctuc/dei/">
               DEI - University of Coimbra

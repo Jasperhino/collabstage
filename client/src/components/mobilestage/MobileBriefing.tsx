@@ -14,9 +14,12 @@ export default function Briefing({ character: characterName, play }: ICharacterB
   function handleClick() {
     selectCharacter(null);
   }
+  const backdrop = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${play.background}')`,
+  };
 
   return (
-    <div className="card">
+    <div className="card" >
       <figure>
         <img src={character.avatar} alt="Character Avatar" />
       </figure>

@@ -3,7 +3,7 @@ import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { IStep } from '@server/types/play';
 import { stepDone } from 'src/services/stageService';
-import MobileDialogMessage from './DialogMessage';
+import MobileDialogMessage from './MobileDialogMessage';
 import Torch from './Torch';
 
 export default function MobileSpellInteraction({ step, character }: { step: IStep; character: string }) {

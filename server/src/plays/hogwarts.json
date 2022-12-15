@@ -5,19 +5,19 @@
         "characters": [
             {
                 "name": "Harry Potter",
-                "avatar": "https://images6.alphacoders.com/691/691559.jpg",
+                "avatar": "/assets/icons/Harry.png",
                 "description": "Harry is a fresh wizard who is in his first year at Hogwarts School of Witchcraft and Wizardry. He is a Gryffindor student and is the son of James and Lily Potter. He is the best friend of Ron Weasley and Hermione Granger. He is the main character of the series.",
                 "age": 15
             },
             {
                 "name": "Ron Weasley",
-                "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                "avatar": "/assets/icons/Ron.png",
                 "description": "Ron is Harry's best friend and is a Gryffindor student. He is the son of Arthur and Molly Weasley. He is the brother of Ginny Weasley and Bill Weasley. He is the best friend of Harry Potter and Hermione Granger.",
                 "age": 15
             },
             {
                 "name": "Hermione Granger",
-                "avatar": "https://wallpaper.dog/large/201223.jpg",
+                "avatar": "/assets/icons/Hermione.png",
                 "description": "Hermione is also a Gryffindor student and is Harry's best friend. She is the daughter of Mr. and Mrs. Granger. She is the best friend of Harry Potter and Ron Weasley.",
                 "age": 15
             }
@@ -30,42 +30,42 @@
                     {
                         "type": "dialog",
                         "character": "Harry Potter",
-                        "avatar": "https://images6.alphacoders.com/691/691559.jpg",
+                        "avatar": "/assets/icons/emotions/1- Harry Confused.png",
                         "text": "We need to figure out how to do this!",
                         "emotion": "Confused"
                     },
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/2- Ron Angry.png",
                         "text": "Whenever we try it, it nothing works!",
                         "emotion": "Angry"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/3- Hermione Bossy.png",
                         "text": "Well, it’s obviously, because you’re not saying it properly!",
                         "emotion": "Bossy"
                     },
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/4- Ron Sarcastically.png",
                         "text": "Why don’t you try it, Miss. Granger.",
                         "emotion": "Sarcastically"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/5- Hermione mean.png",
                         "text": " No. I’m researching on the spell, why don’t you try Mr. Weasley!",
                         "emotion": "Mean"
                     },
                     {
                         "type": "interaction",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/6- Ron Nervous.png",
                         "text": "Wingardium Leviosaaa!",
                         "emotion": "Nervous",
                         "interaction": {
@@ -76,14 +76,14 @@
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/7- Hermione Calm.png",
                         "text": "You said it wrong! It isn’t Wingardia Leviosaaaa!",
                         "emotion": "Calm"
                     },
                     {
                         "type": "interaction",
                         "character": "Hermione Granger",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/8- Hermione Assertive.png",
                         "text": "It’s Wingardia Leviosa!",
                         "emotion": "Assertive",
                         "interaction": {
@@ -94,42 +94,42 @@
                     {
                         "type": "dialog",
                         "character": "Harry Potter",
-                        "avatar": "https://images6.alphacoders.com/691/691559.jpg",
+                        "avatar": "/assets/icons/emotions/9 - Harry Excited.png",
                         "text": "Well, she did it, I want to try!",
                         "emotion": "Excited"
                     },
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/10- Ron Grumpy.png",
                         "text": "It was only a onetime thing; she won’t be able to do it again!",
                         "emotion": "Grumpy"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/11- Hermione Mocking.png",
                         "text": "What? Are you jealous?",
                         "emotion": "Mocking"
                     },
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/4- Ron Sarcastically.png",
                         "text": "Ha-ha so funny!",
                         "emotion": "Sarcastically"
                     },
                     {
                         "type": "dialog",
                         "character": "Harry Potter",
-                        "avatar": "https://images6.alphacoders.com/691/691559.jpg",
+                        "avatar": "/assets/icons/emotions/12- Harry Impatient.png",
                         "text": "Okay guys stop!",
                         "emotion": "Impatient"
                     },
                     {
                         "type": "interaction",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/13- Ron Angry.png",
                         "text": "Wingardium Leviosaa!",
                         "emotion": "Angry",
                         "interaction": {
@@ -140,7 +140,7 @@
                     {
                         "type": "interaction",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/13- Ron Angry.png",
                         "text": "Wingardium Leviosaaaaaaa!",
                         "emotion": "Angrier",
                         "interaction": {
@@ -151,35 +151,35 @@
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/13- Ron Angry.png",
                         "text": "WHY ISN’T IT WORKING!",
                         "emotion": "ANGRIER"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/3- Hermione Bossy.png",
                         "text": "I told you! You’re not saying it correctly",
                         "emotion": "Bossy"
                     },
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/14- Ron Impatient.png",
                         "text": "UGH! You’re always correcting me!",
                         "emotion": "Impatient"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/15- Hermione Embarresed.png",
                         "text": "I was just trying to help",
                         "emotion": "Embarrassed"
                     },
                     {
                         "type": "interaction",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/13- Ron Angry.png",
                         "text": "WINGARDIA LEVIOSA!",
                         "emotion": "Angry",
                         "interaction": {
@@ -190,35 +190,35 @@
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/20- Ron Proud.png",
                         "text": " I told you I could do it!",
-                        "emotion": "Excited"
+                        "emotion": "Proud"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/17- Hermione Surprised.png",
                         "text": "No Comment!",
                         "emotion": "Surprised"
                     },
                     {
                         "type": "dialog",
                         "character": "Harry Potter",
-                        "avatar": "https://images6.alphacoders.com/691/691559.jpg",
+                        "avatar": "/assets/icons/emotions/18- Harry Smilling.png",
                         "text": "Well, Done Ron!",
                         "emotion": "Happy"
                     },
                     {
                         "type": "dialog",
                         "character": "Hermione Granger",
-                        "avatar": "https://wallpaper.dog/large/201223.jpg",
+                        "avatar": "/assets/icons/emotions/19- Hermione Grumpy.png",
                         "text": "You didn’t say it correctly, although you showed you could handle this spell, you need to say it like a TRUE wizard!",
                         "emotion": "Grumpy"
                     },
                     {
                         "type": "dialog",
                         "character": "Ron Weasley",
-                        "avatar": "https://images6.alphacoders.com/691/thumb-1920-691561.jpg",
+                        "avatar": "/assets/icons/emotions/20- Ron Proud.png",
                         "text": "That doesn’t matter!",
                         "emotion": "Proud"
                     }

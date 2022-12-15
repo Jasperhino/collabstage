@@ -2,11 +2,14 @@ import React, { Ref, useEffect, useRef, useState } from 'react';
 import { IPlayState } from '@server/types';
 import { IPlay, IStep } from '@server/types/play';
 import { stepDone } from 'src/services/stageService';
-import MobileDialogMessage from './DialogMessage';
+import MobileDialogMessage from './MobileDialogMessage';
 import { useNavigate } from 'react-router-dom';
 import sound1 from '../sounds/sound1.mp3';
 import sound2 from '../sounds/sound2.mp3';
 import classroom from '../sounds/School Students 1 - QuickSounds.com.mp3';
+import homeIcon from '/assets/icons/home.png';
+import volume from '/assets/icons/volume.png';
+import mute from '/assets/icons/mute.png';
 
 import { useSound } from 'use-sound';
 
@@ -67,31 +70,32 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
 
 
 
-    // Create state
-    const state = {
+  // Create state
+  const state = {
 
-      // Get audio file in a variable
-      audio: new Audio(classroom),
-  
-      // Set initial state of song
-      isPlaying: false,
-    };
-    
-   // Main function to handle both play and pause operations
-   const playPause = () => {
+    // Get audio file in a variable
+    audio: new Audio(classroom),
+
+    // Set initial state of song
+    isPlaying: false,
+  };
+
+  // Main function to handle both play and pause operations
+  const playPause = () => {
 
     // Get state of song
     let isPlaying = state.isPlaying;
+
+    console.log("Is playing? " + isPlaying);
 
     if (isPlaying) {
       // Pause the song if it is playing
       state.audio.pause();
     } else {
-
       // Play the song if it is paused
       state.audio.play();
     }
-
+    state.isPlaying = !isPlaying;
     // Change the state of song
     useState({ isPlaying: !isPlaying });
   };
@@ -109,12 +113,30 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
         <div className="navbar-start bg-opacity-100">
           <a className="btn btn-ghost normal-case text-xl bg-opacity-100">
             <button onClick={handleLeave} className="btn btn-primary bg-opacity-100">
-              Home
+              <div className="avatar ">
+                <div className="w-8">
+                  <img src={homeIcon} />
+                </div>
+              </div>
+
             </button></a>
         </div>
         <div className="navbar-end bg-opacity-100" >
           <button onClick={playPause} className="btn btn-primary bg-opacity-100">
-            {state.isPlaying ? "Pause" : "Sound"}
+            {state.isPlaying ?
+              <div className="avatar ">
+                <div className="w-8">
+                  <img src={volume} />
+                </div>
+              </div>
+              :
+              <div className="avatar ">
+                <div className="w-8">
+                  <img src={mute} />
+                </div>
+              </div>
+
+            }
           </button>
 
 
@@ -122,6 +144,7 @@ export default function MobileTeleprompter({ currentStep, play, playState, chara
         </div>
       </div>
 
+  
       <div style={{ marginTop: '64px', marginBottom: '64px', zIndex: '-10' }}>
         {steps.map((step) => (
           <div ref={refs[step.key]} key={step.key} >

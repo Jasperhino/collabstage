@@ -17,19 +17,27 @@ export default function CharacterSelection({ state, play }: ICharacterSelectionP
     console.log('selected character: ', characterName);
     selectCharacter(characterName);
   }
-
+  const backdrop = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${play.background}')`,
+  };
   return (
-    <ul className="menu">
-      {play.characters.map((character, i) => (
-        <div key={i} className="flex m-4 items-center hover:bg-primary" onClick={() => handleClick(character.name)}>
-          <div className="avatar">
-            <div className="w-24 rounded">
-              <img src={character.avatar} />
+    <div className="flex-col w-screen h-screen items-center bg-opacity-50 -z-100 overflow-auto "
+      style={backdrop}>
+      <ul className="menu rounded-box">
+        {play.characters.map((character, i) => (
+          <li>
+            <div key={i} className="flex m-4 items-center bg-white hover:bg-primary" onClick={() => handleClick(character.name)}>
+              <div className="avatar">
+                <div className="w-24 rounded-full">
+                  <img src={character.avatar} />
+                </div>
+              </div>
+              <p className="mx-4">{character.name}</p>
             </div>
-          </div>
-          <p className="mx-4">{character.name}</p>
-        </div>
-      ))}
-    </ul>
+
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
