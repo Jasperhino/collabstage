@@ -19,19 +19,26 @@ export default function Briefing({ character: characterName, play }: ICharacterB
   };
 
   return (
-    <div className="card" >
-      <figure>
-        <img src={character.avatar} alt="Character Avatar" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title m-auto">{character.name}</h2>
-        <p>{character.description}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary" onClick={handleClick}>
-            Back
-          </button>
-        </div>
+    <>
+      <div className="flex justify-center">
+        <div className="badge badge-primary ">Waiting for host to start the play...</div>
       </div>
-    </div>
+      {character && (
+        <div className="card mt-8">
+          <figure>
+            <img src={character.avatar} alt="Character Avatar" />
+          </figure>
+          <div className="card-body">
+            <h2 className="card-title m-auto">{character.name}</h2>
+            <p>{character.description}</p>
+            <div className="card-actions justify-center mt-8">
+              <button className="btn btn-outline" onClick={handleClick}>
+                Choose different Character
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

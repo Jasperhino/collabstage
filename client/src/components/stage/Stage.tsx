@@ -1,7 +1,7 @@
+import React, { useEffect } from 'react';
 import { ISession, IStageState } from '@server/types';
 import { IPlay } from '@server/types/play';
-import React, { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MobileStage from '../mobilestage/MobileStage';
 import SharedStage from '../sharedstage/SharedStage';
 

@@ -1,16 +1,17 @@
+import classNames from 'classnames';
 import React from 'react';
 import './Feather.css';
 
 interface IFeatherProps {
   flying: boolean;
 }
-export default function Feather(props: IFeatherProps) {
+export default function Feather({ flying }: IFeatherProps) {
   return (
-    <div className={props.flying ? 'feather' : ''}>
+    <div className={classNames({ feather: flying })}>
       <svg
         version="1.1"
-        width="106"
-        height="30"
+        width="212"
+        height="60"
         viewBox="0 0 5385.6934 1551.0267"
         xmlns="http://www.w3.org/2000/svg"
         fill="#DDDDDD"

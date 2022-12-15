@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
 
 export default function Torch({ torchOn }: { torchOn: boolean }) {
   const [hasTorch, setHasTorch] = useState(false);
@@ -29,7 +28,7 @@ export default function Torch({ torchOn }: { torchOn: boolean }) {
         setTrack(stream.getVideoTracks()[0]);
 
         video.addEventListener('loadedmetadata', (e) => {
-          window.setTimeout(() => onCapabilitiesReady(track.getCapabilities()), 1000);
+          window.setTimeout(() => onCapabilitiesReady(track.getCapabilities()), 1500);
         });
 
         function onCapabilitiesReady(capabilities) {
@@ -49,9 +48,5 @@ export default function Torch({ torchOn }: { torchOn: boolean }) {
     display: 'none',
   };
 
-  return (
-    <>
-      <video autoPlay style={hidden}></video>
-    </>
-  );
+  return <video autoPlay style={hidden}></video>;
 }
