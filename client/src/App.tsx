@@ -16,7 +16,7 @@ function App() {
   const [play, setPlay] = useState<IPlay | null>(null);
   const navigate = useNavigate();
   const connectSocket = async () => {
-    const host = `${window.location.hostname}:9000`;
+    const host = `${window.location.hostname}:9009`;
     const sessionId = sessionStorage.getItem('sessionId');
     console.log(`connecting to ${host}`);
     await socketService.connect(host, sessionId).catch((err) => {

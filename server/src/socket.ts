@@ -6,7 +6,7 @@ import sessionStore from "./api/stores/sessionStore";
 export default (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "*",
       credentials: true,
     },
   });

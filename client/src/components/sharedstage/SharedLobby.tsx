@@ -33,7 +33,7 @@ export default function SharedLobby({ state }: ISharedLobbyProps) {
         </div>
       </div>
       <div className="flex flex-col mx-32">
-        <div>{state && <ActorList actors={state.actors} />}</div>
+        <div className="mb-4">{state && <ActorList actors={state.actors} />}</div>
         {state && (
           <button
             className={

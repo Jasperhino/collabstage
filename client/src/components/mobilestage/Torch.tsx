@@ -12,6 +12,10 @@ export default function Torch({ torchOn }: { torchOn: boolean }) {
   }, [torchOn]);
 
   useEffect(() => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      console.error('getUserMedia() not supported.');
+      return;
+    }
     navigator.mediaDevices
       .getUserMedia({
         video: {

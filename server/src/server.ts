@@ -3,15 +3,17 @@ import "reflect-metadata";
 import app from "./app";
 var debug = require("debug")("socketio-server:server");
 import socketServer from "./socket";
- 
-let port = normalizePort(process.env.PORT || "9000");
+
+let port = normalizePort(process.env.PORT || "9009");
+let host = "192.168.0.100";
+
 app.set("port", port);
 
 let server = createServer(app);
 
 const io = socketServer(server);
 
-server.listen(port);
+server.listen(port, host);
 server.on("error", onError);
 server.on("listening", onListening);
 
@@ -59,4 +61,5 @@ function onListening() {
   debug("Listening on " + bind);
 
   console.log("Server Running on Port: ", port);
+  console.log("Server Adress: ", addr);
 }

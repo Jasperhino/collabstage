@@ -246,7 +246,10 @@ export class StageController {
     }
     const takenCharacters = state.actors.map((a) => a.character);
     console.log("Taken Characters", takenCharacters);
-    if (takenCharacters.includes(message.character)) {
+    if (
+      message.character != null &&
+      takenCharacters.includes(message.character)
+    ) {
       console.log("Character already taken");
       socket.emit("select_character_error", "Character already taken");
       return;

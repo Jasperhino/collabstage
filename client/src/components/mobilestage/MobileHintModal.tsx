@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import volumehigh from '/public/assets/icons/volume.svg';
-import vibrate from '/public/assets/icons/vibrate.svg';
 
 export default function MobileHintModal() {
   const [open, setOpen] = useState<boolean>(true);
@@ -10,8 +8,8 @@ export default function MobileHintModal() {
       <div className="modal-box">
         <div className="flex flex-col">
           <div className="flex flex-row justify-around">
-            <img src={volumehigh} className="w-16 h-16" />
-            <img src={vibrate} className="w-16 h-16" />
+            <img src="/assets/icons/volume.svg" className="w-16 h-16" />
+            <img src="/assets/icons/vibrate.svg" className="w-16 h-16" />
           </div>
           <p className="py-4">To enjoy the best experience turn sound and vibration on.</p>
         </div>
